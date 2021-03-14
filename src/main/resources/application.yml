@@ -5,7 +5,7 @@ spring:
   datasource:
     hikari:
       username: root
-      password: tjdgus0113@
+      password: root
       driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
       jdbc-url: jdbc:log4jdbc:mysql://localhost:3306/daelim?serverTimezone=UTC&characterEncoding=UTF-8
       connection-test-query: SELECT 1 FROM DUAL
@@ -13,3 +13,16 @@ spring:
       maximum-pool-size: 5
       pool-name: sccPool
       auto-commit: false
+
+#메일 의존성 주입
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username:        #구글 아이디
+    password: ""                     #큰따옴표안에 구글 비밀번호
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true

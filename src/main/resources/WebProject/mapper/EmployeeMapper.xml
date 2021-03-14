@@ -97,5 +97,17 @@
 
     </select>
 
+    <insert id="insertMember"  parameterType="com.daelim.transactions.dto.afafDTO" >
+        insert into test(
+            id,
+            pass,
+            email
+        )values (
+            #{id},
+            #{pass},
+            #{email}
+        )
+    </insert>
+
 
 </mapper>
