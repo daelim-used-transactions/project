@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.daelim.transactions.mapper.DaoTest">
+
+
+    <insert id="insert" parameterType="com.daelim.transactions.dto.EmployeeDTO">
+        insert into hr_all_emp_info(
+            login_id,
+            join_time,
+            name,
+            tel,
+            email,
+            birth_day,
+            gender,
+            age,
+            native_flag,
+            type,
+            postcode,
+            new_addr,
+            old_addr,
+            detail_addr,
+            part,
+            `rank`,
+            emp_status,
+            contract_status,
+            bank_code,
+            bank_account_number,
+            salary,
+            leave_time,
+            delete_flag,
+            create_time,
+            update_time,
+            delete_time
+        )values (
+                 #{loginID},
+                 #{joinTime},
+                 #{name},
+                 #{tel},
+                 #{email},
+                 #{birthDay},
+                 #{gender},
+                 #{age},
+                 #{nativeFlag},
+                 #{type},
+                 #{postcode},
+                 #{newAddr},
+                 #{oldAddr},
+                 #{detailAddr},
+                 #{part},
+                 #{rank},
+                 #{empStatus},
+                 #{contractStatus},
+                 #{bankCode},
+                 #{bankAccountNumber},
+                 #{salary},
+                 #{leaveTime},
+                 #{deleteFlag},
+                 #{createTime},
+                 #{updateTime},
+                 #{deleteTime}
+                        )
+    </insert>
+
+    <select id="selectById" parameterType="String" resultType="com.daelim.transactions.dto.EmployeeDTO">
+        SELECT
+            login_id,
+            join_time,
+            name,
+            tel,
+            email,
+            birth_day,
+            gender,
+            age,
+            native_flag,
+            type,
+            postcode,
+            new_addr,
+            old_addr,
+            detail_addr,
+            part,
+            `rank`,
+            emp_status,
+            contract_status,
+            bank_code,
+            bank_account_number,
+            salary,
+            leave_time,
+            delete_flag,
+            create_time,
+            update_time,
+            delete_time
+        FROM
+            hr_all_emp_info
+        WHERE
+            login_id = #{id}
+
+    </select>
+
+
+</mapper>

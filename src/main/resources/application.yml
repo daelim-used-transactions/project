@@ -1,0 +1,15 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    hikari:
+      username: root
+      password: tjdgus0113@
+      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+      jdbc-url: jdbc:log4jdbc:mysql://localhost:3306/daelim?serverTimezone=UTC&characterEncoding=UTF-8
+      connection-test-query: SELECT 1 FROM DUAL
+      minimum-idle: 1
+      maximum-pool-size: 5
+      pool-name: sccPool
+      auto-commit: false
