@@ -18,7 +18,7 @@ public class ServerTest {
 
     @GetMapping(value = "/test")
     public String test (){
-        return "/study1";
+        return "login/login";
     }
 
     @GetMapping(value="/test/login")

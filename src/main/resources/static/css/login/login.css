@@ -1,0 +1,83 @@
+*{/*모든 태그를 의미*/  
+    box-sizing: border-box;/*대박;; 이러면 마진 패딩 테두리 다 준것 합이 width 준것만큼 딱 되게하네. 그럼 521.. 높이도! 웬만하면 모든 태그에
+    보더 박스를 해줘서 기준을 잡자*/  
+}
+
+html, body{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-image: url("/images/login/loginbackground.jpg");
+}
+
+header{
+    height: 250px;
+}
+
+ a:link {
+  color: black; text-decoration: none;
+  }
+ a:visited {
+  color: black; text-decoration: none;
+  }
+ a:hover {
+  color: black; text-decoration: none;
+  }
+
+
+.center-align{   
+    margin: 0 auto;
+    width: 800px;/*px은 상대적이다. 모니터의 너비에 따라 다름 만약 모니터가 1920이면 1920을 1080등분 한것이다*/
+}
+
+.center-align div{
+    text-align: center;
+}
+
+.login-size{
+
+}
+
+.login{
+    display: inline-block;
+    text-align: center;
+    height: 300px;
+    width: 400px;
+}
+
+#login-form {
+    width: 350px;
+    background-color:beige;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 20px;
+    text-align: center;
+    border: none;
+    
+}
+ 
+.text-field {
+      font-size: 14px;
+      padding: 10px;
+      border: none;
+      width: 260px;
+      margin-bottom: 10px;
+ 
+}
+ 
+.submit-btn {
+  font-size: 14px;
+  border: none;
+  padding: 10px;
+  width: 260px;
+  background-color: #1BBC9B;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.a-field{
+    text-decoration: none;
+    background-color: beige;
+}
