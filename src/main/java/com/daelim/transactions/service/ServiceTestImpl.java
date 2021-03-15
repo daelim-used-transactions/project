@@ -1,6 +1,7 @@
 package com.daelim.transactions.service;
 
 import com.daelim.transactions.dto.EmployeeDTO;
+import com.daelim.transactions.dto.MemberDTO;
 import com.daelim.transactions.dto.afafDTO;
 import com.daelim.transactions.mapper.DaoTest;
 import com.daelim.transactions.utils.CryptoUtil;
@@ -25,11 +26,11 @@ public class ServiceTestImpl implements ServiceTest {
     }
 
     @Override
-    public int optMemberInsert(afafDTO testDTO) throws NoSuchAlgorithmException {
+    public int memberInsert(MemberDTO member) throws NoSuchAlgorithmException {
         CryptoUtil cryptoUtil =new CryptoUtil();
-        String enPass = cryptoUtil.sha256(testDTO.getPass());
-        testDTO.setPass(enPass);
-      int optMember = daoTest.insertMember(testDTO);
+        String enPass = cryptoUtil.sha256(member.getLoginPw());
+        member.setLoginPw(enPass);
+         int optMember = daoTest.insertMember(member);
         System.out.println("테스트 해보자 " + optMember);
         return optMember;
     }

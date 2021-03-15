@@ -97,15 +97,27 @@
 
     </select>
 
-    <insert id="insertMember"  parameterType="com.daelim.transactions.dto.afafDTO" >
+    <insert id="insertMember"  parameterType="com.daelim.transactions.dto.MemberDTO" >
         insert into test(
-            id,
-            pass,
-            email
+            loginId,
+            loginPw,
+            name,
+            email,
+            nickName,
+            status,
+            createTime,
+            loginFlag,
+            profile
         )values (
-            #{id},
-            #{pass},
-            #{email}
+            #{loginId},
+            #{loginPw},
+            #{name},
+            #{email},
+            #{nickName},
+             IFNULL(#{status}, 'N'),
+             NOW(),
+             IFNULL(#{loginFlag}, '0'),
+             NULL
         )
     </insert>
 

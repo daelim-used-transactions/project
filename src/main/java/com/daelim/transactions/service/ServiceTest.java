@@ -1,6 +1,7 @@
 package com.daelim.transactions.service;
 
 import com.daelim.transactions.dto.EmployeeDTO;
+import com.daelim.transactions.dto.MemberDTO;
 import com.daelim.transactions.dto.afafDTO;
 
 import java.security.NoSuchAlgorithmException;
@@ -10,5 +11,5 @@ public interface ServiceTest {
 
     Optional<EmployeeDTO> optToEmpInfo(String id);
 
-    int optMemberInsert(afafDTO testDTO) throws NoSuchAlgorithmException;
+    int memberInsert(MemberDTO member) throws NoSuchAlgorithmException;
 }
