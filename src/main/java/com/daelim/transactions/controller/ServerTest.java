@@ -21,6 +21,11 @@ public class ServerTest {
         return "login/login";
     }
 
+    @GetMapping(value = "/test/main")
+    public String testMain (){
+        return "main";
+    }
+
     @GetMapping(value="/test/login")
     public String testLogin(Model model){
         MemberDTO member = new MemberDTO();

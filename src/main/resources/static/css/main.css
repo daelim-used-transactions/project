@@ -1,0 +1,301 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body{
+    padding:  0px;
+    margin:  0px;
+    /* font-family: Dotum,'돋움', Helvetica, "Apple SD Gothic Neo" ,sans-serif; */
+}
+
+header{
+    height: 55px;
+    background-color:#6495ED;
+}
+
+.center-align{   
+    margin: 0 auto;
+    width: 1024px;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+#util-group{
+    float: right;
+    margin: 15px 10px 0 0;
+}
+
+#util-group a{
+    color: white;
+    font-size: 15px;
+    letter-spacing: -1px;
+    text-decoration: none;
+}
+
+nav{
+    display: inline-block;
+    position: sticky;
+    width: 100%;
+    height: 50px;
+    padding-top: 10px;
+    text-align: center;
+    z-index: 20;
+    top:0;
+    background-color: white;
+    border-bottom: 1px solid lightgray;
+}
+
+nav .center-align{
+    display: flex;
+    height: 100%;
+    position: relative;
+}
+
+.flex-menu{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    /* flex-direction: row-reverse; */
+    align-items: center;
+}
+
+.menu-bar{
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.fa-bars:before{
+    color:black;
+}
+
+.menu-bar:hover ul{
+    display: inline-block;
+}
+
+.category{
+    display: none;
+    list-style: none;
+    width: 200px;
+    height: 333px;
+    border: 1px solid #aaa;
+    background-color: white;
+    position: absolute;
+    top: 25px;
+    right: 824px;
+    padding: 10px;
+}
+
+.category li:first-child{
+    font-weight: 600;
+    border-bottom: 2px dotted gray;
+    padding-bottom: 10px;
+}
+
+.fieldset-block{    
+    margin-bottom: 10px;
+    margin-left: 120px;
+}
+
+.center-align fieldset{
+    display: flex;
+    align-items: center;
+    width: 350px;
+    height: 35px;
+    padding: 6px 0 0 0;
+    border: 2px solid #6495ED;
+    margin-left: 85px;
+}
+
+.center-align fieldset input{
+    width: 290px;
+    height: 17px;
+    border: none;
+    margin-left: 8px;
+    outline: none;
+    margin-bottom: 2px;
+    
+}
+
+.center-align fieldset button{
+    border: none;
+    background-color: white;
+    margin-left: 20px;
+    outline: none; 
+    cursor: pointer;
+}
+
+.center-align fieldset button i{
+    color: #6495ED;
+    margin-bottom: 5px;
+}
+
+.nav-util{
+    display:flex;
+    margin-bottom: 9px;
+    margin-left: 120px;
+}
+
+.nav-util a{
+    text-decoration: none;
+}
+
+.flex-a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.nav-util a img{
+    max-width: 28px;
+    height: auto;
+}
+
+.nav-util a span{
+    font-size: 15px;
+    font-weight: 600;
+    color: rgb(102, 102, 102);
+}
+
+.sale-text{
+    margin-left: 5px;
+}
+
+.fa-bell:before{
+    color:rgb(234, 199, 115);
+}
+
+
+.div-fixed{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    height: 315px;
+    top: 65px;
+    right: calc(50% - 617px);
+}
+
+.div-fixed-one{
+    border: 1px solid black;
+    width: 100px;
+    flex-basis: 60px;
+    margin-bottom: 5px;
+    padding: 10px;
+}
+
+.div-fixed-two{
+    border: 1px solid lightgray;
+    width: 100px;
+    flex-basis: 210px;
+    margin-bottom: 5px;
+    padding: 10px;
+}
+
+.div-fixed-three{
+    border: 1px solid lightgray;
+    width: 100px;
+    flex-basis: 30px;
+    padding: 10px;
+}
+
+.fixed-text{
+    font-size: 12px;
+    font-weight: 600;
+    color: rgb(102, 102, 102);
+    margin-bottom: 3px;
+}
+
+.fa-heart:before{
+    margin-right: 3px;
+}
+
+.fa, .fas{
+    color:lightgray;
+}
+
+.watch-count{
+    border-bottom: 2px dotted gray;
+    margin-top: 10px;
+}
+
+.div-fixed-three div:first-child{
+    font-weight: 600;
+}
+
+main{
+    margin-bottom: 30px;
+}
+
+main .center-align{
+    margin-top: 15px;
+}
+
+.banner a img{
+    max-width: 1024px; /* 넓이를 지정 */
+    height: auto;
+}
+
+.center-align h2{
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin : 50px 0 20px 0;
+}
+
+.product-list{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.product-wrap{
+    border: 1px solid rgb(238, 238, 238);
+    width: 192px;
+    margin-right: 11px;
+    margin-bottom: 11px;
+}
+
+.product-img img{
+    max-width: 191px; 
+    height: auto;
+}
+
+.product-content{
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.product-info{
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-price{
+    font-size:16px;
+    font-weight: 600;
+}
+
+.time{
+    font-size: 12px;
+    color: rgb(136, 136, 136);
+}
+
+footer{
+    background-color: rgb(34, 34, 34);
+    height: 100px;
+}
+
+.test{
+    color: rgba(255,255,255,0.5);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 17px;
+    margin: 10px 0 10px 0;
+}
