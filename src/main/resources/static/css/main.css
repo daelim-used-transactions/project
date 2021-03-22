@@ -24,12 +24,12 @@ header{
     display: inline-block;
 }
 
-#util-group{
+.util-group{
     float: right;
     margin: 15px 10px 0 0;
 }
 
-#util-group a{
+.util-group a{
     color: white;
     font-size: 15px;
     letter-spacing: -1px;

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>대림장터 메인홈페이지</title>
@@ -13,10 +13,14 @@
             <div class ="inline-block">
                 <img src ="/images/main/logowhite.png" alt ="대림장터 로고" />
             </div>
-            <div id ="util-group" class ="inline-block">
+            <div class ="util-group inline-block" th:if="${session.member != null}">
+                <a href="/test/main">HOME</a>
+                <a href="/test/main/logout">| 로그아웃</a>
+                <a href="/test/main/myPage">| 마이페이지</a>
+            </div>
+            <div class ="util-group inline-block" th:if="${session.member==null}">
                 <a href="/test/main">HOME</a>
                 <a href="/test">| 로그인</a>
-                <a href="http://www.naver.com">| 마이페이지</a>
             </div>
         </div>
     </header>

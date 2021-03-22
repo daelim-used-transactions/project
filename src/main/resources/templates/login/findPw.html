@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비밀번호 찾기</title>
+    <link rel="stylesheet" href="/css/login/findPw.css">
+</head>
+<body>
+<div id = "container">
+    <header>
+        <h2 id="title">비밀번호 찾기</h2>
+    </header>
+
+    <main>
+        <div id ="findBox">
+            <div class="common noCur">
+                <a class="aPad" href="/test/findId">아이디 찾기</a>
+            </div>
+            <div class="common cur">
+                <a class="aPad" href="/test/findPw">비밀번호 찾기</a>
+            </div>
+        </div>
+
+        <div id="forinfo">
+            <div class="resisted">
+                <h3>
+                    <label for="id">아이디 </label>
+                </h3>
+                <span class="spanSpace"><input type="text" name="" id="name"class="inputinit"></span>
+            </div>
+            <div class="resisted">
+                <h3>
+                    <label for="email">이메일</label>
+                </h3>
+                <span class="spanSpace"><input type="text" name="" id="email"class="inputinit"><span id="dealimEmail">@email.daelim.ac.kr</span></span>
+
+            </div>
+
+
+            <div id="fbBox">
+                <button id="findButton">비밀번호 찾기</button>
+            </div>
+        </div>
+        <div id="notMem">
+            아직회원이 아니신가요?
+            <a href="/test/login">회원 가입</a>
+        </div>
+
+
+    </main>
+</div>
+
+</body>
+</html>
