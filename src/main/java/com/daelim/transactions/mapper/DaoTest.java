@@ -11,9 +11,9 @@ import java.util.List;
 @Mapper
 public interface DaoTest {
 
-    public EmployeeDTO selectById(String id);
-
     public int insertMember(MemberDTO memberDTO);
+
+    public String selectById(String id);
 
     public int selectMemberTotalCount(MemberDTO memberDTO);
 

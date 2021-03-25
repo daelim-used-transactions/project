@@ -14,6 +14,8 @@ public interface ServiceTest {
 
     int memberInsert(MemberDTO member) throws NoSuchAlgorithmException;
 
+    boolean isDuplicatedId(String id);
+
     public List<MemberDTO> getMemberList(MemberDTO memberDTO);
 
     public MemberDTO getLogin(MemberDTO memberDTO) throws NoSuchAlgorithmException;
