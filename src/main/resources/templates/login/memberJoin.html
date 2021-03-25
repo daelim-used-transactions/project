@@ -111,8 +111,16 @@
         }
                 /*동적으로 생성된 태그 속성*/
         .idCheckWord{
-            font-size: 11px;
+            font-size: 13px;
+            width:400px;
             color: red;
+            font-weight: 600;
+        }
+
+        .idCheckWord-Ok{
+            font-size: 13px;
+            color: #42d906;
+            font-weight: 600;
         }
 
     </style>
@@ -128,7 +136,7 @@
 
     <div id="content">
 
-        <form th:action="@{/test/register}" method="post" th:object="${member}">
+        <form th:action="@{/login/join/register}" method="post" th:object="${member}">
         <div id="idInfo">
             <h3>
                 <label for="id">아이디</label>

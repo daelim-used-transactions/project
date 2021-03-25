@@ -36,6 +36,15 @@ public class ServiceTestImpl implements ServiceTest {
         System.out.println("테스트 해보자 " + optMember);
         return optMember;
     }
+    /**
+     * false 반환 -> 아이디 이미 존재
+     * true 반환 -> 아이디 존재 X
+     * */
+    @Override
+    public boolean isDuplicatedId(String id){
+        id = daoTest.selectById(id);
+        return (id == null);
+    }
 
     @Override
     public List<MemberDTO> getMemberList(MemberDTO memberDTO) {
