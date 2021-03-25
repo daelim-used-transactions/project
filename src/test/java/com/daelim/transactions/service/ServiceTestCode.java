@@ -21,19 +21,19 @@ public class ServiceTestCode {
     @Autowired
     MailService mailService;
 
-    @Test
-    void OptEmpInfoTest(){
-        Optional<EmployeeDTO> optEmpInfo = serviceTest.optToEmpInfo("id");
-
-        if(!optEmpInfo.isPresent()){
-            // id가 존재하지 않을 시
-            System.out.println("비었다..");
-        }else{
-            EmployeeDTO empInfo = optEmpInfo.get();
-            System.out.println(empInfo.getLoginID());
-
-        }
-    }
+//    @Test
+//    void OptEmpInfoTest(){
+//        Optional<EmployeeDTO> optEmpInfo = serviceTest.optToEmpInfo("id");
+//
+//        if(!optEmpInfo.isPresent()){
+//            // id가 존재하지 않을 시
+//            System.out.println("비었다..");
+//        }else{
+//            EmployeeDTO empInfo = optEmpInfo.get();
+//            System.out.println(empInfo.getLoginID());
+//
+//        }
+//    }
 
     @Test
     void insertMemberTest() throws NoSuchAlgorithmException {
@@ -51,5 +51,22 @@ public class ServiceTestCode {
     @Test
     public void mailTest(){
         mailService.idSearch("explore2012@naver.com", "dkandkdlel123");
+    }
+
+    @Test
+    public void getFindId(){
+        MemberDTO memberDTO = new MemberDTO();
+        memberDTO.setName("김태양");
+        memberDTO.setEmail("212112");
+
+        Optional<MemberDTO> member = Optional.ofNullable(serviceTest.getFindId(memberDTO));
+        if(member.isEmpty()){
+            // id가 존재하지 않을 시
+            System.out.println("비었다..");
+        }else{
+            MemberDTO empInfo = member.get();
+            System.out.println(empInfo.getName());
+        }
+
     }
 }

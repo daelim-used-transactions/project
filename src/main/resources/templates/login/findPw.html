@@ -24,25 +24,29 @@
         </div>
 
         <div id="forinfo">
-            <div class="resisted">
-                <h3>
-                    <label for="id">아이디 </label>
-                </h3>
-                <span class="spanSpace"><input type="text" name="" id="name"class="inputinit"></span>
-            </div>
-            <div class="resisted">
-                <h3>
-                    <label for="email">이메일</label>
-                </h3>
-                <span class="spanSpace"><input type="text" name="" id="email"class="inputinit"><span id="dealimEmail">@email.daelim.ac.kr</span></span>
+            <form th:action="@{/test/login/findPw}" method="post" th:object="${member}">
+                <div class="resisted">
+                    <h3>
+                        <label for="name">아이디 </label>
+                    </h3>
+                    <span class="spanSpace"><input th:field="*{loginId}"type="text" name="" id="name"class="inputinit"></span>
+                </div>
+                <div class="resisted">
+                    <h3>
+                        <label for="email">이메일</label>
+                    </h3>
+                    <span class="spanSpace"><input th:field="*{email}"type="text" name="" id="email"class="inputinit"><span id="dealimEmail">@email.daelim.ac.kr</span></span>
 
-            </div>
-
-
-            <div id="fbBox">
-                <button id="findButton">비밀번호 찾기</button>
-            </div>
+                </div>
+                <div class ="color" th:if="${flag==false}">
+                    아이디와 이메일을 다시 확인해 주세요.
+                </div>
+                <div id="fbBox">
+                    <button type="submit" id="findButton">비밀번호 찾기</button>
+                </div>
+            </form>
         </div>
+
         <div id="notMem">
             아직회원이 아니신가요?
             <a href="/test/login">회원 가입</a>

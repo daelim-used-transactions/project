@@ -25,6 +25,16 @@ public interface DaoTest {
 
     public List<MemberDTO>selectMemberList(MemberDTO memberDTO);
 
+    /**
+     *
+     * @param memberDTO
+     * @return
+     * 아이디 찾기
+     */
+    public MemberDTO findLoginId(MemberDTO memberDTO);
 
+    public MemberDTO findLoginPass(MemberDTO memberDTO);
+
+    public int updateByPass(MemberDTO memberDTO);
 
 }

@@ -5,9 +5,11 @@ import com.daelim.transactions.dto.MemberDTO;
 import com.daelim.transactions.dto.afafDTO;
 import com.daelim.transactions.mapper.DaoTest;
 import com.daelim.transactions.utils.CryptoUtil;
+import com.daelim.transactions.utils.RandomPassword;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Member;
 import java.security.NoSuchAlgorithmException;
 import java.util.Collections;
 import java.util.List;
@@ -32,7 +34,8 @@ public class ServiceTestImpl implements ServiceTest {
         CryptoUtil cryptoUtil =new CryptoUtil();
         String enPass = cryptoUtil.sha256(member.getLoginPw());
         member.setLoginPw(enPass);
-         int optMember = daoTest.insertMember(member);
+        member.setEmail(member.getEmail()+"@email.daelim.ac.kr");
+        int optMember = daoTest.insertMember(member);
         System.out.println("테스트 해보자 " + optMember);
         return optMember;
     }
@@ -55,5 +58,45 @@ public class ServiceTestImpl implements ServiceTest {
         memberDTO.setLoginPw(enPass);
         return  daoTest.selectLogin(memberDTO);
     }
+
+    @Override
+    public MemberDTO getFindId(MemberDTO memberDTO) {
+
+        memberDTO.setEmail(memberDTO.getEmail()+"@email.daelim.ac.kr");
+        Optional<MemberDTO> optMember = Optional.ofNullable(daoTest.findLoginId(memberDTO));
+
+        if(!optMember.isPresent()){
+            // 멤버가 존재하지 않을 시
+            return null;
+
+        }else{
+            MemberDTO member = optMember.get();
+            System.out.println(member.getName());
+            return  member;
+        }
+
+
+    }
+
+    @Override
+    public MemberDTO getFindPass(MemberDTO memberDTO) {
+        memberDTO.setEmail(memberDTO.getEmail()+"@email.daelim.ac.kr");
+        Optional<MemberDTO> optMember = Optional.ofNullable(daoTest.findLoginPass(memberDTO));
+        if(optMember.isEmpty()){
+            // 멤버가 존재하지 않을 시
+            return null;
+        }else{
+            MemberDTO member = optMember.get();
+            RandomPassword randomPassword = new RandomPassword();
+            String changePass = randomPassword.getRandom(10);
+            member.setLoginPw(changePass);
+            int updateCh = daoTest.updateByPass(member);
+            System.out.println(member.getName());
+            return  member;
+        }
+    }
+
+
+
 
 }
