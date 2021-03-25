@@ -3,102 +3,8 @@
 
 <mapper namespace="com.daelim.transactions.mapper.DaoTest">
 
-
-    <insert id="insert" parameterType="com.daelim.transactions.dto.EmployeeDTO">
-        insert into hr_all_emp_info(
-            login_id,
-            join_time,
-            name,
-            tel,
-            email,
-            birth_day,
-            gender,
-            age,
-            native_flag,
-            type,
-            postcode,
-            new_addr,
-            old_addr,
-            detail_addr,
-            part,
-            `rank`,
-            emp_status,
-            contract_status,
-            bank_code,
-            bank_account_number,
-            salary,
-            leave_time,
-            delete_flag,
-            create_time,
-            update_time,
-            delete_time
-        )values (
-                 #{loginID},
-                 #{joinTime},
-                 #{name},
-                 #{tel},
-                 #{email},
-                 #{birthDay},
-                 #{gender},
-                 #{age},
-                 #{nativeFlag},
-                 #{type},
-                 #{postcode},
-                 #{newAddr},
-                 #{oldAddr},
-                 #{detailAddr},
-                 #{part},
-                 #{rank},
-                 #{empStatus},
-                 #{contractStatus},
-                 #{bankCode},
-                 #{bankAccountNumber},
-                 #{salary},
-                 #{leaveTime},
-                 #{deleteFlag},
-                 #{createTime},
-                 #{updateTime},
-                 #{deleteTime}
-                        )
-    </insert>
-
-    <select id="selectById" parameterType="String" resultType="com.daelim.transactions.dto.EmployeeDTO">
+    <select id="selectMemberList" parameterType="com.daelim.transactions.dto.MemberDTO" resultType="com.daelim.transactions.dto.MemberDTO">
         SELECT
-            login_id,
-            join_time,
-            name,
-            tel,
-            email,
-            birth_day,
-            gender,
-            age,
-            native_flag,
-            type,
-            postcode,
-            new_addr,
-            old_addr,
-            detail_addr,
-            part,
-            `rank`,
-            emp_status,
-            contract_status,
-            bank_code,
-            bank_account_number,
-            salary,
-            leave_time,
-            delete_flag,
-            create_time,
-            update_time,
-            delete_time
-        FROM
-            hr_all_emp_info
-        WHERE
-            login_id = #{id}
-
-    </select>
-
-    <insert id="insertMember"  parameterType="com.daelim.transactions.dto.MemberDTO" >
-        insert into test(
             loginId,
             loginPw,
             name,
@@ -108,18 +14,31 @@
             createTime,
             loginFlag,
             profile
-        )values (
-            #{loginId},
-            #{loginPw},
-            #{name},
-            #{email},
-            #{nickName},
-             IFNULL(#{status}, 'N'),
-             NOW(),
-             IFNULL(#{loginFlag}, '0'),
-             NULL
-        )
-    </insert>
+        FROM
+            test
+        WHERE
+            status = 'N'
 
+    </select>
+
+    <select id="selectMemberTotalCount" parameterType="com.daelim.transactions.dto.MemberDTO" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            test
+        WHERE
+            status = 'N'
+    </select>
+    <select id="selectLogin" parameterType="com.daelim.transactions.dto.MemberDTO" resultType="com.daelim.transactions.dto.MemberDTO">
+        SELECT
+            loginId,
+            loginPw
+        FROM
+            test
+        WHERE
+            loginId = #{loginId}
+        AND
+            loginPw = #{loginPw}
+    </select>
 
 </mapper>
