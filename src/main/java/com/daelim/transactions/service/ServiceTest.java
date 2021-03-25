@@ -22,5 +22,7 @@ public interface ServiceTest {
 
     public MemberDTO getFindId(MemberDTO memberDTO);
 
-    public MemberDTO getFindPass(MemberDTO memberDTO);
+    public MemberDTO getFindPass(MemberDTO memberDTO,String changPass) throws NoSuchAlgorithmException;
+
+    public String putRandomPass();
 }

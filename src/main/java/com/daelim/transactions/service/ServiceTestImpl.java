@@ -88,7 +88,7 @@ public class ServiceTestImpl implements ServiceTest {
     }
 
     @Override
-    public MemberDTO getFindPass(MemberDTO memberDTO) {
+    public MemberDTO getFindPass(MemberDTO memberDTO,String changePass) throws NoSuchAlgorithmException {
         memberDTO.setEmail(memberDTO.getEmail()+"@email.daelim.ac.kr");
         Optional<MemberDTO> optMember = Optional.ofNullable(daoTest.findLoginPass(memberDTO));
         if(optMember.isEmpty()){
@@ -96,13 +96,21 @@ public class ServiceTestImpl implements ServiceTest {
             return null;
         }else{
             MemberDTO member = optMember.get();
-            RandomPassword randomPassword = new RandomPassword();
-            String changePass = randomPassword.getRandom(10);
             member.setLoginPw(changePass);
+            CryptoUtil cryptoUtil = new CryptoUtil();
+            String enPass = cryptoUtil.sha256(member.getLoginPw());
+            member.setLoginPw(enPass);
             int updateCh = daoTest.updateByPass(member);
             System.out.println(member.getName());
             return  member;
         }
+    }
+
+    @Override
+    public String putRandomPass(){
+        RandomPassword randomPassword = new RandomPassword();
+        String changePass = randomPassword.getRandom(10);
+        return changePass;
     }
 
 

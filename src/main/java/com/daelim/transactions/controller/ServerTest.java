@@ -100,8 +100,9 @@ public class ServerTest {
     }
 
     @PostMapping(value="/test/login/findPw")
-    public String testFindPass(final MemberDTO memberDTO,Model model){
-        Optional<MemberDTO> member = Optional.ofNullable(serviceTest.getFindPass(memberDTO));
+    public String testFindPass(final MemberDTO memberDTO,Model model) throws NoSuchAlgorithmException {
+        String rcvPass = serviceTest.putRandomPass();
+        Optional<MemberDTO> member = Optional.ofNullable(serviceTest.getFindPass(memberDTO,rcvPass));
 
         if(!member.isPresent()){
             boolean flag = false;
@@ -109,7 +110,7 @@ public class ServerTest {
             model.addAttribute("flag",flag);
             return "login/findPw";
         }else{
-            model.addAttribute("memberPw", member.get().getLoginPw());
+            model.addAttribute("memberPw", rcvPass);
             return "login/findPwResult";
         }
     }
