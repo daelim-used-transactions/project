@@ -123,6 +123,31 @@
             font-weight: 600;
         }
 
+        .pwCheckReg{
+            font-size: 13px;
+            width:450px;
+            color: red;
+            font-weight: 600;
+        }
+
+        .pwCheckReg-Ok{
+            font-size: 13px;
+            color: #42d906;
+            font-weight: 600;
+        }
+
+        .passCheckEqual{
+            font-size: 13px;
+            color: red;
+            font-weight: 600;
+        }
+
+        .passCheckEqual-Ok{
+            font-size: 13px;
+            color: #42d906;
+            font-weight: 600;
+        }
+
     </style>
 </head>
 <body>
@@ -143,21 +168,20 @@
             </h3>
 
             <span id="idInput" class="spanSpace">
-                        <input class="int" type="text" id="id" name="id" maxlength="20" th:field="*{loginId}"  placeholder="아이디를 입력해 주세요.">
-                        <button class="idCheck" type="button" >중복확인</button>
+                <input class="int" type="text" id="id" name="id" maxlength="20" th:field="*{loginId}"  placeholder="아이디를 입력해 주세요.">
             </span>
 
             <h3>
                 <label for="pass">비밀번호</label>
             </h3>
-            <span class="spanSpace">
+            <span id="pwInputSpan" class="spanSpace">
                 <input class="int" type="password" id="pass" name="pass" maxlength="20" th:field="*{loginPw}"  placeholder="비밀번호를 입력해 주세요.">
             </span>
 
             <h3>
                 <label for="passCheck">비밀번호 확인</label>
             </h3>
-            <span class="spanSpace">
+            <span id="pwCheckSpan" class="spanSpace">
                 <input class="int" type="password" id="passCheck" name="passCheck" maxlength="20"  placeholder="비밀번호를 입력해 주세요.">
             </span>
         </div>

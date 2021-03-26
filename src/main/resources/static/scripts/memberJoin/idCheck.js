@@ -20,7 +20,7 @@ function idCheckBlur(){  //focus 잃었을 때 실행되는 함수
     let cssSelectFlag = false;
     let asyncCheck = true;
     if(!/^[a-zA-Z0-9]{5,20}$/.test(idInput.value)){
-        div.innerHTML ="<p>아이디는 숫자와 영문자 조합으로 5~ 20자리를 사용하여야 합니다.</p>";
+        div.innerHTML ="<p>아이디는 숫자와 영문자 조합으로 5~ 20자리를 사용해야 합니다.</p>";
         idCheckOk = false;
     }else{
         let checkNumber = idInput.value.search(/[0-9]/g);
