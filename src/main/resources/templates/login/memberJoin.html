@@ -148,6 +148,18 @@
             font-weight: 600;
         }
 
+        .nameWordCheck{
+            font-size: 13px;
+            color: red;
+            font-weight: 600;
+        }
+
+        .nameWordCheck-Ok{
+            font-size: 13px;
+            color: #42d906;
+            font-weight: 600;
+        }
+
     </style>
 </head>
 <body>
@@ -190,7 +202,7 @@
             <h3>
                 <label for="name">이름</label>
             </h3>
-            <span class="spanSpace">
+            <span id="nameCheckSpan" class="spanSpace">
                         <input class="int" type="text" id="name" name="name" maxlength="20" th:field="*{name}"  placeholder="이름을 입력해 주세요.">
                     </span>
 
@@ -229,5 +241,6 @@
 </div>
 <script src="/scripts/memberJoin/idCheck.js"></script>
 <script src="/scripts/memberJoin/pwCheck.js"></script>
+<script src="/scripts/memberJoin/nameCheck.js"></script>
 </body>
 </html>
