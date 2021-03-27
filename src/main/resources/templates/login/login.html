@@ -2,41 +2,60 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/login/login.css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>대림장터 | 로그인</title>
+    <link rel="stylesheet" href="/css/login/login.css">
+    <script src="/scripts/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <header>
-
-    </header>
-    <main>
-        <div class ="center-align">
-            <div class = "login-size">
-                <div class = "login">
-                    <div><img src ="/images/login/logo.png" alt ="대림장터 로고" /></div>
-                    <div id ="login-form">
-                        <form th:action="@{/main/dlogin}" method="post" th:object="${loginInfo}">
-                            <input type="text" name="id" class="text-field" th:field="*{loginId}"placeholder="아이디">
-                            <input type="password" name="password" class="text-field" th:field="*{loginPw}"placeholder="비밀번호">
-                            <div class ="color" th:if="${flag==false}">
-                                아이디를 다시 입력해라 짜증나니까 ;
-                            </div>
-                            <input type="submit" value="로그인" class="submit-btn">
-                        </form>
-                          <div>
-                            <a href="/login/join" class="a-field">회원가입</a>
-                            |
-                            <a href="/login/findId" class="a-field">아이디 찾기</a>
-                            |
-                            <a href="/login/findPw" class="a-field">비밀번호 찾기</a>
-                          </div>
-                    </div>
+    <div class="container">
+        <section class="login-form">
+            <h1><img src="/images/login/login_topLogo.png" alt="로고"></h1>
+            <form th:action="@{/main/dlogin}" th:object="${loginInfo}" method="post">
+                <div class="int-area">
+                    <input type="text" name="id" id="id"  th:field="*{loginId}" autocomplete="off" required>
+                    <label for="id">USER NAME</label>
                 </div>
-            </div>
-        </div>
-    </main>
-    <footer>
+                <div class="int-area">
+                    <input type="password" name="pass" id="pass" th:field="*{loginPw}" autocomplete="off" required>
+                    <label for="pass">PASSWORD</label>
+                </div>
+                <div class="falseCheck" th:if="${flag==false}"></div>
 
-    </footer>
+                <div class="btn-area">
+                    <button id="btn"type="submit">LOGIN</button>
+                </div>
+            </form>
+
+            <div class="caption">
+                <a href="/login/findId">아이디 찾기 </a>|
+                <a href="/login/findPw"> 비밀번호 찾기 </a>|
+                <a href="/login/join"> 회원가입</a>
+            </div>
+        </section>
+    </div>
+
+
+    <script>
+        let id = $('#id');
+        let pass = $('#pass');
+        let btn = $('#btn');
+
+        $(btn).on('click',function(){
+            if($(id).val() == ""){
+                $(id).next('label').addClass('warning');
+                setTimeout(function(){
+                    $('label').removeClass('warning');
+                },1500);
+            }
+            else if($(pass).val() == ""){
+                $(pass).next('label').addClass('warning');
+                setTimeout(function(){
+                    $('label').removeClass('warning');
+                },1500);
+            }
+        })
+    </script>
 </body>
 </html>

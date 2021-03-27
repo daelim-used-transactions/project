@@ -29,12 +29,26 @@ public interface DaoTest {
      *
      * @param memberDTO
      * @return
+     * 이름과 이메일을 통해
      * 아이디 찾기
      */
     public MemberDTO findLoginId(MemberDTO memberDTO);
 
+    /**
+     *
+     * @param memberDTO
+     * @return
+     * 아이디와 이메일을 통해
+     * 비밀번호 찾기
+     */
     public MemberDTO findLoginPass(MemberDTO memberDTO);
 
+    /**
+     *
+     * @param memberDTO
+     * @return
+     * 아이디에 맞는 비밀번호를 찾아 변경
+     */
     public int updateByPass(MemberDTO memberDTO);
 
 }
