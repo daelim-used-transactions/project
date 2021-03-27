@@ -14,10 +14,8 @@ function pwBlur(){
     pwdiv = document.createElement('div');
     if(!/^.*(?=^.{8,20}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=*()]).*$/.test(pwInput.value)){
         pwdiv.innerHTML ="<p>비밀번호는 숫자,영문,특수문자 조합으로 8~20자를 사용해야 합니다.</p>"
-        pwdiv.className = 'pwCheckReg';
     }else{
         pwdiv.innerHTML ="<p>사용가능한 비밀번호 입니다.</p>"
-        pwdiv.className = 'pwCheckReg-Ok';
         pwRegOk = true;
     }
     if(pwRegOk){
@@ -53,15 +51,12 @@ function passCheckBlur(){
     if(pwRegOk){ //비밀번호 유효성 검사 통과시에만 값을 비교
         if(passCheckInput.value === pwInput.value){ // 값이 같을 경우
             passCheckdiv.innerHTML ="<p>확인이 완료되었습니다.</p>";
-            passCheckdiv.className = 'passCheckEqual-Ok';
             pwEqualOk = true;
         }else{
             passCheckdiv.innerHTML ="<p>비밀번호를 제대로 확인해 주세요.</p>";
-            passCheckdiv.className = 'passCheckEqual';
         }
     }else{
         passCheckdiv.innerHTML ="<p>먼저 비밀번호를 조건에 맞춰 입력해 주세요!</p>";
-        passCheckdiv.className = 'passCheckEqual';
     }
     if(pwEqualOk){
         document.querySelector('#pwCheckSpan').appendChild(passCheckdiv).setAttribute('class', 'passCheckEqual-Ok');
