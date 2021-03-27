@@ -1,90 +1,44 @@
 package com.daelim.transactions.controller;
 
+
 import com.daelim.transactions.dto.MemberDTO;
 import com.daelim.transactions.service.MailService;
 import com.daelim.transactions.service.ServiceTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.lang.reflect.Member;
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 @Controller
-public class ServerTest {
+public class FindController {
 
     @Autowired
     ServiceTest serviceTest;
+
     @Autowired
     MailService mailService;
 
-
-    @GetMapping(value = "/test")
-    public String test(Model model) {
-        MemberDTO memberDTO = new MemberDTO();
-        model.addAttribute("loginInfo", memberDTO);
-        return "login/login";
-    }
-
-    @GetMapping(value = "/test/main")
-    public String testMain() {
-        return "main";
-    }
-
-    @GetMapping(value = "/test/findId")
+    @GetMapping(value = "/login/findId")
     public String testFindId (Model model) {
         MemberDTO member = new MemberDTO();
         model.addAttribute("member", member);
         return "login/findId";
     }
 
-    @GetMapping(value = "/test/findPw")
+    @GetMapping(value = "/login/findPw")
     public String testFindPw (Model model){
         MemberDTO member = new MemberDTO();
         model.addAttribute("member", member);
         return "login/findPw";
     }
 
-    public String testFindPw() {
-        return "/login/findPw";
-    }
 
-    @GetMapping(value = "/test/main/myPage")
-    public String testMyPage() {
-        return "/myPage/myPage";
-    }
-
-    @PostMapping(value = "/test/main/login")
-    public String loginTest(final MemberDTO memberDTO, HttpServletRequest hsr, RedirectAttributes rttr) throws NoSuchAlgorithmException {
-        HttpSession session = hsr.getSession();
-        MemberDTO member = serviceTest.getLogin(memberDTO);
-        if (member == null) {
-            session.setAttribute("member", null);
-            rttr.addFlashAttribute("msg", false);
-        } else {
-            session.setAttribute("member", member);
-            session.setMaxInactiveInterval(60 * 30);
-        }
-        return "main";
-    }
-
-    @GetMapping(value = "/test/main/logout")
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return "main";
-    }
-
-    @PostMapping(value="/test/login/findId")
+    @PostMapping(value="/login/dlogin/findId")
     public String testFindId(final MemberDTO memberDTO, Model model){
         Optional<MemberDTO> member = Optional.ofNullable(serviceTest.getFindId(memberDTO));
 
@@ -99,7 +53,7 @@ public class ServerTest {
         }
     }
 
-    @PostMapping(value="/test/login/findPw")
+    @PostMapping(value="/login/dlogin/findPw")
     public String testFindPass(final MemberDTO memberDTO,Model model) throws NoSuchAlgorithmException {
         String rcvPass = serviceTest.putRandomPass();
         Optional<MemberDTO> member = Optional.ofNullable(serviceTest.getFindPass(memberDTO,rcvPass));

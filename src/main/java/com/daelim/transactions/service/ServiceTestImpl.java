@@ -89,7 +89,13 @@ public class ServiceTestImpl implements ServiceTest {
 
     @Override
     public MemberDTO getFindPass(MemberDTO memberDTO,String changePass) throws NoSuchAlgorithmException {
+
+        /**
+         * 뷰에서 받은 이메일값을 대림대 이메일로 고정 시키기 위한 것
+         * */
         memberDTO.setEmail(memberDTO.getEmail()+"@email.daelim.ac.kr");
+
+
         Optional<MemberDTO> optMember = Optional.ofNullable(daoTest.findLoginPass(memberDTO));
         if(optMember.isEmpty()){
             // 멤버가 존재하지 않을 시
@@ -106,6 +112,10 @@ public class ServiceTestImpl implements ServiceTest {
         }
     }
 
+
+    /**
+     * 임시 비밀번호 생성
+     * */
     @Override
     public String putRandomPass(){
         RandomPassword randomPassword = new RandomPassword();

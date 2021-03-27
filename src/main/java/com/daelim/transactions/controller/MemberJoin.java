@@ -32,7 +32,7 @@ public class MemberJoin {
     @PostMapping(value = "/login/join/register")
     public String testRegister(final MemberDTO member) throws NoSuchAlgorithmException {
         int checkInsert = serviceTest.memberInsert(member);
-        return "redirect:/test";
+        return "redirect:/login";
     }
 
     /**
