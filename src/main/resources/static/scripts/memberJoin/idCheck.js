@@ -32,8 +32,8 @@ function idCheckBlur(){  //focus 잃었을 때 실행되는 함수
         }else{
             asyncCheck = false;
             $.ajax({
-                url : "/idtest",
-                type : "POST",
+                url : '/idtest',
+                type : 'POST',
                 data : {id : idInput.value},
                 dataType : 'text',  //controller 에서 int형이나 boolean으로 반환해도 string 형태로 그 값을 받음
                 success : function(data){
@@ -57,7 +57,7 @@ function idCheckBlur(){  //focus 잃었을 때 실행되는 함수
             }); //ajax 비동기
         } //else end
     } //else end
-    if(asyncCheck){
+    if(asyncCheck){ //ajax 통신을 하지 않았을 시
         document.querySelector('#idInput').appendChild(div).setAttribute('class','idCheckWord');
     }
 }

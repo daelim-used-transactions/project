@@ -1,6 +1,7 @@
 package com.daelim.transactions.service;
 
 import com.daelim.transactions.utils.MailHandler;
+import com.daelim.transactions.utils.RandomPassword;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -38,5 +39,31 @@ public class MailServiceImpl implements MailService{
         map.put("msg",msg);
         map.put("id", id);
         return map;
+    }
+
+    /**
+     * 이메일 인증번호 발송
+     */
+    @Override
+    public String sendNumber(String email) {
+
+        MailHandler mailHandler;
+        RandomPassword randomPassword = new RandomPassword();
+        String senderAdr = "sksrpf1126@gmail.com"; // ???
+        String AuthenticationNumber = randomPassword.getRandom(6);;
+        try{
+            mailHandler = new MailHandler(mailSender);
+            mailHandler.setTo(email);
+            mailHandler.setFrom(senderAdr , "대림장터 이메일 인증번호 발송");
+            mailHandler.setSubject("대림장터 이메일 인증번호 발송");
+            mailHandler.setText("인증번호는 " +  AuthenticationNumber + "입니다.",false);
+            mailHandler.send();
+
+        } catch (MessagingException | UnsupportedEncodingException e) {
+            AuthenticationNumber = null;
+            e.printStackTrace();
+        }
+
+        return  AuthenticationNumber;
     }
 }

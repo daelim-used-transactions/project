@@ -160,6 +160,18 @@
             font-weight: 600;
         }
 
+        .emailCheck{
+            font-size: 13px;
+            color: red;
+            font-weight: 600;
+        }
+
+        .emailCheck-Ok{
+            font-size: 13px;
+            color: #42d906;
+            font-weight: 600;
+        }
+
     </style>
 </head>
 <body>
@@ -215,15 +227,15 @@
                      </span>
             <button id="certification"type="button">인증번호 받기</button>
 
-<!--            <h3>-->
-<!--                <label for="emailCheck">이메일 인증번호</label>-->
-<!--            </h3>-->
-<!--            <span class="spanSpace">-->
-<!--                        <input class="int" type="text" id="emailCheck" name="emailCheck" maxlength="20" th:field="*{}"  placeholder="인증번호를 입력해 주세요.">-->
-<!--                    </span>-->
-<!--            <h3>-->
-<!--                <label for="nickName">닉네임</label>-->
-<!--            </h3>-->
+            <h3>
+                <label for="emailCheck">이메일 인증번호</label>
+            </h3>
+            <span id="emailCheckSpan" class="spanSpace">
+                        <input class="int" type="text" id="emailCheck" name="emailCheck" maxlength="20"  placeholder="인증번호를 입력해 주세요.">
+                    </span>
+            <h3>
+                <label for="nickName">닉네임</label>
+            </h3>
             <span class="spanSpace">
                         <input class="int" type="text" id="nickName" name="nickName" maxlength="20" th:field="*{nickName}"  placeholder="닉네임 입력해 주세요.">
                         <button  type="button" >중복 확인</button>
@@ -242,5 +254,6 @@
 <script src="/scripts/memberJoin/idCheck.js"></script>
 <script src="/scripts/memberJoin/pwCheck.js"></script>
 <script src="/scripts/memberJoin/nameCheck.js"></script>
+<script src="/scripts/memberJoin/emailCheck.js"></script>
 </body>
 </html>
