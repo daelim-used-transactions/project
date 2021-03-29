@@ -14,6 +14,7 @@ public interface DaoTest {
     public int insertMember(MemberDTO memberDTO);
 
     public String selectById(String id);
+    public String selectByNickname(String userNickname);
 
     public int selectMemberTotalCount(MemberDTO memberDTO);
 

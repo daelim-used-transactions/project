@@ -4,14 +4,15 @@ import com.daelim.transactions.dto.MemberDTO;
 import com.daelim.transactions.service.MailService;
 import com.daelim.transactions.service.ServiceTest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class MemberJoinController {
@@ -42,12 +43,12 @@ public class MemberJoinController {
     /**
      * id 중복 검사 id 입력란 focus 잃었을 때 mapping
      */
-    @PostMapping(value = "/idtest")
+    @PostMapping(value = "/idCheck")
     @ResponseBody
     public String ajaxTest(String id){
         String idCheck = null;
         if(serviceTest.isDuplicatedId(id)){
-            idCheck = "true";
+            idCheck = "true";  //중복되는 아이디가 없을 경우
         }
         return idCheck;
     }
@@ -55,7 +56,7 @@ public class MemberJoinController {
     /**
      * email 전송 및 인증번호 반환
      */
-    @PostMapping(value ="/emailtest")
+    @PostMapping(value ="/emailCheck")
     @ResponseBody
     public String emailTest(String userEmail){
         userEmail +="@email.daelim.ac.kr";
@@ -63,5 +64,23 @@ public class MemberJoinController {
         return AuthenticationNumber;
     }
 
+
+    /**
+     * ajax 와 server 간에 json으로 데이터를 주고받는 연습이자
+     * 닉네임 중복검사 API
+     */
+    @PostMapping(value ="/nicknameCheck")
+    @ResponseBody
+    public Object nicknameTest(@RequestBody Map<String,Object> param){//Stirng,Object로 해도 되네
+        String nickNameCheck = null;
+        Map<String, Object> map = new HashMap<>();
+        System.out.println("테스트 값 잘 나오냐 " + param);
+        System.out.println("테스트 값 잘 나오냐2 " + param.get("userNickname"));
+        if(serviceTest.isDuplicatedNickname((String) param.get("userNickname"))){
+            nickNameCheck = "true";  //중복되는 닉네임이 없을 경우
+            map.put("nickNameCheck", nickNameCheck);
+        }
+        return map;
+    }
 
 }//class end

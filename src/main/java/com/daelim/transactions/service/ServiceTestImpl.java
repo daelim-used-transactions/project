@@ -50,6 +50,12 @@ public class ServiceTestImpl implements ServiceTest {
     }
 
     @Override
+    public boolean isDuplicatedNickname(String userNickname) {
+        userNickname = daoTest.selectByNickname(userNickname);
+        return (userNickname == null);
+    }
+
+    @Override
     public List<MemberDTO> getMemberList(MemberDTO memberDTO) {
         List<MemberDTO> memberList = Collections.emptyList();
         int memberTotalCount = daoTest.selectMemberTotalCount(memberDTO);

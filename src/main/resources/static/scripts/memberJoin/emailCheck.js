@@ -22,7 +22,7 @@ function certificationClick(){
     }
     sendFlag = false;
     $.ajax({
-        url : '/emailtest',
+        url : '/emailCheck',
         type : 'POST',
         data : {userEmail : emailInput.value},
         dataType : 'text',
