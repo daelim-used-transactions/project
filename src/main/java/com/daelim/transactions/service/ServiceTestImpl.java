@@ -123,7 +123,21 @@ public class ServiceTestImpl implements ServiceTest {
         return changePass;
     }
 
+    @Override
+    public void changProfile(MemberDTO memberDTO , String profile){
 
+        memberDTO.setProfile(profile);
+        int checkUp = daoTest.updateByProfile(memberDTO);
+
+
+    }
+
+    @Override
+    public MemberDTO getProfile(String memId) {
+        MemberDTO member = daoTest.idToProfile(memId);
+
+        return member;
+    }
 
 
 }

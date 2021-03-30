@@ -51,4 +51,12 @@ public interface DaoTest {
      */
     public int updateByPass(MemberDTO memberDTO);
 
+
+    /**
+     * 프로필사진 변경에 대한 업데이트
+     * */
+    public int updateByProfile(MemberDTO memberDTO);
+
+    public MemberDTO idToProfile(String memId);
+
 }

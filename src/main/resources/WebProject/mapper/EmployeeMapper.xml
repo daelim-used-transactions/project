@@ -32,7 +32,14 @@
     <select id="selectLogin" parameterType="com.daelim.transactions.dto.MemberDTO" resultType="com.daelim.transactions.dto.MemberDTO">
         SELECT
             loginId,
-            loginPw
+            loginPw,
+            name,
+            email,
+            nickName,
+            status,
+            createTime,
+            loginFlag,
+            profile
         FROM
             test
         WHERE
@@ -87,4 +94,31 @@
         WHERE
             loginId = #{loginId}
     </update>
+
+    <update id="updateByProfile" parameterType="com.daelim.transactions.dto.MemberDTO">
+        UPDATE
+            test
+        SET
+            profile = #{profile}
+        WHERE
+            loginId = #{loginId}
+    </update>
+
+    <select id="idToProfile" parameterType="String" resultType="com.daelim.transactions.dto.MemberDTO">
+        SELECT
+            loginId,
+            loginPw,
+            name,
+            email,
+            nickName,
+            status,
+            createTime,
+            loginFlag,
+            profile
+        FROM
+            test
+        WHERE
+             loginId = #{loginId}
+    </select>
+
 </mapper>

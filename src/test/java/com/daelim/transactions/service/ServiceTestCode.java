@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.lang.reflect.Member;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.Optional;
@@ -68,5 +69,16 @@ public class ServiceTestCode {
             System.out.println(empInfo.getName());
         }
 
+    }
+    @Test
+    public void getRandom(){
+        serviceTest.putRandomPass();
+    }
+
+    @Test
+    public void getProfile(){
+        MemberDTO memberDTO =serviceTest.getProfile("qwer1234");
+        System.out.println(memberDTO.getProfile());
+        System.out.println(memberDTO.getName());
     }
 }

@@ -1,240 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마이페이지</title>
-    <style>
-        *{
-            margin:0;
-            padding:0;
-        }
-        *:focus {
-            outline:none;
-        }
-        a{
-            text-decoration: none;
-        }
-        a:link { color:black; text-decoration: none;}
-        a:visited { color:black; text-decoration: none;}
-        a:hover { color:black; text-decoration: underline;}
-
-        body{
-            background-color: rgb(255, 255, 255);
-        }
-        #fileBox{
-            width: 99%;
-            height: 600px;
-            display: inline-block;
-            position: relative;
-
-        }
-        #fileDiv {
-            text-align: center;
-            width: 46%;
-            height: 46%;
-            display: inline-block;
-            border: 1px solid #dadada;
-            border-radius: 100%;
-            box-shadow: 0 0 10px 0 #dadada;
-            margin-top: 65px;
-        }
-        #img_upload{
-            display: none;
-        }
-        #fileDiv > label {
-            cursor: pointer;
-            width: 130px;
-            height: 100px;
-            text-align: center;
-            margin-top: 30px;
-        }
-        #fileDiv > label >img{
-            width: 50px;
-            height: 50px;
-            margin-top: 24px;
-            margin-left: 6px;
-
-        }
-        #addImg{
-            margin:0;
-            font-size: 14px;
-            cursor: pointer;
-        }
-        #myContent{
-            display: inline;
-            width: 100%;
-            border: 1px solid #dadada;
-            border-radius: 17px;
-            box-shadow: 0 0 10px 0 #dadada;
-            float: left;
-        }
-        #profileCon{
-            margin-bottom: 19px;
-            display: inline-block;
-            width: 100%;
-        }
-        #imgDiv{
-            text-align: center;
-            display: block;
-            float: left;
-            background:url("./imgae/background.jpg");
-            width: 25%;
-            height: 284px;
-            border: 1px solid #dadada;
-            border-radius: 17px;
-            margin-right: 2%;
-            box-shadow: 0 0 10px 0 #dadada;
-        }
-        #allSec{
-            min-width: 700px;
-            height: 905px;
-            margin: 80px auto;
-        }
-        #profileInfo{
-            display: block;
-            float: left;
-            width: 72%;
-            height: 284px;
-            border: 1px solid #dadada;
-            border-radius: 17px;
-            box-shadow: 0 0 10px 0 #dadada;
-        }
-        #menu{
-            position: relative;
-            top:32px;
-            text-align: center;
-            width: 300px;
-            display: inline;
-            list-style: none;
-
-        }
-        #menu>li{
-            margin-bottom: 30px;
-        }
-        #selectMenu{
-            position: relative;
-            float: left;
-            width: 20%;
-            display: block;
-            height: 900px;
-            margin-right: 3%;
-        }
-        #menuCon{
-            float: left;
-            width: 75%;
-            display: block;
-        }
-        #two{
-            width: 82%;
-            height: 94%;
-            margin:0 2%;
-        }
-        #goodsBox{
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            width: 100%;
-        }
-        .goodsImg{
-            position: relative;
-            margin: 30px 0px 30px 40px;
-        }
-        .goodsImg img{
-            width: 150px;
-            height: 100px;
-        }
-        .goodsCon{
-            width: 150px;
-            height: 30px;
-        }
-
-        .goodsCon > h3{
-            text-align: right;
-        }
-        .goodsCon >p{
-            text-align: right;
-        }
-        .inlineB{
-            display: inline-block;
-        }
-        #nickName{
-            font-size: 32px;
-
-        }
-        #myinfo{
-            display: block;
-            width: 37%;
-            height: 100%;
-            float: left;
-            margin-right: 13%;
-
-        }
-        #listNum{
-            display: block;
-            width: 46%;
-            height: 100%;
-            padding-top: 4%;
-            float: left;
-        }
-        #infoBox{
-            margin: 12% 0px 0px 5%;
-            width: 100%;
-            height: 43%;
-        }
-        .borLeft{
-            border-left: 1px solid #e5e5e5;
-            margin-left: 10px;
-            font-size: 20px;
-        }
-
-    </style>
+    <link rel="stylesheet" href="/css/mypage/mypage.css">
 </head>
 <body>
 
 <div id="allSec">
-    <div id="two">
-        <div id="selectMenu">
-            <ul id="menu">
-                <li class="on">
-                    <a class="asd"href="#" onclick="aClick();">등록한 상품</a>
-                </li>
-                <li class="">
-                    <a class="asd"href="" onclick="aClick();">위시 리스트</a>
-                </li>
-                <li class="">
-                    <a class="asd"href="#" onclick="aClick();">구해요</a>
-                </li>
-                <li class="">
-                    <a class="asd"href="#"onclick="aClick();">1:1 문의</a>
-                </li>
-                <li>
-                    <a class="asd"href="#" onclick="aClick();">정보 수정</a>
-                </li>
-                <li>
-                    <a class="asd" href="#"onclick="aClick();" >회원탈퇴</a>
-                </li>
-            </ul>
-        </div>
-        <div id="">
+    <div id="selectMenu">
+        <ul id="menu">
+            <li class="on">
+                <a class="asd" href="#" >등록한 상품</a>
+            </li>
+            <li class="">
+                <a class="asd" href="">위시 리스트</a>
+            </li>
+            <li class="">
+                <a class="asd" href="#">구해요</a>
+            </li>
+            <li class="">
+                <a class="asd" href="#">1:1 문의</a>
+            </li>
+            <li>
+                <a class="asd" href="#">정보 수정</a>
+            </li>
+            <li>
+                <a class="asd" href="#" >회원탈퇴</a>
+            </li>
+        </ul>
+    </div>
 
-        </div>
+    <div id="two">
         <div id="menuCon">
             <div id="profileCon">
-                <div id="imgDiv">
-                    <div id="fileDiv">
-                        <label for="img_upload">
-                            <img src="/images/myPage/camera.png" alt="카메라 사진">
-                            <p id="addImg">사진 추가</p>
-                        </label>
-                        <input type="file" name="img_upload" id="img_upload" multiple>
-                    </div>
-                </div>
+                <a href="#"><div id="imgDiv"><img th:src="@{${memProfile}}" alt="백그라운드"></div></a>
                 <div id="profileInfo">
                     <div id ="infoBox" >
                         <div id="myinfo" >
-                            <span id="nickName"> 태비서 </span><p class="inlineB">님 안녕하세요</p><br>
+                            <span th:text="${memNick}" id="nickName"> 태비서 </span><p class="inlineB">님 안녕하세요</p><br>
                             <span > 태비서 </span><p class="inlineB">가입일 : 2021-03-18</p>
                         </div>
                         <div id="listNum" class="inlineB">
@@ -254,7 +60,7 @@
                 <div id="myContent">
                     <div id="goodsBox">
                         <div class="goodsImg">
-                            <img src="/images/myPage/camera.png" alt="">
+                            <img src="./imgae/camera.png" alt="">
                             <div class="goodsCon">
                                 <h3>상품 제목</h3>
                                 <p>10,000원</p>
@@ -262,7 +68,7 @@
                             </div>
                         </div>
                         <div class="goodsImg">
-                            <img src="/images/myPage/camera.png" alt="">
+                            <img src="./imgae/camera.png" alt="">
                             <div class="goodsCon">
                                 <h3>상품 제목</h3>
                                 <p>10,000원</p>
@@ -270,7 +76,7 @@
                             </div>
                         </div>
                         <div class="goodsImg">
-                            <img src="/images/myPage/camera.png" alt="">
+                            <img src="./imgae/camera.png" alt="">
                             <div class="goodsCon">
                                 <h3>상품 제목</h3>
                                 <p>10,000원</p>
@@ -278,7 +84,7 @@
                             </div>
                         </div>
                         <div class="goodsImg">
-                            <img src="/images/myPage/camera.png" alt="">
+                            <img src="./imgae/camera.png" alt="">
                             <div class="goodsCon">
                                 <h3>상품 제목</h3>
                                 <p>10,000원</p>
@@ -286,7 +92,7 @@
                             </div>
                         </div>
                         <div class="goodsImg">
-                            <img src="/images/myPage/camera.png" alt="">
+                            <img src="./imgae/camera.png" alt="">
                             <div class="goodsCon">
                                 <h3>상품 제목</h3>
                                 <p>10,000원</p>
@@ -294,7 +100,7 @@
                             </div>
                         </div>
                         <div class="goodsImg">
-                            <img src="/images/myPage/camera.png" alt="">
+                            <img src="./imgae/camera.png" alt="">
                             <div class="goodsCon">
                                 <h3>상품 제목</h3>
                                 <p>10,000원</p>
@@ -302,7 +108,7 @@
                             </div>
                         </div>
                         <div class="goodsImg">
-                            <img src="/images/myPage/camera.png" alt="">
+                            <img src="./imgae/camera.png" alt="">
                             <div class="goodsCon">
                                 <h3>상품 제목</h3>
                                 <p>10,000원</p>
@@ -310,7 +116,7 @@
                             </div>
                         </div>
                         <div class="goodsImg">
-                            <img src="/images/myPage/camera.png" alt="">
+                            <img src="./imgae/camera.png" alt="">
                             <div class="goodsCon">
                                 <h3>상품 제목</h3>
                                 <p>10,000원</p>
@@ -318,7 +124,7 @@
                             </div>
                         </div>
                         <div class="goodsImg">
-                            <img src="/images/myPage/camera.png" alt="">
+                            <img src="./imgae/camera.png" alt="">
                             <div class="goodsCon">
                                 <h3>상품 제목</h3>
                                 <p>10,000원</p>
@@ -326,7 +132,7 @@
                             </div>
                         </div>
                         <div class="goodsImg">
-                            <img src="/images/myPage/camera.png" alt="">
+                            <img src="./imgae/camera.png" alt="">
                             <div class="goodsCon">
                                 <h3>상품 제목</h3>
                                 <p>10,000원</p>
@@ -334,7 +140,7 @@
                             </div>
                         </div>
                         <div class="goodsImg">
-                            <img src="/images/myPage/camera.png" alt="">
+                            <img src="./imgae/camera.png" alt="">
                             <div class="goodsCon">
                                 <h3>상품 제목</h3>
                                 <p>10,000원</p>
@@ -342,7 +148,7 @@
                             </div>
                         </div>
                         <div class="goodsImg">
-                            <img src="/images/myPage/camera.png" alt="">
+                            <img src="./imgae/camera.png" alt="">
                             <div class="goodsCon">
                                 <h3>상품 제목</h3>
                                 <p>10,000원</p>
@@ -350,7 +156,7 @@
                             </div>
                         </div>
                         <div class="goodsImg">
-                            <img src="/images/myPage/camera.png" alt="">
+                            <img src="./imgae/camera.png" alt="">
                             <div class="goodsCon">
                                 <h3>상품 제목</h3>
                                 <p>10,000원</p>
@@ -358,7 +164,7 @@
                             </div>
                         </div>
                         <div class="goodsImg">
-                            <img src="/images/myPage/camera.png" alt="">
+                            <img src="./imgae/camera.png" alt="">
                             <div class="goodsCon">
                                 <h3>상품 제목</h3>
                                 <p>10,000원</p>
@@ -366,7 +172,7 @@
                             </div>
                         </div>
                         <div class="goodsImg">
-                            <img src="/images/myPage/camera.png" alt="">
+                            <img src="./imgae/camera.png" alt="">
                             <div class="goodsCon">
                                 <h3>상품 제목</h3>
                                 <p>10,000원</p>
@@ -374,7 +180,7 @@
                             </div>
                         </div>
                         <div class="goodsImg">
-                            <img src="/images/myPage/camera.png" alt="">
+                            <img src="./imgae/camera.png" alt="">
                             <div class="goodsCon">
                                 <h3>상품 제목</h3>
                                 <p>10,000원</p>
@@ -382,7 +188,7 @@
                             </div>
                         </div>
                         <div class="goodsImg">
-                            <img src="/images/myPage/camera.png" alt="">
+                            <img src="./imgae/camera.png" alt="">
                             <div class="goodsCon">
                                 <h3>상품 제목</h3>
                                 <p>10,000원</p>
@@ -390,7 +196,7 @@
                             </div>
                         </div>
                         <div class="goodsImg">
-                            <img src="/images/myPage/camera.png" alt="">
+                            <img src="./imgae/camera.png" alt="">
                             <div class="goodsCon">
                                 <h3>상품 제목</h3>
                                 <p>10,000원</p>
@@ -398,7 +204,7 @@
                             </div>
                         </div>
                         <div class="goodsImg">
-                            <img src="/images/myPage/camera.png" alt="">
+                            <img src="./imgae/camera.png" alt="">
                             <div class="goodsCon">
                                 <h3>상품 제목</h3>
                                 <p>10,000원</p>
@@ -406,7 +212,7 @@
                             </div>
                         </div>
                         <div class="goodsImg">
-                            <img src="/images/myPage/camera.png" alt="">
+                            <img src="./imgae/camera.png" alt="">
                             <div class="goodsCon">
                                 <h3>상품 제목</h3>
                                 <p>10,000원</p>
@@ -414,7 +220,7 @@
                             </div>
                         </div>
                         <div class="goodsImg">
-                            <img src="/images/myPage/camera.png" alt="">
+                            <img src="./imgae/camera.png" alt="">
                             <div class="goodsCon">
                                 <h3>상품 제목</h3>
                                 <p>10,000원</p>
@@ -422,36 +228,42 @@
                             </div>
                         </div>
                         <div class="goodsImg">
-                            <img src="/images/myPage/camera.png" alt="">
+                            <img src="./imgae/camera.png" alt="">
                             <div class="goodsCon">
                                 <h3>상품 제목</h3>
                                 <p>10,000원</p>
 
                             </div>
                         </div>
+                        <div class="goodsImg">
+                            <img src="./imgae/camera.png" alt="">
+                            <div class="goodsCon">
+                                <h3>상품 제목</h3>
+                                <p>10,000원</p>
 
+                            </div>
+                        </div>
+                        <div class="goodsImg">
+                            <img src="./imgae/camera.png" alt="">
+                            <div class="goodsCon">
+                                <h3>상품 제목</h3>
+                                <p>10,000원</p>
+
+                            </div>
+                        </div>
+                        <div class="goodsImg">
+                            <img src="./imgae/camera.png" alt="">
+                            <div class="goodsCon">
+                                <h3>상품 제목</h3>
+                                <p>10,000원</p>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>
-
-<script>
-        let a = document.querySelectorAll(".asd");
-
-        function aClick(){
-            for(let i =0; i<a.length; i++){
-                var isFocused = (document.activeElement === a[i]);
-                if(isFocused){
-                    a[i].style.textDecoration = "underline";
-                }
-            }
-
-
-        }
-    </script>
 </body>
 </html>

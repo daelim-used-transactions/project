@@ -40,14 +40,16 @@ public class LoginController {
     public String loginTest(final MemberDTO memberDTO, HttpServletRequest hsr, RedirectAttributes rttr) throws NoSuchAlgorithmException {
         HttpSession session = hsr.getSession();
         MemberDTO member = serviceTest.getLogin(memberDTO);
-
         if (member == null) {
             session.setAttribute("member", null);
             rttr.addFlashAttribute("msg", false);
+
             return "redirect:/login?flag=false";
         } else {
             session.setAttribute("member", member);
+            session.setAttribute("memId",member.getLoginId());
             session.setMaxInactiveInterval(60 * 30);
+
             return "main";
         }
 

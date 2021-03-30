@@ -14,9 +14,11 @@
                 <img src ="/images/main/logowhite.png" alt ="대림장터 로고" />
             </div>
             <div class ="util-group inline-block" th:if="${session.member != null}">
-                <a href="/test/main">HOME</a>
-                <a href="/test/main/logout">| 로그아웃</a>
-                <a href="/test/main/myPage">| 마이페이지</a>
+                <span th:text="${session.member.getNickName()}"></span>
+                <span> 님 안녕하세요</span>
+                <a href="/main">HOME</a>
+                <a href="/main/dlogout">| 로그아웃</a>
+                <a th:href="@{/main/myPage/{memId}(memId = ${session.memId})}">| 마이페이지</a>
             </div>
             <div class ="util-group inline-block" th:if="${session.member==null}">
                 <a href="/main">HOME</a>

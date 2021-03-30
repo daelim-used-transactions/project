@@ -25,4 +25,8 @@ public interface ServiceTest {
     public MemberDTO getFindPass(MemberDTO memberDTO,String changPass) throws NoSuchAlgorithmException;
 
     public String putRandomPass();
+
+    public void changProfile(MemberDTO memberDTO, String profile);
+
+    public MemberDTO getProfile(String memId);
 }

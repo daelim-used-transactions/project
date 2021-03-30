@@ -23,7 +23,7 @@
         IFNULL(#{status}, 'N'),
         NOW(),
         IFNULL(#{loginFlag}, '0'),
-        NULL
+        IFNULL(#{profile},'/images/profile/background.jpg')
         )
     </insert>
 
