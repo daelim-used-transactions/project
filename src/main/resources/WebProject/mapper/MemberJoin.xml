@@ -37,4 +37,13 @@
             loginId =#{id}
     </select>
 
+    <select id="selectByNickname" parameterType="String" resultType="String">
+        SELECT
+            nickName
+        FROM
+            test
+        WHERE
+            nickName =#{userNickname}
+    </select>
+
 </mapper>
