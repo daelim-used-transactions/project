@@ -1,5 +1,6 @@
 package com.daelim.transactions.service;
 
+import com.daelim.transactions.configuration.MvcConfiguration;
 import com.daelim.transactions.dto.EmployeeDTO;
 import com.daelim.transactions.dto.MemberDTO;
 import com.daelim.transactions.dto.afafDTO;
@@ -7,7 +8,12 @@ import com.daelim.transactions.utils.CryptoUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.lang.reflect.Member;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
@@ -21,6 +27,9 @@ public class ServiceTestCode {
 
     @Autowired
     MailService mailService;
+
+    @Autowired
+    MvcConfiguration mockMvc;
 
 //    @Test
 //    void OptEmpInfoTest(){
@@ -77,8 +86,20 @@ public class ServiceTestCode {
 
     @Test
     public void getProfile(){
-        MemberDTO memberDTO =serviceTest.getProfile("qwer1234");
+        MemberDTO memberDTO =serviceTest.getAllInfo("rlaxodid123");
         System.out.println(memberDTO.getProfile());
         System.out.println(memberDTO.getName());
+    }
+
+    @Test
+    public void changeProfile(){
+        String fileDir ="/tmp";
+        String fileName = "test.txt";
+        String fileFullPath = String.format("%s/%s",fileDir,fileName);
+        MemberDTO memberDTO = new MemberDTO();
+        memberDTO.setName("test");
+        MultipartFile multipartFile = new MockMultipartFile(fileFullPath, fileName, null, "hello file".getBytes());
+        boolean hi = serviceTest.changProfile(memberDTO,multipartFile);
+        System.out.println(hi);
     }
 }

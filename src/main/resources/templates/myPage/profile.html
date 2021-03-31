@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지</title>
+    <link rel="stylesheet" href="/css/mypage/profile.css">
+</head>
+<body>
+
+<div id="allSec">
+    <div id="selectMenu">
+        <ul id="menu">
+            <li class="on">
+                <a class="asd" href="/main/myPage" >등록한 상품</a>
+            </li>
+            <li class="">
+                <a class="asd"href="">위시 리스트</a>
+            </li>
+            <li class="">
+                <a class="asd"href="#">구해요</a>
+            </li>
+            <li class="">
+                <a class="asd"href="#">1:1 문의</a>
+            </li>
+            <li>
+                <a class="asd"href="#">정보 수정</a>
+            </li>
+            <li>
+                <a class="asd" href="#" >회원탈퇴</a>
+            </li>
+        </ul>
+    </div>
+
+    <div id="two">
+        <div id="menuCon">
+            <div id="profileCon">
+                <a href="/main/myPage/profile"><div id="imgDiv"><img th:src="@{${memProfile}}" alt="백그라운드"></div></a>
+                <div id="profileInfo">
+                    <div id ="infoBox" >
+                        <div id="myinfo" >
+                            <span th:text="${memNick}" id="nickName"> 태 </span><p class="inlineB">님 안녕하세요</p><br>
+                            <span > 태비서 </span><p class="inlineB">가입일 : 2021-03-18</p>
+                        </div>
+                        <div id="listNum" class="inlineB">
+                            <a class="borLeft" href="#">
+                                <i class=""></i>팔아요 &gt;
+                                <strong>5,319</strong>
+                            </a>
+                            <a class="borLeft" href="#">
+                                <i class=""></i>구해요 &gt;
+                                <strong>4,600</strong>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="fileBox">
+                <div id="myContent">
+                    <div id="goodsBox">
+                        <div class="profile_area">
+                            <label for="img_upload">
+                                <img class="View_area" th:src="@{${memProfile}}" alt="백그라운드">
+                            </label>
+                            <form th:action="@{/profile/upload.do}" method="post" enctype="multipart/form-data">
+                                <input type="file" name="file" accept="image/*" id="img_upload" onchange="preview(event);">
+                                <button class= "fileUpload" type="submit">  업로드 </button>
+                                <span class="fileBtn" onclick="resetImage();">기본 배경</span>
+                            </form>
+
+                        </div>
+
+                        <div class="revice">
+                            <form action="#">
+                                <div class="meminfo">
+                                    <label class="con" for="name">이름</label>
+                                    <div class="int_area">
+                                        <input class="int" type="text">
+                                    </div>
+                                </div>
+
+                                <div class="meminfo">
+                                    <label  class="con"  for="name">비밀번호</label>
+                                    <div class="int_area">
+                                        <input class="int" type="password">
+                                    </div>
+                                </div>
+
+                                <div class="meminfo">
+                                    <label class="con"  for="name">비밀번호 확인</label>
+                                    <div class="int_area">
+                                        <input class="int" type="password">
+                                    </div>
+                                </div>
+
+                                <button class="rein" type="submit">정보 수정 </button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function preview(e){
+        let reader = new FileReader();
+        reader.onload = function(e){
+            let img = document.querySelector('.View_area');
+            img.setAttribute("src",e.target.result);
+         };
+        reader.readAsDataURL(e.target.files[0]);
+    }
+</script>
+</body>
+</html>

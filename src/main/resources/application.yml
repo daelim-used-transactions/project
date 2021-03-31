@@ -18,7 +18,7 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username:        #구글 아이디
+    username:      #구글 아이디
     password: ""                     #큰따옴표안에 구글 비밀번호
     properties:
       mail:
@@ -26,3 +26,10 @@ spring:
           auth: true
           starttls:
             enable: true
+
+# 서버 자동 리로드
+  devtools:
+    livereload:
+      enabled: true
+    freemarker:
+      cache: false

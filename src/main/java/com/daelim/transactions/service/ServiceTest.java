@@ -3,6 +3,7 @@ package com.daelim.transactions.service;
 import com.daelim.transactions.dto.EmployeeDTO;
 import com.daelim.transactions.dto.MemberDTO;
 import com.daelim.transactions.dto.afafDTO;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
@@ -27,7 +28,7 @@ public interface ServiceTest {
 
     public String putRandomPass();
 
-    public void changProfile(MemberDTO memberDTO, String profile);
+    public boolean changProfile(MemberDTO memberDTO, MultipartFile files);
 
-    public MemberDTO getProfile(String memId);
+    public MemberDTO getAllInfo(String memId);
 }

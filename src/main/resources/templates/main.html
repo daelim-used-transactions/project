@@ -18,7 +18,7 @@
                 <span> 님 안녕하세요</span>
                 <a href="/main">HOME</a>
                 <a href="/main/dlogout">| 로그아웃</a>
-                <a th:href="@{/main/myPage/{memId}(memId = ${session.memId})}">| 마이페이지</a>
+                <a th:href="@{/main/myPage}">| 마이페이지</a>
             </div>
             <div class ="util-group inline-block" th:if="${session.member==null}">
                 <a href="/main">HOME</a>

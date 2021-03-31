@@ -48,43 +48,7 @@
             loginPw = #{loginPw}
     </select>
 
-    <select id="findLoginId" parameterType="com.daelim.transactions.dto.MemberDTO" resultType="com.daelim.transactions.dto.MemberDTO">
-            SELECT
-                loginId,
-                loginPw,
-                name,
-                email,
-                nickName,
-                status,
-                createTime,
-                loginFlag,
-                profile
-            FROM
-                test
-            WHERE
-                name = #{name}
-             AND
-                email =#{email}
-    </select>
 
-    <select id="findLoginPass" parameterType="com.daelim.transactions.dto.MemberDTO" resultType="com.daelim.transactions.dto.MemberDTO">
-        SELECT
-            loginId,
-            loginPw,
-            name,
-            email,
-            nickName,
-            status,
-            createTime,
-            loginFlag,
-            profile
-        FROM
-            test
-        WHERE
-            loginId = #{loginId}
-        AND
-            email =#{email}
-    </select>
     
     <update id="updateByPass" parameterType="com.daelim.transactions.dto.MemberDTO">
         UPDATE
@@ -95,16 +59,9 @@
             loginId = #{loginId}
     </update>
 
-    <update id="updateByProfile" parameterType="com.daelim.transactions.dto.MemberDTO">
-        UPDATE
-            test
-        SET
-            profile = #{profile}
-        WHERE
-            loginId = #{loginId}
-    </update>
 
-    <select id="idToProfile" parameterType="String" resultType="com.daelim.transactions.dto.MemberDTO">
+
+    <select id="allInfoById" parameterType="String" resultType="com.daelim.transactions.dto.MemberDTO">
         SELECT
             loginId,
             loginPw,

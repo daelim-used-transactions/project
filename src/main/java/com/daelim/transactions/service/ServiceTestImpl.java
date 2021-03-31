@@ -5,9 +5,12 @@ import com.daelim.transactions.dto.MemberDTO;
 import com.daelim.transactions.dto.afafDTO;
 import com.daelim.transactions.mapper.DaoTest;
 import com.daelim.transactions.utils.CryptoUtil;
+import com.daelim.transactions.utils.FileUtils;
 import com.daelim.transactions.utils.RandomPassword;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.lang.reflect.Member;
 import java.security.NoSuchAlgorithmException;
@@ -21,6 +24,7 @@ public class ServiceTestImpl implements ServiceTest {
 
     private final DaoTest daoTest;
 
+    private final FileUtils fileUtils;
 
 //    @Override
 //    public Optional<EmployeeDTO> optToEmpInfo(String id) {
@@ -130,18 +134,39 @@ public class ServiceTestImpl implements ServiceTest {
     }
 
     @Override
-    public void changProfile(MemberDTO memberDTO , String profile){
+    public boolean changProfile(MemberDTO memberDTO , MultipartFile files){
 
-        memberDTO.setProfile(profile);
-        int checkUp = daoTest.updateByProfile(memberDTO);
+        int checkUp=0;
 
-
+        if(files.isEmpty()==false){
+            String path = fileUtils.uploadFiles(files);
+            memberDTO.setProfile(path);
+            System.out.println("path = " +path);
+            checkUp= daoTest.updateByProfile(memberDTO);
+        }
+        else{
+            String path ="/images/profile/background.jpg";
+            memberDTO.setProfile(path);
+            System.out.println("path = " +path);
+            checkUp= daoTest.updateByProfile(memberDTO);
+        }
+        if(checkUp>0){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
-    @Override
-    public MemberDTO getProfile(String memId) {
-        MemberDTO member = daoTest.idToProfile(memId);
 
+
+
+    /**
+     *  아이디로 모든 정보 찾기
+     * */
+    @Override
+    public MemberDTO getAllInfo(String memId) {
+        MemberDTO member = daoTest.allInfoById(memId);
         return member;
     }
 

@@ -58,6 +58,10 @@ public interface DaoTest {
      * */
     public int updateByProfile(MemberDTO memberDTO);
 
-    public MemberDTO idToProfile(String memId);
+
+    /**
+     *  아이디로 모든 정보 찾기
+     * */
+    public MemberDTO allInfoById(String memId);
 
 }
