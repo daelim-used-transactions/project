@@ -74,8 +74,6 @@ public class MemberJoinController {
     public Object nicknameTest(@RequestBody Map<String,Object> param){//Stirng,Object로 해도 되네
         String nickNameCheck = null;
         Map<String, Object> map = new HashMap<>();
-        System.out.println("테스트 값 잘 나오냐 " + param);
-        System.out.println("테스트 값 잘 나오냐2 " + param.get("userNickname"));
         if(serviceTest.isDuplicatedNickname((String) param.get("userNickname"))){
             nickNameCheck = "true";  //중복되는 닉네임이 없을 경우
             map.put("nickNameCheck", nickNameCheck);

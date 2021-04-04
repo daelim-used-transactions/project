@@ -33,3 +33,7 @@ spring:
       enabled: true
     freemarker:
       cache: false
+
+custom:
+  path:
+    upload-images: 'file:///c:/fileUpload/images/'
