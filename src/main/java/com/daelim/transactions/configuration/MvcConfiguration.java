@@ -1,9 +1,11 @@
 package com.daelim.transactions.configuration;
 
+import com.daelim.transactions.interceptor.LoginInterceptor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -38,6 +40,13 @@ public class MvcConfiguration implements WebMvcConfigurer {
 
 //        registry.addResourceHandler("/images/main/**")
 //                .addResourceLocations(ImagePath);
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        LoginInterceptor loginInterceptor = new LoginInterceptor();
+        registry.addInterceptor(loginInterceptor)
+                .addPathPatterns("/*/*.do");
     }
 }
 

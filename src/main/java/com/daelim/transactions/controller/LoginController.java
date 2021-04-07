@@ -49,8 +49,9 @@ public class LoginController {
             session.setAttribute("member", member);
             session.setAttribute("memId",member.getLoginId());
             session.setMaxInactiveInterval(60 * 30);
-
-            return "main";
+            String dest = (String)session.getAttribute("dest");
+            String redirect =(dest==null) ? "/main" : dest;
+            return "redirect:"+redirect;
         }
 
     }

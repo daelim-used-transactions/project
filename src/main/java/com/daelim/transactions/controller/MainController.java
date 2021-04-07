@@ -30,7 +30,7 @@ public class MainController {
     }
 
 
-    @GetMapping(value = "/main/myPage")
+    @GetMapping(value = "/main/myPage.do")
     public String toMyPage(HttpServletRequest request, Model model) {
         MemberDTO member = commonSession(request);
         model.addAttribute("memNick",member.getNickName());
@@ -38,7 +38,7 @@ public class MainController {
         return "/myPage/myPage";
     }
 
-    @GetMapping(value="/main/myPage/profile")
+    @GetMapping(value="/main/myPage/profile.do")
     public String toProfile(HttpServletRequest request, Model model){
         MemberDTO member = commonSession(request);
         model.addAttribute("memNick",member.getNickName());
