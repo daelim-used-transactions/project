@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.daelim.transactions.mapper.DaoBoard">
+    <insert id="insertBoard"  parameterType="com.daelim.transactions.dto.BoardDTO" >
+        insert into listboard(
+        boardIdx,
+        loginId,
+        title,
+        price,
+        contents,
+        deleteYn,
+        insertTime,
+        deleteTime
+        )values (
+        #{boardIdx},
+        #{loginId},
+        #{title},
+        #{price},
+        #{contents},
+        #{deleteYn},
+        #{insertTime},
+        #{deleteTime}
+        )
+    </insert>
+
+    <select id="selectBoard" parameterType="com.daelim.transactions.dto.BoardDTO">
+
+    </select>
+
+    <update id="updateBoard" parameterType="com.daelim.transactions.dto.BoardDTO">
+
+    </update>
+
+    <delete id="deleteBoard" parameterType="com.daelim.transactions.dto.BoardDTO">
+
+    </delete>
+
+</mapper>
