@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마이페이지</title>
     <link rel="stylesheet" href="/css/mypage/profile.css">
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-
+<header th:replace="fragments/header :: main-header"> </header>
 <div id="allSec">
     <div id="selectMenu">
         <ul id="menu">
@@ -66,7 +67,9 @@
                             <form th:action="@{/profile/upload.do}" method="post" enctype="multipart/form-data">
                                 <input type="file" name="file" accept="image/*" id="img_upload" onchange="preview(event);">
                                 <button class= "fileUpload" type="submit">  업로드 </button>
-                                <span class="fileBtn" onclick="resetImage();">기본 배경</span>
+                            </form>
+                            <form th:action="@{/profile/upload.do}" method="post" enctype="multipart/form-data">
+                                <button type="submit">기본배경</button>
                             </form>
 
                         </div>

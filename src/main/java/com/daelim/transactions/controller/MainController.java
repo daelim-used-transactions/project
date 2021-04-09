@@ -54,7 +54,12 @@ public class MainController {
         System.out.println("member ="+member.getLoginId());
         boolean isChange = serviceTest.changProfile(member,file);
 
-        return "redirect:/main/myPage";
+        return "redirect:/main/myPage.do";
+    }
+
+    @GetMapping(value="/main/product.do")
+    public String product(){
+        return "/productUpload";
     }
     /**
      * 파일 업로드 인데 다른거로 할 예정

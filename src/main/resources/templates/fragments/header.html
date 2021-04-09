@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <header th:fragment ="main-header">
+        <div class ="center-align">
+            <div class ="inline-block">
+                <img src ="/images/main/logowhite.png" alt ="대림장터 로고" />
+            </div>
+            <div class ="util-group inline-block" th:if="${session.member != null}">
+                <span th:text="${session.member.getNickName()}"></span>
+                <span> 님 안녕하세요</span>
+                <a href="/main">HOME</a>
+                <a href="/main/dlogout">| 로그아웃</a>
+                <a th:href="@{/main/myPage.do}">| 마이페이지</a>
+            </div>
+            <div class ="util-group inline-block" th:if="${session.member==null}">
+                <a href="/main">HOME</a>
+                <a href="/login">| 로그인</a>
+                <a th:href="@{/main/myPage.do}">| 마이페이지</a>
+            </div>
+        </div>
+    </header>
+</body>
+</html>

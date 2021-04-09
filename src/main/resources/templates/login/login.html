@@ -14,11 +14,11 @@
             <h1><img src="/images/login/login_topLogo.png" alt="로고"></h1>
             <form th:action="@{/main/dlogin}" th:object="${loginInfo}" method="post">
                 <div class="int-area">
-                    <input type="text" name="id" id="id"  th:field="*{loginId}" autocomplete="off" required>
+                    <input type="text" name="id" id="id"  th:field="*{loginId}"  required>
                     <label for="id">USER NAME</label>
                 </div>
                 <div class="int-area">
-                    <input type="password" name="pass" id="pass" th:field="*{loginPw}" autocomplete="off" required>
+                    <input type="password" name="pass" id="pass" th:field="*{loginPw}"  required>
                     <label for="pass">PASSWORD</label>
                 </div>
                 <div class="falseCheck" th:if="${flag==false}"></div>

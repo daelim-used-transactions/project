@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <title>중고 거래 사이트 글 작성</title>
     <style>
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+             -webkit-appearance: none;
+              margin: 0;
+        }
         body{
             background-color: #f5f6f7;
         }
@@ -22,12 +27,17 @@
             border: none;
             height: 29px;
             display: inline-block;
+            outline:none;
         }
         .intBig{
             width:90%;
             border: none;
             height: 89px;
             display: inline-block;
+            resize: none;
+            overflow: hidden;
+            outline:none;
+
         }
         .spanNeed{
             color: rgb(255, 80, 88);
@@ -117,73 +127,89 @@
             color: white;
             border: 2px solid #00a6db;
         }
-        
+        .fileNone{
+            display:none;
+            width: 100%;
+            height: 18vh;
+        }
+        .imgArea{
+            width: 10%;
+            margin: 5% auto;
+
+        }
+        .imgArea img{
+            width:100px;
+            cursor: pointer;
+        }
 
     </style>
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
+<header th:replace="fragments/header :: main-header"> </header>
 <div id="container">
-    <header id ="logo">
-        <span class="blind">대림대학교 로고</span>
-        <h1>
-            <a href=""><img src="https://www.daelim.ac.kr/type/KOR_A/img/intro/logo.png" alt="대림대로고"></a>
-        </h1>
-    </header>
-
     <div id="content">
-
         <h2 class="spanBLine">
             <label for="id">판매 등록 정보</label>
             <span class="spanNeed">*필수항목</span>
         </h2>
-        
-
-        <div class="spanName">
-            제목
-            <span class="spanNeed">*</span>
-        </div>
-        <div class="spanLine">
-            <div class="spanSpace">
-                <input class="int" type="text" id="id" name="id" maxlength="20"   placeholder="제목을 입력해 주세요.">
+        <form action="#">
+            <div class="spanName">
+                제목
+                <span class="spanNeed">*</span>
             </div>
-        </div>
-
-        <div class="spanName">
-            상품 사진 
-            <span class="spanNeed">*</span>
-        </div>
-        <div class="spanLine">
-            <form method="post" action="upload" enctype="multipart/form-data">
-
-                <div>
-                    <input type="file" accept="image/jpg, image/jpeg, image/png" multiple="">
+            <div class="spanLine">
+                <div class="spanSpace">
+                    <input class="int" type="text" id="id" name="id" maxlength="20"  placeholder="제목을 입력해 주세요." required>
                 </div>
-            </form>
-        </div>
-
-        <div class="spanName">
-            가격
-            <span class="spanNeed">*</span>
-        </div>
-        <div class="spanLine">
-            <div class="spanSpace">
-                <input class="int" type="text" id="price" name="price" maxlength="20"   placeholder="가격을 입력해 주세요.">
             </div>
-        </div>
 
-        <div class="spanName">
-            설명
-            <span class="spanNeed">*</span>
-        </div>
-        <div class="spanLine">
-            <div class="spanSpaceBig">
-                <input class="intBig" type="text" id="detail" name="detail" maxlength="400"   placeholder="설명을 입력해 주세요.">
+            <div class="spanName">
+                상품 사진
+                <span class="spanNeed">*</span>
             </div>
-        </div>
-        <div id=joinButton>
-            <button type="submit"> 등록하기 </button>
-        </div>
+            <div class="spanLine">
+                <div class="imgArea">
+                    <img src="./camera.png" alt="사진 파일">
+                </div>
+                <input class="fileNone" type="file" accept="image/jpg, image/jpeg, image/png" multiple>
+            </div>
+
+            <div class="spanName">
+                가격
+                <span class="spanNeed">*</span>
+            </div>
+            <div class="spanLine">
+                <div class="spanSpace">
+                    <input class="int" type="number" id="price" name="price" maxlength="10"   placeholder="가격을 입력해 주세요." required>
+                </div>
+            </div>
+
+            <div class="spanName">
+                설명
+                <span class="spanNeed">*</span>
+            </div>
+            <div class="spanLine">
+                <div class="spanSpaceBig">
+                    <textarea class="intBig" type="text" id="detail" name="detail" maxlength="400"   placeholder="설명을 입력해 주세요."></textarea>
+                </div>
+            </div>
+            <div id=joinButton>
+                <button type="submit"> 등록하기 </button>
+            </div>
+        </form>
     </div>
+
 </div>
+<script>
+    function preview(e){
+        let reader = new FileReader();
+        reader.onload = function(e){
+            let img = document.querySelector('.View_area');
+            img.setAttribute("src",e.target.result);
+         };
+        reader.readAsDataURL(e.target.files[0]);
+    }
+</script>
 </body>
 </html>
