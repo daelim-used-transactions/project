@@ -134,12 +134,27 @@
         }
         .imgArea{
             width: 10%;
-            margin: 5% auto;
-
+            position: relative;
         }
         .imgArea img{
-            width:100px;
+            width:100%;
             cursor: pointer;
+        }
+        .addImg{
+            top: 77px;
+            position: absolute;
+            left: 14px;
+            cursor: pointer;
+        }
+        .photo{
+            width: 250px;
+            height: 200px;
+        }
+        .View_area{
+            width:88%;
+            display:flex;
+            flex-direction: row;
+            flex-wrap: wrap;
         }
 
     </style>
@@ -169,10 +184,14 @@
                 <span class="spanNeed">*</span>
             </div>
             <div class="spanLine">
-                <div class="imgArea">
-                    <img src="./camera.png" alt="사진 파일">
-                </div>
-                <input class="fileNone" type="file" accept="image/jpg, image/jpeg, image/png" multiple>
+                <label class="imgArea">
+                    <input class="fileNone" onchange="preview(event);" type="file" accept="image/jpg, image/jpeg, image/png" multiple>
+                    <img src="/images/myPage/camera.png" alt="사진 파일">
+                    <p class="addImg">사진 추가</p>
+                </label>
+                <div class="View_area"></div>
+
+
             </div>
 
             <div class="spanName">
@@ -205,8 +224,14 @@
     function preview(e){
         let reader = new FileReader();
         reader.onload = function(e){
-            let img = document.querySelector('.View_area');
+            let area = document.querySelector('.View_area')
+            let div = document.createElement('div');
+            div.style.marginLeft = "4%";
+            let img = document.createElement('img');
             img.setAttribute("src",e.target.result);
+            img.setAttribute('class','photo');
+            div.appendChild(img);
+            area.appendChild(div);
          };
         reader.readAsDataURL(e.target.files[0]);
     }
