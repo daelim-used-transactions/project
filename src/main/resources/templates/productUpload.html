@@ -2,6 +2,7 @@
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <script src="/scripts/jquery-3.6.0.min.js"></script>
     <title>중고 거래 사이트 글 작성</title>
     <style>
         input[type=number]::-webkit-inner-spin-button,
@@ -168,14 +169,14 @@
             <label for="id">판매 등록 정보</label>
             <span class="spanNeed">*필수항목</span>
         </h2>
-        <form action="#">
+        <form th:action="@{/main/product.do/register}" method="post" th:object="${board}">
             <div class="spanName">
                 제목
                 <span class="spanNeed">*</span>
             </div>
             <div class="spanLine">
                 <div class="spanSpace">
-                    <input class="int" type="text" id="id" name="id" maxlength="20"  placeholder="제목을 입력해 주세요." required>
+                    <input class="int" type="text" id="id" th:field="*{title}" name="id" maxlength="20"  placeholder="제목을 입력해 주세요." required>
                 </div>
             </div>
 
@@ -200,7 +201,7 @@
             </div>
             <div class="spanLine">
                 <div class="spanSpace">
-                    <input class="int" type="number" id="price" name="price" maxlength="10"   placeholder="가격을 입력해 주세요." required>
+                    <input class="int" type="number" id="price" th:field="*{price}" name="price" maxlength="10"  oninput="maxLengthCheck(this)"  placeholder="가격을 입력해 주세요." required>
                 </div>
             </div>
 
@@ -210,7 +211,8 @@
             </div>
             <div class="spanLine">
                 <div class="spanSpaceBig">
-                    <textarea class="intBig" type="text" id="detail" name="detail" maxlength="400"   placeholder="설명을 입력해 주세요."></textarea>
+                    <div id="test_cnt">(0 / 100)</div>
+                    <textarea class="intBig" type="text" id="detail" th:field="*{contents}" name="detail" maxlength="400"   placeholder="설명을 입력해 주세요."></textarea>
                 </div>
             </div>
             <div id=joinButton>
@@ -221,20 +223,40 @@
 
 </div>
 <script>
+    let nFiles = 0;
     function preview(e){
         let reader = new FileReader();
-        reader.onload = function(e){
-            let area = document.querySelector('.View_area')
-            let div = document.createElement('div');
-            div.style.marginLeft = "4%";
-            let img = document.createElement('img');
-            img.setAttribute("src",e.target.result);
-            img.setAttribute('class','photo');
-            div.appendChild(img);
-            area.appendChild(div);
+        if(nFiles < 3){
+            reader.onload = function(e){
+                let area = document.querySelector('.View_area')
+                let div = document.createElement('div');
+                div.style.marginLeft = "4%";
+                let img = document.createElement('img');
+                img.setAttribute("src",e.target.result);
+                img.setAttribute('class','photo');
+                div.appendChild(img);
+                area.appendChild(div);
+                nFiles++;
          };
-        reader.readAsDataURL(e.target.files[0]);
+            reader.readAsDataURL(e.target.files[0]);
+        }else{
+            alert('최대 3개의 이미지만 올릴 수 있습니다.');
+        }
     }
+
+        $('.intBig').on('keyup', function() {
+        $('#test_cnt').html("("+$(this).val().length+" / 100)");
+        if($(this).val().length > 100) {
+            $(this).val($(this).val().substring(0, 100));
+            $('#test_cnt').html("(100 / 100)");
+        }
+    });
+
+    function maxLengthCheck(object){
+        if (object.value.length > object.maxLength){
+            object.value = object.value.slice(0, object.maxLength);
+    }
+  }
 </script>
 </body>
 </html>

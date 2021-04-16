@@ -1,5 +1,6 @@
 package com.daelim.transactions.controller;
 
+import com.daelim.transactions.dto.BoardDTO;
 import com.daelim.transactions.dto.MemberDTO;
 import com.daelim.transactions.service.ServiceTest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +59,9 @@ public class MainController {
     }
 
     @GetMapping(value="/main/product.do")
-    public String product(){
+    public String product(Model model){
+        BoardDTO board = new BoardDTO();
+        model.addAttribute("board",board);
         return "/productUpload";
     }
     /**
