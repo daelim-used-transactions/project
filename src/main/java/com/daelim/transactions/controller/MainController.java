@@ -44,6 +44,7 @@ public class MainController {
         MemberDTO member = commonSession(request);
         model.addAttribute("memNick",member.getNickName());
         model.addAttribute("memProfile",member.getProfile());
+        model.addAttribute("memName",member.getName());
         System.out.println(member.getNickName());
         return "/myPage/profile";
     }

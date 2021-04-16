@@ -12,9 +12,16 @@
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
     <style>
         .img_size{
-            width: 915px;
+            width: 1015px;
             height: 300px;
         }
+        .bx-prev{
+            display:none;
+        }
+        .bx-next{
+            display:none;
+        }
+
     </style>
 </head>
 <body>
@@ -89,11 +96,11 @@
 <main>
     <div class="center-align">
         <div class="slider">
-            <div><img class="img_size" src="./dz.jpg" alt=""></div>
-            <div><img class="img_size" src="./dz.jpg" alt=""></div>
-            <div><img class="img_size" src="./dz.jpg" alt=""></div>
-            <div><img class="img_size" src="./dz.jpg" alt=""></div>
-            <div><img class="img_size" src="./gd.jpg" alt=""></div>
+            <div><img class="img_size" src="/images/main/dz.jpg" alt=""></div>
+            <div><img class="img_size" src="/images/main/gd.jpg" alt=""></div>
+            <div><img class="img_size" src="/images/main/dz.jpg" alt=""></div>
+            <div><img class="img_size" src="/images/main/gd.jpg" alt=""></div>
+            <div><img class="img_size" src="/images/main/dz.jpg" alt=""></div>
         </div>
         <h2>상품 리스트</h2>
         <div class="product-list">
@@ -237,6 +244,8 @@
     <p class="test">© 2020 BY Daelim University College. ALL RIGHTS RESERVED</p>
 </footer>
 <script>
+     let prev = document.querySelector('.bx-prev');
+    let next = document.querySelector('.bx-next');
         $(document).ready(function(){
           $('.slider').bxSlider({
            auto:true,
@@ -245,7 +254,31 @@
            mode:'fade',
            pager:false
           });
+
+          $('.bx-viewport').mouseenter(function(){
+            $('.bx-prev').css('display','inline-block');
+            $('.bx-next').css('display','inline-block');
+          })
+          $('.bx-viewport').mouseleave(function(){
+            $('.bx-prev').css('display','none');
+            $('.bx-next').css('display','none');
+          })
+
+
+          $('.bx-next').mouseover(function(){
+            $('.bx-next').css('display','inline-block');
+            $('.bx-prev').css('display','inline-block');
+
+          });
+          $('.bx-prev').mouseover(function(){
+            $('.bx-prev').css('display','inline-block');
+            $('.bx-next').css('display','inline-block');
+
+          });
         });
-      </script>
+
+
+
+</script>
 </body>
 </html>
