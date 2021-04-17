@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.daelim.transactions.mapper.DaoAttach">
+    <sql id="attachColumns">
+          attachIdx
+        , boardIdx
+        , saveName
+        , size
+        , deleteYn
+        , insertTime
+        , deleteTime
+    </sql>
+
+    <insert id="insertAttach" parameterType="list">
+        INSERT INTO attach (
+        <include refid="attachColumns" />
+        ) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+              #{item.idx}
+            , #{item.boardIdx}
+            , #{item.saveName}
+            , #{item.size}
+            , 'N'
+            , NOW()
+            , NULL
+            )
+        </foreach>
+    </insert>
+</mapper>

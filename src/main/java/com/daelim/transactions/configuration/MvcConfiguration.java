@@ -4,7 +4,9 @@ import com.daelim.transactions.interceptor.LoginInterceptor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -29,6 +31,7 @@ public class MvcConfiguration implements WebMvcConfigurer {
         return multipartResolver;
     }
 
+
     /**
      * 파일 저장 경로를 프로젝트 내부가 아닌 외부로 지정
      * 내부 경로로 설정할 경우 웹 어플리케이션 재배포시 파일이 삭제되는 현상이 발생
@@ -41,6 +44,7 @@ public class MvcConfiguration implements WebMvcConfigurer {
 //        registry.addResourceHandler("/images/main/**")
 //                .addResourceLocations(ImagePath);
     }
+
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

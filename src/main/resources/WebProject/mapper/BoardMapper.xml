@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.daelim.transactions.mapper.DaoBoard">
-    <insert id="insertBoard"  parameterType="com.daelim.transactions.dto.BoardDTO" >
+    <insert id="insertBoard"  parameterType="com.daelim.transactions.dto.BoardDTO" useGeneratedKeys="true" keyProperty="boardIdx">
         insert into listboard(
         boardIdx,
         loginId,

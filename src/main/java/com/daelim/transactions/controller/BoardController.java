@@ -6,6 +6,9 @@ import com.daelim.transactions.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
@@ -19,15 +22,16 @@ public class BoardController {
     BoardService boardService;
 
     @PostMapping(value="/main/product.do/register")
-    public String registerBoard(BoardDTO board, HttpServletRequest request){
+    public String registerBoard(BoardDTO board, @RequestParam(value = "files") MultipartFile[] files, HttpServletRequest request){
         MemberDTO member = mainController.commonSession(request);
         board.setLoginId(member.getLoginId());
         board.setInsertTime(LocalDateTime.now());
-        if(boardService.registerBoard(board)){
+        if(boardService.registerBoard(board, files)){
             //insert 성공
         }else{
             //실패
         }
+
         return "redirect:/main";
     }
 }

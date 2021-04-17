@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <script src="/scripts/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/7725a9a983.js" crossorigin="anonymous"></script>
     <title>중고 거래 사이트 글 작성</title>
     <style>
         input[type=number]::-webkit-inner-spin-button,
@@ -158,6 +159,60 @@
             flex-wrap: wrap;
         }
 
+    /*
+     * start of file css
+     */
+    .filebox input[type="file"] {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+    }
+    .filebox.bs3-primary .col-sm-10>label {
+        color: #fff;
+        background-color: #337ab7;
+        border-color: #2e6da4;
+    }
+    .filebox .col-sm-10>label {
+        display: inline-block;
+        padding: .5em .75em;
+        color: #999;
+        font-size: inherit;
+        font-weight: 600;
+        line-height: normal;
+        vertical-align: middle;
+        background-color: #fdfdfd;
+        cursor: pointer;
+        border: 1px solid #ebebeb;
+        border-bottom-color: #e2e2e2;
+        border-radius: .25em;
+    }
+    .filebox .upload-name {
+        display: inline-block;
+        width: 350px;
+        padding: .5em .75em;
+        /* label의 패딩값과 일치 */
+        font-size: inherit;
+        font-family: inherit;
+        line-height: normal;
+        vertical-align: middle;
+        background-color: #f5f5f5;
+        border: 1px solid #ebebeb;
+        border-bottom-color: #e2e2e2;
+        border-radius: .25em;
+        -webkit-appearance: none;
+        /* 네이티브 외형 감추기 */
+        -moz-appearance: none;
+        appearance: none;
+    }
+    /*
+    * end of file css
+    */
+
     </style>
     <link rel="stylesheet" href="/css/main.css">
 </head>
@@ -169,7 +224,7 @@
             <label for="id">판매 등록 정보</label>
             <span class="spanNeed">*필수항목</span>
         </h2>
-        <form th:action="@{/main/product.do/register}" method="post" th:object="${board}">
+        <form th:action="@{/main/product.do/register}" method="post" th:object="${board}" onsubmit="return checkItFile()" enctype="multipart/form-data">
             <div class="spanName">
                 제목
                 <span class="spanNeed">*</span>
@@ -186,11 +241,24 @@
             </div>
             <div class="spanLine">
                 <label class="imgArea">
-                    <input class="fileNone" onchange="preview(event);" type="file" accept="image/jpg, image/jpeg, image/png" multiple>
-                    <img src="/images/myPage/camera.png" alt="사진 파일">
-                    <p class="addImg">사진 추가</p>
+                    <div data-name="fileDiv" class="form-group filebox bs3-primary">
+                        <label for="file_0" class="col-sm-2 control-label">파일1</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="upload-name" value="파일 찾기" readonly />
+                            <label for="file_0" class="control-label">찾아보기</label>
+                            <input type="file" name="files" id="file_0" class="upload-hidden" onchange="changeFilename(this)" />
+
+                            <button type="button" onclick="addFile()" class="btn btn-bordered btn-xs visible-xs-inline visible-sm-inline visible-md-inline visible-lg-inline">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" onclick="removeFile(this)" class="btn btn-bordered btn-xs visible-xs-inline visible-sm-inline visible-md-inline visible-lg-inline">
+                                <i class="fa fa-minus" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div  id="btnDiv"></div>
                 </label>
-                <div class="View_area"></div>
+<!--                <div class="View_area"></div>-->
 
 
             </div>
@@ -224,6 +292,7 @@
 </div>
 <script>
     let nFiles = 0;
+    let fileIdx = 0; /*[- 파일 인덱스 처리용 전역 변수 -]*/
     function preview(e){
         let reader = new FileReader();
         if(nFiles < 3){
@@ -257,6 +326,72 @@
             object.value = object.value.slice(0, object.maxLength);
     }
   }
+
+    function checkItFile(){
+        nFiles=0;
+        let fileList = document.getElementsByClassName('upload-name');
+        for(let item of fileList){
+            if(item.value !== '파일 찾기'){
+            nFiles++;
+            }
+        }
+        if(nFiles < 1 || nFiles > 3){
+            alert(`파일은 1개 이상 올려야 합니다.`);
+            return false;
+        }else{
+            return true;
+        }
+  }
+
+function addFile() {
+    const fileDivs = $('div[data-name="fileDiv"]');
+    if (fileDivs.length > 2) {
+        alert('파일은 최대 세 개까지 업로드 할 수 있습니다.');
+        return false;
+    }
+
+    fileIdx++;
+
+    const fileHtml = `
+        <div data-name="fileDiv" class="form-group filebox bs3-primary">
+            <label for="file_${fileIdx}" class="col-sm-2 control-label"></label>
+            <div class="col-sm-10">
+                <input type="text" class="upload-name" value="파일 찾기" readonly />
+                <label for="file_${fileIdx}" class="control-label">찾아보기</label>
+                <input type="file" name="files" id="file_${fileIdx}" class="upload-hidden" onchange="changeFilename(this)" />
+
+                <button type="button" onclick="removeFile(this)" class="btn btn-bordered btn-xs visible-xs-inline visible-sm-inline visible-md-inline visible-lg-inline">
+                    <i class="fa fa-minus" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    `;
+    $('#btnDiv').before(fileHtml);
+}
+
+function removeFile(elem) {
+
+	const prevTag = $(elem).prev().prop('tagName');
+	if (prevTag === 'BUTTON') {
+		const file = $(elem).prevAll('input[type="file"]');
+		const filename = $(elem).prevAll('input[type="text"]');
+		file.val('');
+		filename.val('파일 찾기');
+		return false;
+	}
+
+	const target = $(elem).parents('div[data-name="fileDiv"]');
+	target.remove();
+}
+
+function changeFilename(file) {
+	file = $(file);
+	const filename = file[0].files[0].name;
+	const target = file.prevAll('input');
+	target.val(filename);
+}
+
+
 </script>
 </body>
 </html>
