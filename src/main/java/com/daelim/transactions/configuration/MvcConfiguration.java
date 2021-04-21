@@ -40,7 +40,6 @@ public class MvcConfiguration implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/images/profile/**")
                 .addResourceLocations(ImagePath +"/profile/");
-
 //        registry.addResourceHandler("/images/main/**")
 //                .addResourceLocations(ImagePath);
     }

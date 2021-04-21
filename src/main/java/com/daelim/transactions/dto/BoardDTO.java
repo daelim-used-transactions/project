@@ -11,12 +11,11 @@ import java.time.LocalDateTime;
 @Getter
 @Builder
 @AllArgsConstructor
-
 public class BoardDTO {
     //게시글 번호
     private int boardIdx;
 
-    //아이디
+    //아이디(작성자)
     private String loginId;
 
     //제목

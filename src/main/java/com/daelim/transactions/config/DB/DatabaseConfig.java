@@ -52,4 +52,6 @@ public class DatabaseConfig {
     public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) throws Exception {
         return new SqlSessionTemplate(mysqlSessionFactory());
     }
+
+
 }

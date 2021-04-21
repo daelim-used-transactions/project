@@ -11,13 +11,17 @@ html, body{
 }
 
 header{
-    height: 55px;
+    padding: 9px 0 4px 0;
     background-color:#6495ED;
 }
 
 .center-align{   
     margin: 0 auto;
     width: 1024px;
+}
+.product{
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .inline-block {
@@ -26,12 +30,12 @@ header{
 
 .util-group{
     float: right;
-    margin: 15px 10px 0 0;
+    margin: 11px 10px 0 0;
 }
 
 .util-group a{
     color: white;
-    font-size: 15px;
+    font-size: 17px;
     letter-spacing: -1px;
     text-decoration: none;
 }
@@ -247,20 +251,19 @@ main .center-align{
 }
 
 .product-list{
-    display: flex;
-    flex-wrap: wrap;
+    /*display: flex;
+    flex-wrap: wrap;*/
 }
 
 .product-wrap{
     border: 1px solid rgb(238, 238, 238);
-    width: 192px;
-    margin-right: 11px;
+    margin-right: 30px;
     margin-bottom: 11px;
 }
 
 .product-img img{
-    max-width: 191px; 
-    height: auto;
+    width:200px;
+    height: 300px;
 }
 
 .product-content{

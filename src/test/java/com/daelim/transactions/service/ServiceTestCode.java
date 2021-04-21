@@ -1,23 +1,21 @@
 package com.daelim.transactions.service;
 
 import com.daelim.transactions.configuration.MvcConfiguration;
-import com.daelim.transactions.dto.EmployeeDTO;
+import com.daelim.transactions.dto.AttachDTO;
+import com.daelim.transactions.dto.BoardDTO;
 import com.daelim.transactions.dto.MemberDTO;
-import com.daelim.transactions.dto.afafDTO;
+import com.daelim.transactions.mapper.DaoAttach;
+import com.daelim.transactions.mapper.DaoBoard;
 import com.daelim.transactions.utils.CryptoUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.lang.reflect.Member;
 import java.security.NoSuchAlgorithmException;
-import java.util.Date;
-import java.util.Optional;
+import java.util.*;
 
 @SpringBootTest
 public class ServiceTestCode {
@@ -30,6 +28,14 @@ public class ServiceTestCode {
 
     @Autowired
     MvcConfiguration mockMvc;
+
+    @Autowired
+    DaoBoard daoBoard;
+
+    @Autowired
+    DaoAttach daoAttach;
+    @Autowired
+    BoardService boardService;
 
 //    @Test
 //    void OptEmpInfoTest(){
@@ -101,5 +107,56 @@ public class ServiceTestCode {
         MultipartFile multipartFile = new MockMultipartFile(fileFullPath, fileName, null, "hello file".getBytes());
         boolean hi = serviceTest.changProfile(memberDTO,multipartFile);
         System.out.println(hi);
+    }
+
+    @Test
+    public void getBoardList(){
+        int boardTotalCount = daoBoard.selectBoardTotalCount();
+        System.out.println(boardTotalCount);
+        if (boardTotalCount > 0) {
+            List<BoardDTO> boardList  = daoBoard.selectBoardList();
+
+            if (CollectionUtils.isEmpty(boardList) == false) {
+                for (BoardDTO board : boardList) {
+                    System.out.println("=========================");
+                    System.out.println(board.getTitle());
+                    System.out.println(board.getContents());
+                    System.out.println(board.getLoginId());
+                    System.out.println("=========================");
+                }
+            }
+        }
+    }
+
+
+    @Test
+    public void getAttachList(){
+        int attachTotalCount = daoAttach.selectAttachTotalCount();
+        System.out.println(attachTotalCount);
+        List<BoardDTO> boardList = Collections.emptyList();
+        int boardIdx = 0;
+        int boardTotalCount = daoBoard.selectBoardTotalCount();
+        if (boardTotalCount > 0) {
+            boardList = daoBoard.selectBoardList();
+            for(int i=0; i<boardList.size(); i++){
+                boardIdx=boardList.get(i).getBoardIdx();
+                if (attachTotalCount > 0) {
+                    List<AttachDTO> attachList  = daoAttach.selectAttachList();
+
+                    if (CollectionUtils.isEmpty(attachList) == false) {
+                        for (AttachDTO attach : attachList) {
+                            System.out.println("=========================");
+                            System.out.println(attach.getIdx());
+                            System.out.println(attach.getBoardIdx());
+                            System.out.println(attach.getSaveName());
+                            System.out.println("=========================");
+                        }
+                    }
+                }
+            }
+
+
+        }
+
     }
 }

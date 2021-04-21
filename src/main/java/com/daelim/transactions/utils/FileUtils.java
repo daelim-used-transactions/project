@@ -25,7 +25,7 @@ public class FileUtils {
     /** 업로드 경로 */
     //private final String uploadPath = Paths.get("src", "main", "resources","static","images","profile", today).toString();
     private final String uploadPath = Paths.get("c:", "fileUpload", "images","profile", today).toString();
-    private final String uploadBoardPath = Paths.get("c:", "fileUpload", "images","board", today).toString();
+    private final String uploadBoardPath = Paths.get("c:", "fileUpload", "images","profile","board", today).toString();
     /**
      * 서버에 생성할 파일명을 처리할 랜덤 문자열 반환
      * @return 랜덤 문자열
@@ -90,9 +90,11 @@ public class FileUtils {
             dir.mkdirs();
         }
 
+        int count = 0;
         /* 파일 개수만큼 forEach 실행 */
         for (MultipartFile file : files) {
             try {
+                 count++;
                 /* 파일 확장자 */
                 final String extension = FilenameUtils.getExtension(file.getOriginalFilename());
                 /* 서버에 저장할 파일명 (랜덤 문자열 + 확장자) */
@@ -106,8 +108,9 @@ public class FileUtils {
                 AttachDTO attach = new AttachDTO();
                 attach.setBoardIdx(boardIdx);
                 //attach.setOriginalName(file.getOriginalFilename());
-                attach.setSaveName(saveName);
+                attach.setSaveName("/images/profile/board/"+today+"/"+saveName);
                 attach.setSize(file.getSize());
+                attach.setCount(count);
                 if(attach.getSize() == 0){ //빈 파일을 보내왔을 경우
                     continue;
                 }

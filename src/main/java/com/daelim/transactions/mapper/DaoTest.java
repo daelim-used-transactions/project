@@ -1,11 +1,8 @@
 package com.daelim.transactions.mapper;
 
-import com.daelim.transactions.dto.EmployeeDTO;
 import com.daelim.transactions.dto.MemberDTO;
-import com.daelim.transactions.dto.afafDTO;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.lang.reflect.Member;
 import java.util.List;
 
 @Mapper

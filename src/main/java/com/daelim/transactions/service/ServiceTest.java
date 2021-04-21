@@ -1,13 +1,10 @@
 package com.daelim.transactions.service;
 
-import com.daelim.transactions.dto.EmployeeDTO;
 import com.daelim.transactions.dto.MemberDTO;
-import com.daelim.transactions.dto.afafDTO;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
-import java.util.Optional;
 
 public interface ServiceTest {
 

@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.daelim.transactions.mapper.DaoBoard">
+
     <insert id="insertBoard"  parameterType="com.daelim.transactions.dto.BoardDTO" useGeneratedKeys="true" keyProperty="boardIdx">
         insert into listboard(
         boardIdx,
@@ -35,5 +36,34 @@
     <delete id="deleteBoard" parameterType="com.daelim.transactions.dto.BoardDTO">
 
     </delete>
+
+    <select id="selectBoardTotalCount" parameterType="com.daelim.transactions.dto.BoardDTO" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            listboard
+        WHERE
+            deleteYn = 'N'
+    </select>
+
+
+<!-- interface에서 list로 리턴값을 두고 mybatis에서 객채를 리턴하면 알아서 리스트 안으로 들어가게 되어있다함   -->
+    <select id="selectBoardList"  parameterType="com.daelim.transactions.dto.BoardDTO"  resultType="com.daelim.transactions.dto.BoardDTO">
+        SELECT
+            boardIdx,
+            loginId,
+            title,
+            price,
+            contents,
+            deleteYn,
+            insertTime,
+            deleteTime
+        FROM
+             listboard
+        WHERE
+            deleteYn = 'N'
+        ORDER BY
+            boardIdx DESC
+    </select>
 
 </mapper>

@@ -5,23 +5,24 @@ import com.daelim.transactions.dto.BoardDTO;
 import com.daelim.transactions.mapper.DaoAttach;
 import com.daelim.transactions.mapper.DaoBoard;
 import com.daelim.transactions.utils.FileUtils;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.Access;
+import java.util.Collections;
 import java.util.List;
 
-@Service
-public class BoardServicempl implements BoardService {
+@Service @RequiredArgsConstructor
+public class BoardServiceImpl implements BoardService {
 
-    @Autowired
-    DaoBoard daoBoard;
-    @Autowired
-    FileUtils fileUtils;
-    @Autowired
-    DaoAttach daoAttach;
+    private final DaoBoard daoBoard;
+
+    private final FileUtils fileUtils;
+
+    private final DaoAttach daoAttach;
 
     @Override
     public boolean registerBoard(BoardDTO board) {
@@ -45,5 +46,33 @@ public class BoardServicempl implements BoardService {
 
         return (queryResult > 0);
     }
+
+    @Override
+    public List<BoardDTO> getBoardList() {
+        List<BoardDTO> boardList = Collections.emptyList();
+
+        int boardTotalCount = daoBoard.selectBoardTotalCount();
+
+        if (boardTotalCount > 0) {
+            boardList = daoBoard.selectBoardList();
+        }
+
+        return boardList;
+    }
+
+    @Override
+    public List<AttachDTO> getAttachList( ) {
+        List<AttachDTO> attachList = Collections.emptyList();
+
+        int boardTotalCount = daoAttach.selectAttachTotalCount();
+
+        if (boardTotalCount > 0) {
+            attachList = daoAttach.selectAttachList();
+        }
+
+        return attachList;
+    }
+
+
 }
 

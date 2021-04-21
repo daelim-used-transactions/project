@@ -1,7 +1,9 @@
 package com.daelim.transactions.controller;
 
+import com.daelim.transactions.dto.AttachDTO;
 import com.daelim.transactions.dto.BoardDTO;
 import com.daelim.transactions.dto.MemberDTO;
+import com.daelim.transactions.service.BoardService;
 import com.daelim.transactions.service.ServiceTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 
 @Controller
@@ -25,8 +28,15 @@ public class MainController {
     @Autowired
     ServiceTest serviceTest;
 
+    @Autowired
+    BoardService boardService;
+
     @GetMapping(value = "/main")
-    public String goMain() {
+    public String goMain(Model model) {
+        List<BoardDTO> boardList = boardService.getBoardList();
+        List<AttachDTO> attachList = boardService.getAttachList();
+        model.addAttribute("boardList", boardList);
+        model.addAttribute("attachList", attachList);
         return "main";
     }
 

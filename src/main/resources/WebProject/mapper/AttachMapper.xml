@@ -10,6 +10,7 @@
         , deleteYn
         , insertTime
         , deleteTime
+        , count
     </sql>
 
     <insert id="insertAttach" parameterType="list">
@@ -25,7 +26,28 @@
             , 'N'
             , NOW()
             , NULL
+            , #{item.count}
             )
         </foreach>
     </insert>
+
+    <select id="selectAttachTotalCount" parameterType="com.daelim.transactions.dto.AttachDTO" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            attach
+        WHERE
+            deleteYn = 'N'
+    </select>
+
+    <select id="selectAttachList"  parameterType="com.daelim.transactions.dto.AttachDTO"  resultType="com.daelim.transactions.dto.AttachDTO">
+        SELECT
+            <include refid="attachColumns" />
+        FROM
+            attach
+        WHERE
+            deleteYn = 'N'
+        ORDER BY
+            boardIdx DESC
+    </select>
 </mapper>

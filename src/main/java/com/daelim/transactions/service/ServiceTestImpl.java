@@ -1,18 +1,14 @@
 package com.daelim.transactions.service;
 
-import com.daelim.transactions.dto.EmployeeDTO;
 import com.daelim.transactions.dto.MemberDTO;
-import com.daelim.transactions.dto.afafDTO;
 import com.daelim.transactions.mapper.DaoTest;
 import com.daelim.transactions.utils.CryptoUtil;
 import com.daelim.transactions.utils.FileUtils;
 import com.daelim.transactions.utils.RandomPassword;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.lang.reflect.Member;
 import java.security.NoSuchAlgorithmException;
 import java.util.Collections;
 import java.util.List;

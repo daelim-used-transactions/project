@@ -35,6 +35,9 @@ public class AttachDTO {
     /**삭제 시간 */
     private LocalDateTime  deleteTime;
 
+    /**파일 카운트(갯수) 웹에서 사용해야함**/
+    private int count;
+
     public AttachDTO() {
 
     }
