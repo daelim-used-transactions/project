@@ -7,6 +7,7 @@
     <title>마이페이지</title>
     <link rel="stylesheet" href="/css/mypage/profile.css">
     <link rel="stylesheet" href="/css/main.css">
+    <script src="/scripts/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <header th:replace="fragments/header :: main-header"> </header>
@@ -75,7 +76,7 @@
                         </div>
 
                         <div class="revice">
-                            <form action="#">
+                            <form action="비밀변호 변경할 때 컨트롤러">
                                 <div class="meminfo">
                                     <label class="con" for="name">이름</label>
                                     <div class="int_area">
@@ -87,6 +88,7 @@
                                     <label  class="con"  for="name">현재 비밀번호</label>
                                     <div class="int_area">
                                         <input class="int"  id="pass" type="password">
+                                        <div id="cur_chk_area"></div>
                                     </div>
                                 </div>
 
@@ -101,9 +103,9 @@
                                 <div class="meminfo">
                                     <label class="con"  for="name">새 비밀번호 확인</label>
                                     <div class="int_area">
-                                        <input class="int" id="passChk"type="password">
+                                        <input class="int" id="upPassChk"type="password">
                                     </div>
-                                    <div class="chk_area"></div>
+                                    <div id="up_chk_area"></div>
                                 </div>
 
                                 <button class="rein" type="submit">정보 수정 </button>
@@ -118,47 +120,59 @@
 </div>
 <script>
 
-    let pass = document.querySelector('#updatePass');
-    let passchk = document.querySelector('#passChk');
-    let chkArea = document.querySelector('.chk_area');
+    let updatePass = document.querySelector('#updatePass');
+    let upPassChk = document.querySelector('#upPassChk');
+    let curChkArea = document.querySelector('#cur_chk_area');
+    let upChkArea = document.querySelector('#up_chk_area');
     let currentPass = document.querySelector('#pass');
+    let rein = document.querySelector('.rein');
+    rein.disabled=true;
+    rein.style.backgroundColor = "#8e8e8e"
+    rein.style.color = "white";
+    let bolchk1;
+    let bolchk2;
 
-    passchk.addEventListener('change',function(){
-    if(pass!=="" && passchk !==""){
-        if(pass.value === passchk.value){
-        chkArea.innerHTML ="<p>확인이 완료되었습니다.</p>";
-        console.log(currentPass.value);
-
+    upPassChk.addEventListener('change',function(){
+    if(updatePass!=="" && upPassChk !==""){
+        if(updatePass.value === upPassChk.value){
+        bolchk2 = true;
+        upChkArea.innerHTML ="<p>확인이 완료되었습니다.</p>";
         }else{
-    console.log(currentPass);
-
-            chkArea.innerHTML ="<p>비밀번호를 다시 확인해주세요.</p>";
+        bolchk2 = false;
+            upChkArea.innerHTML ="<p>비밀번호를 다시 확인해주세요.</p>";
         }
     }
+        if(bolchk1 === true && bolchk2 === true){
+              rein.disabled=false;
+              rein.style.backgroundColor ="#00a6db";
+        }
     })
 
-    let sbmBtn = document.querySelector('.rein');
-    sbmBtn.addEventListener('click',function(){
+    currentPass.addEventListener('change',function(){
         $.ajax({
                url : '/main/myPage/profile/passUpdate',
                type : 'POST',
-               data : currentPass.value,
+               data : {pass : currentPass.value},
                dataType : 'text',
                success : function(data){
-                     nicknameCheckOk = Boolean(data.nickNameCheck);
-                      if(nicknameCheckOk){ //닉네임 중복 아닐 시
-                          nicknamediv.innerHTML = "<p>사용가능한 닉네임입니다.</p>";
-                         document.querySelector('#nicknameCheckSpan').appendChild(nicknamediv).setAttribute('class','nicknameCheckWord-Ok');
-                     }else{
-                          nicknamediv.innerHTML = "<p>이미 존재하는 닉네임입니다.</p>";
-                         document.querySelector('#nicknameCheckSpan').appendChild(nicknamediv).setAttribute('class','nicknameCheckWord');
-                     }
+                        if(Boolean(data) === true){
+                        bolchk1 = Boolean(data);
+                            curChkArea.innerHTML =`<p>맞음</p>`;
+                        }else{
+                        bolchk1 = Boolean(data);
+                        curChkArea.innerHTML =`<p>틀렸음</p>`;
+                        }
                 },
                 error: function(){
                     alert('status 500(Server Error)');
                 }
             });
+             if(bolchk1 === true && bolchk2 === true){
+                     rein.disabled=false;
+                     rein.style.backgroundColor ="#00a6db";
+                 }
     })
+
 
     function preview(e){
         let reader = new FileReader();
