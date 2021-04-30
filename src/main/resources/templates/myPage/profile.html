@@ -76,7 +76,7 @@
                         </div>
 
                         <div class="revice">
-                            <form action="비밀변호 변경할 때 컨트롤러">
+                            <form th:action="@{/main/myPage/profile/passUpdate.do}" method="post" th:object="${member}">
                                 <div class="meminfo">
                                     <label class="con" for="name">이름</label>
                                     <div class="int_area">
@@ -88,22 +88,23 @@
                                     <label  class="con"  for="name">현재 비밀번호</label>
                                     <div class="int_area">
                                         <input class="int"  id="pass" type="password">
-                                        <div id="cur_chk_area"></div>
                                     </div>
+                                    <div id="cur_chk_area"></div>
                                 </div>
 
 
                                 <div class="meminfo">
                                     <label class="con"  for="name">새 비밀번호</label>
                                     <div class="int_area">
-                                        <input class="int" id="updatePass"type="password">
+                                        <input class="int" id="updatePass" type="password">
                                     </div>
+                                    <div id="chg_pass_area"></div>
 
                                 </div>
                                 <div class="meminfo">
                                     <label class="con"  for="name">새 비밀번호 확인</label>
                                     <div class="int_area">
-                                        <input class="int" id="upPassChk"type="password">
+                                        <input class="int" id="upPassChk"type="password" th:field="*{loginPw}">
                                     </div>
                                     <div id="up_chk_area"></div>
                                 </div>
@@ -119,7 +120,7 @@
     </div>
 </div>
 <script>
-
+    let chgPassArea = document.querySelector('#chg_pass_area');
     let updatePass = document.querySelector('#updatePass');
     let upPassChk = document.querySelector('#upPassChk');
     let curChkArea = document.querySelector('#cur_chk_area');
@@ -133,20 +134,31 @@
     let bolchk2;
 
     upPassChk.addEventListener('change',function(){
-    if(updatePass!=="" && upPassChk !==""){
-        if(updatePass.value === upPassChk.value){
-        bolchk2 = true;
-        upChkArea.innerHTML ="<p>확인이 완료되었습니다.</p>";
-        }else{
-        bolchk2 = false;
-            upChkArea.innerHTML ="<p>비밀번호를 다시 확인해주세요.</p>";
+        if(updatePass!=="" && upPassChk !==""){
+            if(updatePass.value === upPassChk.value){
+            bolchk2 = true;
+            upChkArea.innerHTML =`<p style="color:#00a6db; margin:4px; font-size:0.8vw;">확인이 완료되었습니다.</p>`;
+            }else{
+            bolchk2 = false;
+                upChkArea.innerHTML =`<p style="color:red; margin:4px; font-size:0.8vw;">비밀번호를 다시 확인해주세요.</p>`;
+            }
         }
-    }
         if(bolchk1 === true && bolchk2 === true){
               rein.disabled=false;
               rein.style.backgroundColor ="#00a6db";
+        }else{
+            rein.disabled=true;
+            rein.style.backgroundColor = "#8e8e8e"
         }
     })
+
+    updatePass.addEventListener('change',function(){
+        if(!/^.*(?=^.{8,20}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=*()]).*$/.test(updatePass.value)){
+            chgPassArea.innerHTML =`<p style="color:red; margin:4px; font-size:0.8vw;">비밀번호는 숫자,영문,특수문자 조합으로 8~20자를 사용해야 합니다.</p>`
+        }else{
+            chgPassArea.innerHTML =`<p style="color:#00a6db; margin:4px; font-size:0.8vw;">사용가능한 비밀번호 입니다.</p>`
+        }
+     });
 
     currentPass.addEventListener('change',function(){
         $.ajax({
@@ -157,10 +169,10 @@
                success : function(data){
                         if(Boolean(data) === true){
                         bolchk1 = Boolean(data);
-                            curChkArea.innerHTML =`<p>맞음</p>`;
+                            curChkArea.innerHTML =`<p style="color:#00a6db; margin:4px; font-size:0.8vw;">맞음</p>`;
                         }else{
                         bolchk1 = Boolean(data);
-                        curChkArea.innerHTML =`<p>틀렸음</p>`;
+                        curChkArea.innerHTML =`<p style="color:red;margin:4px; font-size:0.8vw;">틀렸음</p>`;
                         }
                 },
                 error: function(){
@@ -170,6 +182,9 @@
              if(bolchk1 === true && bolchk2 === true){
                      rein.disabled=false;
                      rein.style.backgroundColor ="#00a6db";
+                 }else{
+                    rein.disabled=true;
+                    rein.style.backgroundColor = "#8e8e8e"
                  }
     })
 
@@ -182,6 +197,8 @@
          };
         reader.readAsDataURL(e.target.files[0]);
     }
+
+
 </script>
 </body>
 </html>

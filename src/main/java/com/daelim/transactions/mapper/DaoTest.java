@@ -2,6 +2,7 @@ package com.daelim.transactions.mapper;
 
 import com.daelim.transactions.dto.MemberDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -60,5 +61,10 @@ public interface DaoTest {
      *  아이디로 모든 정보 찾기
      * */
     public MemberDTO allInfoById(String memId);
+
+    /**
+     *  비밀번호 변경
+     * **/
+    public int updatePass(@Param("loginId")String memId , @Param("loginPw") String changePass);
 
 }

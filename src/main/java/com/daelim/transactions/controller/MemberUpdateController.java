@@ -25,15 +25,25 @@ public class MemberUpdateController {
     public Boolean getPassword(HttpServletRequest request, String pass) throws NoSuchAlgorithmException {
         CryptoUtil cryptoUtil =new CryptoUtil();
         String enPass = cryptoUtil.sha256(pass);
-        System.out.println("d;r[padkdo비밀번호 : " + enPass);
         HttpSession session = request.getSession();
         String id = (String)session.getAttribute("memId");
         MemberDTO memberDTO =serviceTest.getAllInfo(id);
-        System.out.println("멤버 비밀번호 : " + memberDTO.getLoginPw());
         if(enPass.equals(memberDTO.getLoginPw())){
             return true ;
         }else{
             return false ;
         }
     }
+
+    @PostMapping(value="/main/myPage/profile/passUpdate.do")
+    public String updateProfileWrite(HttpServletRequest request, final MemberDTO memberDTO){
+        HttpSession session = request.getSession();
+        MemberDTO member  = (MemberDTO) session.getAttribute("member");
+        System.out.println("현재 멤버 아이디: " +member.getLoginId());
+        System.out.println("현재 멤버 비번: " +member.getLoginPw());
+        System.out.println("변경할 멤버 비번: " +memberDTO.getLoginPw());
+
+        return "redirect:/main";
+    }
+
 }

@@ -12,4 +12,14 @@
                 loginId = #{loginId}
         </update>
 
+
+        <update id="updateByPass" parameterType="String">
+            UPDATE
+                 test
+            SET
+                loginPw = #{loginPw}
+            WHERE
+                loginId = #{loginId}
+        </update>
+
 </mapper>

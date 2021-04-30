@@ -55,6 +55,7 @@ public class MainController {
         model.addAttribute("memNick",member.getNickName());
         model.addAttribute("memProfile",member.getProfile());
         model.addAttribute("memName",member.getName());
+        model.addAttribute("member",member);
         System.out.println(member.getNickName());
         return "/myPage/profile";
     }
