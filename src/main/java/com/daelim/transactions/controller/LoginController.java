@@ -59,7 +59,7 @@ public class LoginController {
     @GetMapping(value = "/main/dlogout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "main";
+        return "redirect:/main";
     }
 
 
