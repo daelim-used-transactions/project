@@ -24,6 +24,9 @@ public class BoardDTO {
     //가격
     private int price;
 
+    //카테고리
+    private String category;
+
     //내용
     private String contents;
 

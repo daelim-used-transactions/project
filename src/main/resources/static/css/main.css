@@ -3,6 +3,16 @@
     margin: 0;
     padding: 0;
 }
+.img_size{
+    width: 1015px;
+    height: 300px;
+}
+.bx-prev{
+    display:none;
+}
+.bx-next{
+    display:none;
+}
 
 html, body{
     padding:  0px;
@@ -84,7 +94,7 @@ nav .center-align{
     display: none;
     list-style: none;
     width: 200px;
-    height: 333px;
+    height: 430px;
     border: 1px solid #aaa;
     background-color: white;
     position: absolute;
@@ -97,6 +107,15 @@ nav .center-align{
     font-weight: 600;
     border-bottom: 2px dotted gray;
     padding-bottom: 10px;
+}
+
+.category a{
+    font-family: "Noto Sans KR", sans-serif;
+    text-decoration: none;
+    color: #000;
+    display: block;
+    font-size: 14px;
+    margin: 7px 0 7px 0;
 }
 
 .fieldset-block{    
@@ -293,6 +312,7 @@ main .center-align{
 footer{
     background-color: rgb(34, 34, 34);
     height: 100px;
+    margin-top: 100px;
 }
 
 .test{

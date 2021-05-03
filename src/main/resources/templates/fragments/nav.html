@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav th:fragment ="main-nav">
+    <div class ="center-align">
+        <div class="flex-menu">
+            <div class="menu-bar">
+                <i class="fas fa-bars fa-lg"></i>
+                <ul class="category">
+                    <li>카테고리</li>
+                    <a href="search?product=여성의류">여성의류</a>
+                    <a href="search?product=남성의류">남성의류</a>
+                    <a href="search?product=패션잡화">패션잡화</a>
+                    <a href="search?product=디지털/가전">디지털/가전</a>
+                    <a href="search?product=도서/티켓/취미">도서/티켓/취미</a>
+                    <a href="search?product=애완">애완</a>
+                    <a href="search?product=스타굿즈">스타굿즈</a>
+                    <a href="search?product=생활/식품">생활/식품</a>
+                    <a href="search?product=문구/가구">문구/가구</a>
+                    <a href="search?product=스포츠/레저">스포츠/레저</a>
+                    <a href="search?product=뷰티/미용">뷰티/미용</a>
+                    <a href="search?product=차량/오토바이">차량/오토바이</a>
+                    <a href="search?product=재능">재능</a>
+                    <a href="search?product=나눔터">나눔터</a>
+                    <a href="search?product=기타">기타</a>
+                </ul>
+            </div>
+            <div class="fieldset-block">
+                <fieldset>
+                    <input class="search_input" placeholder="검색할 상품을 입력해주세요"/>
+                    <button class="search_button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </fieldset>
+            </div>
+            <div class="nav-util">
+                <a href="/main/product.do" class="flex-a">
+                    <img src="/images/main/sale.png" alt="팔아요"/>
+                    <span class="sale-text">팔아요</span>
+                </a>
+                <a href="http://www.naver.com" class="flex-a">
+                    <img src="/images/main/find.png" alt="구해요"/>
+                    <span class>구해요</span>
+                </a>
+                <a href="http://www.naver.com" class="flex-a">
+                    <i class="far fa-bell fa-lg bell"></i>
+                    <span class="sale-text">알림</span>
+                </a>
+            </div>
+        </div>
+        <div class="div-fixed">
+            <div class="div-fixed-one">
+                <div class="fixed-text">찜한상품</div>
+                <div><i class="fas fa-heart">0</i></div>
+            </div>
+            <div class="div-fixed-two">
+                <div class="fixed-text">최근본상품</div>
+                <div class="watch-count"></div>
+            </div>
+            <div class="div-fixed-three">
+                <div>TOP</div>
+            </div>
+        </div>
+    </div>
+    <script src="/scripts/nav/nav.js"></script>
+</nav>
+</body>
+</html>

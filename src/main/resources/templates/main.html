@@ -4,25 +4,13 @@
     <meta charset="UTF-8">
     <title>대림장터 메인홈페이지</title>
     <link rel="stylesheet" href="/css/main.css" />
-    <meta name="viewport" content="initial-scale=0.8;" />
+    <meta name="viewport" content="initial-scale=0.67;" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 
     <script src="https://kit.fontawesome.com/7725a9a983.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
-    <style>
-        .img_size{
-            width: 1015px;
-            height: 300px;
-        }
-        .bx-prev{
-            display:none;
-        }
-        .bx-next{
-            display:none;
-        }
 
-    </style>
 </head>
 <body>
 <header th:replace="fragments/header :: main-header"> </header>
@@ -45,54 +33,69 @@
 <!--            </div>-->
 <!--        </div>-->
 <!--    </header>-->
-<nav>
-    <div class ="center-align">
-        <div class="flex-menu">
-            <div class="menu-bar">
-                <i class="fas fa-bars fa-lg"></i>
-                <ul class="category">
-                    <li>KeyWord</li>
-                    <li>test</li>
-                </ul>
-            </div>
-            <div class="fieldset-block">
-                <fieldset>
-                    <input placeholder="검색할 상품을 입력해주세요"/>
-                    <button>
-                        <i class="fas fa-search"></i>
-                    </button>
-                </fieldset>
-            </div>
-            <div class="nav-util">
-                <a href="/main/product.do" class="flex-a">
-                    <img src="/images/main/sale.png" alt="팔아요"/>
-                    <span class="sale-text">팔아요</span>
-                </a>
-                <a href="http://www.naver.com" class="flex-a">
-                    <img src="/images/main/find.png" alt="구해요"/>
-                    <span class>구해요</span>
-                </a>
-                <a href="http://www.naver.com" class="flex-a">
-                    <i class="far fa-bell fa-lg bell"></i>
-                    <span class="sale-text">알림</span>
-                </a>
-            </div>
-        </div>
-        <div class="div-fixed">
-            <div class="div-fixed-one">
-                <div class="fixed-text">찜한상품</div>
-                <div><i class="fas fa-heart">0</i></div>
-            </div>
-            <div class="div-fixed-two">
-                <div class="fixed-text">최근본상품</div>
-                <div class="watch-count"></div>
-            </div>
-            <div class="div-fixed-three">
-                <div>TOP</div>
-            </div>
-        </div>
-    </div>
-</nav>
+<nav th:replace="fragments/nav :: main-nav"> </nav>
+<!--<nav>-->
+<!--    <div class ="center-align">-->
+<!--        <div class="flex-menu">-->
+<!--            <div class="menu-bar">-->
+<!--                <i class="fas fa-bars fa-lg"></i>-->
+<!--                <ul class="category">-->
+<!--                    <li>카테고리</li>-->
+<!--                    <a href="">여성의류</a>-->
+<!--                    <a href="">남성의류</a>-->
+<!--                    <a href="">패션잡화</a>-->
+<!--                    <a href="">디지털/가전</a>-->
+<!--                    <a href="">도서/티켓/취미</a>-->
+<!--                    <a href="">애완</a>-->
+<!--                    <a href="">스타굿즈</a>-->
+<!--                    <a href="">생활/식품</a>-->
+<!--                    <a href="">문구/가구</a>-->
+<!--                    <a href="">스포츠/레저</a>-->
+<!--                    <a href="">뷰티/미용</a>-->
+<!--                    <a href="">차량/오토바이</a>-->
+<!--                    <a href="">재능</a>-->
+<!--                    <a href="">나눔터</a>-->
+<!--                    <a href="">기타</a>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--            <div class="fieldset-block">-->
+<!--                <fieldset>-->
+<!--                    <input placeholder="검색할 상품을 입력해주세요"/>-->
+<!--                    <button>-->
+<!--                        <i class="fas fa-search"></i>-->
+<!--                    </button>-->
+<!--                </fieldset>-->
+<!--            </div>-->
+<!--            <div class="nav-util">-->
+<!--                <a href="/main/product.do" class="flex-a">-->
+<!--                    <img src="/images/main/sale.png" alt="팔아요"/>-->
+<!--                    <span class="sale-text">팔아요</span>-->
+<!--                </a>-->
+<!--                <a href="http://www.naver.com" class="flex-a">-->
+<!--                    <img src="/images/main/find.png" alt="구해요"/>-->
+<!--                    <span class>구해요</span>-->
+<!--                </a>-->
+<!--                <a href="http://www.naver.com" class="flex-a">-->
+<!--                    <i class="far fa-bell fa-lg bell"></i>-->
+<!--                    <span class="sale-text">알림</span>-->
+<!--                </a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="div-fixed">-->
+<!--            <div class="div-fixed-one">-->
+<!--                <div class="fixed-text">찜한상품</div>-->
+<!--                <div><i class="fas fa-heart">0</i></div>-->
+<!--            </div>-->
+<!--            <div class="div-fixed-two">-->
+<!--                <div class="fixed-text">최근본상품</div>-->
+<!--                <div class="watch-count"></div>-->
+<!--            </div>-->
+<!--            <div class="div-fixed-three">-->
+<!--                <div>TOP</div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</nav>-->
 <main>
 
     <div class="center-align">

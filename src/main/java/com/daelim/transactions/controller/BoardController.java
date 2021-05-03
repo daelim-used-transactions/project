@@ -5,6 +5,7 @@ import com.daelim.transactions.dto.MemberDTO;
 import com.daelim.transactions.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -17,10 +18,14 @@ import java.time.LocalDateTime;
 public class BoardController {
 
     @Autowired
-    MainController  mainController;
+    MainController mainController;
     @Autowired
     BoardService boardService;
 
+    /**
+     * @param board -> 게시글 등록 form 태그로 전달되는 객체
+     * @RequestParam(value = "files") MultipartFile[] files -> 파일 저장을 위한 객체
+     */
     @PostMapping(value="/main/product.do/register")
     public String registerBoard(BoardDTO board, @RequestParam(value = "files") MultipartFile[] files, HttpServletRequest request){
         MemberDTO member = mainController.commonSession(request);
@@ -34,4 +39,5 @@ public class BoardController {
 
         return "redirect:/main";
     }
+
 }

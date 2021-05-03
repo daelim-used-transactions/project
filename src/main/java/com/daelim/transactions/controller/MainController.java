@@ -76,6 +76,18 @@ public class MainController {
         model.addAttribute("board",board);
         return "/productUpload";
     }
+
+    /**
+     * 카테고리 또는 검색할 경우 동작
+     * @param product -> 카테고리 or 검색 값
+     * @return
+     */
+    @GetMapping(value = "/search")
+    public String searchProduct(String product){
+        System.out.println("나와라요요요요 : " +product);
+        return "/search";
+    }
+
     /**
      * 파일 업로드 인데 다른거로 할 예정
      * */
