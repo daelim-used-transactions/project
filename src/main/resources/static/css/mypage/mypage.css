@@ -48,7 +48,10 @@ body{
     cursor: pointer;
 }
 #myContent{
-    display: inline;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
     width: 100%;
     border: 1px solid #dadada;
     border-radius: 17px;
@@ -123,36 +126,42 @@ body{
 }
 #goodsBox{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
-    width: 100%;
+    width: 278px;
+    margin-bottom: 3%;
+    align-items:center;
+
 }
 .goodsImg{
     position: relative;
-    width: 15%;
-    margin: 3% 0px 1% 4%;
+    margin: 13% 0px 3% 0%;
 }
-.goodsImg img{
-    width: 100%;
+.goodsImg_back{
+    width: 150px;
+    height: 150px;
 }
 .goodsCon{
-    width: 100%;
+    width: 94%;
 }
 
 .goodsCon > h3{
-    text-align: right;
-    font-size: 1vw;
+    text-align: center;
+    font-size: 0.9vw;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 .goodsCon >p{
-    text-align: right;
-    font-size: 1vw;
+    text-align: center;
+    font-size: 0.8vw;
 }
 .inlineB{
     display: inline-block;
     font-size: 1vw;
 }
 #nickName{
-    font-size: 2vw;
+    font-size: 1.7vw;
 
 }
 #myinfo{

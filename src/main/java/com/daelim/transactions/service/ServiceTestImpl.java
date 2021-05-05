@@ -154,9 +154,6 @@ public class ServiceTestImpl implements ServiceTest {
         }
     }
 
-
-
-
     /**
      *  아이디로 모든 정보 찾기
      * */
@@ -165,6 +162,5 @@ public class ServiceTestImpl implements ServiceTest {
         MemberDTO member = daoTest.allInfoById(memId);
         return member;
     }
-
 
 }

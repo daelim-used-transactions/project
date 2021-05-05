@@ -68,4 +68,35 @@
             boardIdx DESC
     </select>
 
+    <select id="selectBoardListById"  parameterType="String"  resultType="com.daelim.transactions.dto.BoardDTO">
+        SELECT
+            boardIdx,
+            loginId,
+            title,
+            price,
+            contents,
+            deleteYn,
+            insertTime,
+            deleteTime
+        FROM
+            listboard
+        WHERE
+            deleteYn = 'N'
+        AND
+            loginId = #{loginId}
+        ORDER BY
+            boardIdx DESC
+    </select>
+
+    <select id="selectBoardMemberCount" parameterType="String" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            listboard
+        WHERE
+            deleteYn = 'N'
+        AND
+            loginId = #{loginId}
+    </select>
+
 </mapper>

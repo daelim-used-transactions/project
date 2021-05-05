@@ -40,6 +40,23 @@
             deleteYn = 'N'
     </select>
 
+
+    <select id="selectAttachIdxCount" parameterType="list" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            attach
+        WHERE
+            deleteYn = 'N'
+        AND
+            boardIdx IN(
+                <foreach collection="list" item="item" separator=",">
+                    #{item.boardIdx}
+                </foreach>
+            )
+
+    </select>
+
     <select id="selectAttachList"  parameterType="com.daelim.transactions.dto.AttachDTO"  resultType="com.daelim.transactions.dto.AttachDTO">
         SELECT
             <include refid="attachColumns" />
@@ -47,6 +64,23 @@
             attach
         WHERE
             deleteYn = 'N'
+        ORDER BY
+            boardIdx DESC
+    </select>
+
+    <select id="selectAttachListByBoardIdx"  parameterType="list"  resultType="com.daelim.transactions.dto.AttachDTO">
+        SELECT
+            <include refid="attachColumns" />
+        FROM
+            attach
+        WHERE
+            deleteYn = 'N'
+        AND
+            boardIdx IN (
+            <foreach collection="list" item="item" separator=",">
+                #{item.boardIdx}
+            </foreach>
+        )
         ORDER BY
             boardIdx DESC
     </select>

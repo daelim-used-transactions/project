@@ -13,4 +13,8 @@ public interface DaoAttach {
     public List<AttachDTO> selectAttachList();
 
     public int selectAttachTotalCount();
+
+    public int selectAttachIdxCount(List<BoardDTO> boardList);
+
+    public List<AttachDTO> selectAttachListByBoardIdx(List<BoardDTO> boardList);
 }

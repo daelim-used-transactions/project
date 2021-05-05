@@ -44,6 +44,11 @@ public class MainController {
     @GetMapping(value = "/main/myPage.do")
     public String toMyPage(HttpServletRequest request, Model model) {
         MemberDTO member = commonSession(request);
+        List<BoardDTO> boardList = boardService.getBoardList(member.getLoginId());
+        List<AttachDTO> attachList = boardService.getAttachList(boardList);
+        System.out.println(attachList.get(0));
+        model.addAttribute("boardList", boardList);
+        model.addAttribute("attachList", attachList);
         model.addAttribute("memNick",member.getNickName());
         model.addAttribute("memProfile",member.getProfile());
         return "/myPage/myPage";
@@ -52,10 +57,11 @@ public class MainController {
     @GetMapping(value="/main/myPage/profile.do")
     public String toProfile(HttpServletRequest request, Model model){
         MemberDTO member = commonSession(request);
+        MemberDTO newMemberPw = new MemberDTO();
         model.addAttribute("memNick",member.getNickName());
         model.addAttribute("memProfile",member.getProfile());
         model.addAttribute("memName",member.getName());
-        model.addAttribute("member",member);
+        model.addAttribute("member",newMemberPw);
         System.out.println(member.getNickName());
         return "/myPage/profile";
     }
@@ -86,6 +92,11 @@ public class MainController {
     public String searchProduct(String product){
         System.out.println("나와라요요요요 : " +product);
         return "/search";
+    }
+
+    @GetMapping(value="/main/buyList")
+    public String showBuyList(){
+        return "/buyList";
     }
 
     /**

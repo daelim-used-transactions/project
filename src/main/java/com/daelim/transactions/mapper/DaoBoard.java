@@ -22,6 +22,9 @@ public interface DaoBoard {
 
     public int selectBoardTotalCount();
 
+    public List<BoardDTO> selectBoardListById(String loginId);
+
+    public int selectBoardMemberCount(String loginId);
 
 
 }

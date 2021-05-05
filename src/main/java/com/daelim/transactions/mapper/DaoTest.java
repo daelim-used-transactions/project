@@ -62,9 +62,5 @@ public interface DaoTest {
      * */
     public MemberDTO allInfoById(String memId);
 
-    /**
-     *  비밀번호 변경
-     * **/
-    public int updatePass(@Param("loginId")String memId , @Param("loginPw") String changePass);
 
 }

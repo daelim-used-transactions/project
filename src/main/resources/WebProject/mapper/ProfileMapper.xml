@@ -3,23 +3,13 @@
 
 <mapper namespace="com.daelim.transactions.mapper.DaoTest">
 
-<!--        <update id="updateByProfile" parameterType="com.daelim.transactions.dto.MemberDTO">-->
-<!--            UPDATE-->
-<!--                test-->
-<!--            SET-->
-<!--                profile = #{profile}-->
-<!--            WHERE-->
-<!--                loginId = #{loginId}-->
-<!--        </update>-->
-
-
-<!--        <update id="updateByPass" parameterType="String">-->
-<!--            UPDATE-->
-<!--                 test-->
-<!--            SET-->
-<!--                loginPw = #{loginPw}-->
-<!--            WHERE-->
-<!--                loginId = #{loginId}-->
-<!--        </update>-->
+        <update id="updateByProfile" parameterType="com.daelim.transactions.dto.MemberDTO">
+            UPDATE
+                test
+            SET
+                profile = #{profile}
+            WHERE
+                loginId = #{loginId}
+        </update>
 
 </mapper>

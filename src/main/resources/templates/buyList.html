@@ -4,58 +4,37 @@
     <meta charset="UTF-8">
     <title>대림장터 메인홈페이지</title>
     <link rel="stylesheet" href="/css/main.css" />
-    <meta name="viewport" content="initial-scale=0.67;" />
+    <link rel="stylesheet" href="/css/buyList.css">
+    <meta name="viewport" content="initial-scale=0.8;" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 
     <script src="https://kit.fontawesome.com/7725a9a983.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+    <style>
+        .img_size{
+            width: 1015px;
+            height: 300px;
+        }
+        .bx-prev{
+            display:none;
+        }
+        .bx-next{
+            display:none;
+        }
 
+    </style>
 </head>
 <body>
 <header th:replace="fragments/header :: main-header"> </header>
-<!--    <header>-->
-<!--        <div class ="center-align">-->
-<!--            <div class ="inline-block">-->
-<!--                <img src ="/images/main/logowhite.png" alt ="대림장터 로고" />-->
-<!--            </div>-->
-<!--            <div class ="util-group inline-block" th:if="${session.member != null}">-->
-<!--                <span th:text="${session.member.getNickName()}"></span>-->
-<!--                <span> 님 안녕하세요</span>-->
-<!--                <a href="/main">HOME</a>-->
-<!--                <a href="/main/dlogout">| 로그아웃</a>-->
-<!--                <a th:href="@{/main/myPage.do}">| 마이페이지</a>-->
-<!--            </div>-->
-<!--            <div class ="util-group inline-block" th:if="${session.member==null}">-->
-<!--                <a href="/main">HOME</a>-->
-<!--                <a href="/login">| 로그인</a>-->
-<!--                <a th:href="@{/main/myPage.do}">| 마이페이지</a>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </header>-->
-<nav th:replace="fragments/nav :: main-nav"> </nav>
 <!--<nav>-->
 <!--    <div class ="center-align">-->
 <!--        <div class="flex-menu">-->
 <!--            <div class="menu-bar">-->
 <!--                <i class="fas fa-bars fa-lg"></i>-->
 <!--                <ul class="category">-->
-<!--                    <li>카테고리</li>-->
-<!--                    <a href="">여성의류</a>-->
-<!--                    <a href="">남성의류</a>-->
-<!--                    <a href="">패션잡화</a>-->
-<!--                    <a href="">디지털/가전</a>-->
-<!--                    <a href="">도서/티켓/취미</a>-->
-<!--                    <a href="">애완</a>-->
-<!--                    <a href="">스타굿즈</a>-->
-<!--                    <a href="">생활/식품</a>-->
-<!--                    <a href="">문구/가구</a>-->
-<!--                    <a href="">스포츠/레저</a>-->
-<!--                    <a href="">뷰티/미용</a>-->
-<!--                    <a href="">차량/오토바이</a>-->
-<!--                    <a href="">재능</a>-->
-<!--                    <a href="">나눔터</a>-->
-<!--                    <a href="">기타</a>-->
+<!--                    <li>KeyWord</li>-->
+<!--                    <li>test</li>-->
 <!--                </ul>-->
 <!--            </div>-->
 <!--            <div class="fieldset-block">-->
@@ -96,6 +75,7 @@
 <!--        </div>-->
 <!--    </div>-->
 <!--</nav>-->
+<nav th:replace="fragments/nav :: main-nav"> </nav>
 <main>
 
     <div class="center-align">
@@ -106,31 +86,32 @@
             <div><img class="img_size" src="/images/main/gd.jpg" alt=""></div>
             <div><img class="img_size" src="/images/main/dz.jpg" alt=""></div>
         </div>
-        <h2>상품 리스트</h2>
+        <span><h2 class="inline-block">구해요 리스트</h2></span><span class="write"><button>글쓰기</button></span>
         <div class="product">
             <div th:if="${not #lists.isEmpty(boardList)}" th:each="row: ${boardList}" class="product-list">
                 <div class="product-wrap">
                     <div  class="product-img">
-                        <div th:if="${not #lists.isEmpty(attachList) && row.boardIdx==img.boardIdx}" th:each="img: ${attachList}" class="product-img">
-                            <img th:if="${img.count == 1} "th:src="@{${img.saveName}}" alt="남성지갑"/>
-    <!--          \images\board\210421            -->
-                        </div>
-
-                            <div class="product-text">
-                                <div th:text="${row.title}" class="product-content">남성 반지갑 팝니다ddddddddddddd</div>
-                                            <div class="product-info">
-                                                <div th:text="${row.price}" class="product-price">150,000원</div>
-                                                <span th:text="${row.insertTime}" class="time">2일 전</span>
-                                            </div>
+                        <div class="product-text">
+                            <div th:text="${row.title}" class="product-content">남성 반지갑 팝니다ddddddddddddd</div>
+                            <div>
+                                <div th:text="${row.price}" class="product-price">150,000원</div>
+                                <span th:text="${row.insertTime}" class="time">2일 전</span>
                             </div>
+                            <ul class="status"><li class="attach inline-block commonImg">1</li><li title="공감" class="vote inline-block commonImg">0</li><li title="댓글" class="comment inline-block commonImg">6</li></ul>
+                        </div>
+                        <div th:if="${not #lists.isEmpty(attachList) }" th:each="img: ${attachList}" class="product-img">
+                            <img th:if="${row.boardIdx==img.boardIdx && img.count == 1} " src="./123.jpg" alt="남성지갑"/>
+                            <!--          \images\board\210421            -->
+                        </div>
                     </div>
                 </div>
-                            <div th:unless="${not #lists.isEmpty(boardList)}">
-                                <div> 조회된 결과가 없습니다.</div>
-                            </div>
+                <div th:unless="${not #lists.isEmpty(boardList)}">
+                    <div> 조회된 결과가 없습니다.</div>
+                </div>
             </div>
 
         </div><!--상품리스트 끝-->
+    </div>
     <!--main안의 중앙정렬 끝-->
 </main>
 <footer>

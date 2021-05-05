@@ -3,16 +3,6 @@
     margin: 0;
     padding: 0;
 }
-.img_size{
-    width: 1015px;
-    height: 300px;
-}
-.bx-prev{
-    display:none;
-}
-.bx-next{
-    display:none;
-}
 
 html, body{
     padding:  0px;
@@ -25,14 +15,14 @@ header{
     background-color:#6495ED;
 }
 
-.center-align{   
+.center-align{
     margin: 0 auto;
     width: 1024px;
 }
 .product{
     display: flex;
     flex-wrap: wrap;
-    margin-left: 23px;
+    flex-direction: column;
 }
 
 .inline-block {
@@ -95,7 +85,7 @@ nav .center-align{
     display: none;
     list-style: none;
     width: 200px;
-    height: 430px;
+    height: 333px;
     border: 1px solid #aaa;
     background-color: white;
     position: absolute;
@@ -110,16 +100,7 @@ nav .center-align{
     padding-bottom: 10px;
 }
 
-.category a{
-    font-family: "Noto Sans KR", sans-serif;
-    text-decoration: none;
-    color: #000;
-    display: block;
-    font-size: 14px;
-    margin: 7px 0 7px 0;
-}
-
-.fieldset-block{    
+.fieldset-block{
     margin-bottom: 10px;
     margin-left: 120px;
 }
@@ -141,14 +122,14 @@ nav .center-align{
     margin-left: 8px;
     outline: none;
     margin-bottom: 2px;
-    
+
 }
 
 .center-align fieldset button{
     border: none;
     background-color: white;
     margin-left: 20px;
-    outline: none; 
+    outline: none;
     cursor: pointer;
 }
 
@@ -275,19 +256,24 @@ main .center-align{
     flex-wrap: wrap;*/
 }
 
+.product-text{
+    margin: 10px;
+    float: left;
+    width: 865px;
+
+}
+
 .product-wrap{
     border: 1px solid rgb(238, 238, 238);
-    margin-right: 30px;
-    width: 216px;
     margin-bottom: 11px;
-}c
-.product-img{
-    text-align: center;
-    cursor: pointer;
+    overflow: hidden;
+    height: 110px;
 }
 .product-img img{
-    width:100%;
-    height: 300px;
+    width: 100px;
+    height: 100px;
+    margin: 4px;
+    float: right;
 }
 
 .product-content{
@@ -317,7 +303,6 @@ main .center-align{
 footer{
     background-color: rgb(34, 34, 34);
     height: 100px;
-    margin-top: 100px;
 }
 
 .test{
@@ -326,4 +311,46 @@ footer{
     font-weight: 300;
     line-height: 17px;
     margin: 10px 0 10px 0;
+}
+
+.status{
+    list-style-type:none;
+    float: right;
+}
+
+.attach{
+    background: url('/images/buyList/container.articles.attach.png');
+}
+.vote{
+    background: url('/images/buyList/free-icon-like-126473.png');
+    color: red;
+}
+.comment{
+    background: url('/images/buyList/speech-bubble.png');
+    color: #0ca5af;
+}
+.commonImg{
+    background-repeat: no-repeat;
+    background-position: left;
+    width: 20px;
+    /* padding-right: 20px; */
+    text-align: right;
+    font-size: 12px;
+    margin-left: 10px;
+    background-size: 11px 11px;
+}
+
+.write{
+    margin-left: 750px;
+}
+
+.write > button{
+        height: 40px;
+        width: 70px;
+        background: #009fdb;
+        color: #fff;
+        font-size: 20px;
+        border: none;
+        border-radius: 7px;
+        cursor: pointer;
 }
