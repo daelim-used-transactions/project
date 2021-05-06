@@ -54,7 +54,17 @@
                     #{item.boardIdx}
                 </foreach>
             )
+    </select>
 
+    <select id="selectAttachOneCount" parameterType="int" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            attach
+        WHERE
+            deleteYn = 'N'
+        AND
+        boardIdx =#{boardIdx}
     </select>
 
     <select id="selectAttachList"  parameterType="com.daelim.transactions.dto.AttachDTO"  resultType="com.daelim.transactions.dto.AttachDTO">
@@ -84,4 +94,18 @@
         ORDER BY
             boardIdx DESC
     </select>
+
+    <select id="selectAttachOne"  parameterType="int"  resultType="com.daelim.transactions.dto.AttachDTO">
+        SELECT
+            <include refid="attachColumns" />
+        FROM
+            attach
+        WHERE
+            deleteYn = 'N'
+        AND
+            boardIdx= #{boardIdx}
+        AND
+            count = #{count}
+    </select>
+
 </mapper>

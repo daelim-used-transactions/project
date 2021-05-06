@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>대림장터 메인홈페이지</title>
     <link rel="stylesheet" href="/css/main.css" />
-    <meta name="viewport" content="initial-scale=0.67;" />
+    <meta name="viewport" content="initial-scale=0.67" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 
     <script src="https://kit.fontawesome.com/7725a9a983.js" crossorigin="anonymous"></script>
@@ -111,8 +111,8 @@
             <div th:if="${not #lists.isEmpty(boardList)}" th:each="row: ${boardList}" class="product-list">
                 <div class="product-wrap">
                     <div  class="product-img">
-                        <div th:if="${not #lists.isEmpty(attachList) && row.boardIdx==img.boardIdx}" th:each="img: ${attachList}" class="product-img">
-                            <img th:if="${img.count == 1} "th:src="@{${img.saveName}}" alt="남성지갑"/>
+                        <div th:if="${not #lists.isEmpty(attachList) && row.boardIdx==img.boardIdx && img.count==1}" th:each="img: ${attachList}" class="product-img">
+                            <img th:src="@{${img.saveName}}" alt="남성지갑"/>
     <!--          \images\board\210421            -->
                         </div>
 
