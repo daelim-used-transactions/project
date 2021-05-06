@@ -18,7 +18,7 @@ public interface DaoBoard {
 
     public int deleteBoard(int boardIdx);
 
-    public List<BoardDTO> selectBoardList();
+    public List<BoardDTO> selectBoardList(int count);
 
     public int selectBoardTotalCount();
 

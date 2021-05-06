@@ -14,7 +14,6 @@ public interface BoardService {
      *  모든 게시판 찾기
      * */
     public List<AttachDTO> getAttachList( );
-
     /**
      * 아이디로 게시판 찾기
      * */
@@ -24,4 +23,5 @@ public interface BoardService {
      *  보더idx로 이미지 찾아오기
      * */
     public List<AttachDTO> getAttachList(List<BoardDTO> boardList);
+    public List<BoardDTO> getBoardList(int count);
 }

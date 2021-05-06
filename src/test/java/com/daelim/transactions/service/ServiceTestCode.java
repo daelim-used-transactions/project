@@ -114,7 +114,7 @@ public class ServiceTestCode {
         int boardTotalCount = daoBoard.selectBoardTotalCount();
         System.out.println(boardTotalCount);
         if (boardTotalCount > 0) {
-            List<BoardDTO> boardList  = daoBoard.selectBoardList();
+            List<BoardDTO> boardList  = daoBoard.selectBoardList(5);
 
             if (CollectionUtils.isEmpty(boardList) == false) {
                 for (BoardDTO board : boardList) {
@@ -137,7 +137,7 @@ public class ServiceTestCode {
         int boardIdx = 0;
         int boardTotalCount = daoBoard.selectBoardTotalCount();
         if (boardTotalCount > 0) {
-            boardList = daoBoard.selectBoardList();
+            boardList = daoBoard.selectBoardList(5);
             for(int i=0; i<boardList.size(); i++){
                 boardIdx=boardList.get(i).getBoardIdx();
                 if (attachTotalCount > 0) {

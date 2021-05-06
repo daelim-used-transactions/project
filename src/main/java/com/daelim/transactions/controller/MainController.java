@@ -8,10 +8,7 @@ import com.daelim.transactions.service.ServiceTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +16,9 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -84,19 +83,41 @@ public class MainController {
     }
 
     /**
-     * 카테고리 또는 검색할 경우 동작
-     * @param product -> 카테고리 or 검색 값
-     * @return
+     * 검색할 경우 동작
+     * @param product ->검색 값
+     * @return html 파일
      */
     @GetMapping(value = "/search")
     public String searchProduct(String product){
-        System.out.println("나와라요요요요 : " +product);
+        System.out.println("검색 값 : " +product);
         return "/search";
     }
 
     @GetMapping(value="/main/buyList")
     public String showBuyList(){
         return "/buyList";
+    }
+
+    /**
+     * 카테고리 클릭 시 동작
+     * @param categoriesProduct -> 카테고리
+     * @return html 파일
+     */
+    @GetMapping(value = "/categories")
+    public String categoriesProduct(String categoriesProduct){
+        System.out.println("카테고리 선택 값 : " +categoriesProduct);
+        return "/search";
+    }
+
+    @PostMapping(value = "/mainPaging")
+    @ResponseBody
+    public Object mainBoardListControl(@RequestBody Map<String,Integer> param){
+        Map<String, Object> map = new HashMap<>();
+        List<BoardDTO> listMore = boardService.getBoardList(param.get("Idx"));
+        List<AttachDTO> attachMore = boardService.getAttachList(listMore);
+        map.put("listMore", listMore);
+        map.put("attachMore", attachMore);
+        return map;
     }
 
     /**

@@ -54,7 +54,24 @@ public class BoardServiceImpl implements BoardService {
         int boardTotalCount = daoBoard.selectBoardTotalCount();
 
         if (boardTotalCount > 0) {
-            boardList = daoBoard.selectBoardList();
+            boardList = daoBoard.selectBoardList(0);
+        }
+
+        return boardList;
+    }
+
+    /**
+     * @param count-> 페이징을 위한 카운트
+     * @return BoardDTO list형태로 반환
+     */
+    @Override
+    public List<BoardDTO> getBoardList(int count) {
+        List<BoardDTO> boardList = Collections.emptyList();
+
+        int boardTotalCount = daoBoard.selectBoardTotalCount();
+
+        if (boardTotalCount > 0) {
+            boardList = daoBoard.selectBoardList(count);
         }
 
         return boardList;

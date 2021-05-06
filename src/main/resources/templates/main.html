@@ -116,13 +116,13 @@
     <!--          \images\board\210421            -->
                         </div>
 
-                            <div class="product-text">
-                                <div th:text="${row.title}" class="product-content">남성 반지갑 팝니다ddddddddddddd</div>
-                                            <div class="product-info">
-                                                <div th:text="${row.price}" class="product-price">150,000원</div>
-                                                <span th:text="${row.insertTime}" class="time">2일 전</span>
-                                            </div>
+                        <div class="product-text">
+                            <div th:text="${row.title}" class="product-content">남성 반지갑 팝니다ddddddddddddd</div>
+                            <div class="product-info">
+                                <div th:text="${row.price}" class="product-price">150,000원</div>
+                                <span th:text="${row.insertTime}" class="time">2일 전</span>
                             </div>
+                        </div>
                     </div>
                 </div>
                             <div th:unless="${not #lists.isEmpty(boardList)}">
@@ -131,6 +131,9 @@
             </div>
 
         </div><!--상품리스트 끝-->
+        <div class="btn-area">
+            <button id="btn" onclick="moreList();">더보기</button>
+        </div>
     <!--main안의 중앙정렬 끝-->
 </main>
 <footer>
@@ -171,8 +174,86 @@
           });
         });
 
+</script>
+<script th:inline="javascript">
+	/*<![CDATA[*/
+	    let count = 0;
+	    let lastIdx = {};
+        function moreList() {
+        count++;
+        console.log(count);
+        if(count === 1){
+            let boardList =  /*[[ ${boardList} ]]*/;
+            lastIdx = {
+                Idx : boardList[boardList.length-1].boardIdx,
+            }
+        }
 
+      	$.ajax({
+                url : '/mainPaging',
+                type : 'POST',
+                data : JSON.stringify(lastIdx),
+                dataType : 'json',
+                contentType : "application/json; charset=UTF-8",
+                success : function(data){
+                    if(count >= 1){
+                        lastIdx = {
+                            Idx : data.listMore[data.listMore.length -1].boardIdx,
+                        }
+                    }
+                    for(let board of data.listMore){
+                        if(data.listMore.length < 4){
+                            $('#btn').remove();
+                        }
+                        const product =  document.querySelector('.product');
+                        const productList = document.createElement('div');
+                        const productWrap = document.createElement('div');
+                        const productImg = document.createElement('div');
+                        const productImg2 = document.createElement('div');
+                        const productText = document.createElement('div');
+                        const productContent = document.createElement('div');
+                        const productInfo = document.createElement('div');
+                        const productPrice = document.createElement('div');
+                        const time = document.createElement('span');
+                        const imgContents = document.createElement('img');
 
+                        productList.setAttribute('class', 'product-list');
+                        productWrap.setAttribute('class', 'product-wrap');
+                        productImg.setAttribute('class', 'product-img');
+                        productImg2.setAttribute('class', 'product-img');
+                        productText.setAttribute('class', 'product-text');
+                        productInfo.setAttribute('class', 'product-info');
+                        productPrice.setAttribute('class', 'product-price');
+                        productContent.setAttribute('class', 'product-content');
+                        time.setAttribute('class', 'time');
+
+                        for(let file of data.attachMore){
+                            if((board.boardIdx === file.boardIdx)&& file.count === 1){
+                                imgContents.setAttribute('src',file.saveName);
+                            }
+                        }
+                        productContent.innerHTML = board.title;
+                        productPrice.innerHTML = board.price;
+                        time.innerHTML = board.insertTime;
+
+                       product.appendChild(productList);
+                       productList.appendChild(productWrap);
+                       productWrap.appendChild(productImg);
+                       productImg.appendChild(productImg2);
+                       productImg2.appendChild(imgContents);
+                       productImg.appendChild(productText);
+                       productText.appendChild(productContent);
+                       productText.appendChild(productInfo);
+                       productInfo.appendChild(productPrice);
+                       productInfo.appendChild(time);
+                    }
+                },
+                error: function(){
+                    alert('status 500(Server Error)');
+                }
+            });
+      	}
+	/*]]>*/
 </script>
 </body>
 </html>

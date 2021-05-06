@@ -50,12 +50,14 @@
 
 
 <!-- interface에서 list로 리턴값을 두고 mybatis에서 객채를 리턴하면 알아서 리스트 안으로 들어가게 되어있다함   -->
-    <select id="selectBoardList"  parameterType="com.daelim.transactions.dto.BoardDTO"  resultType="com.daelim.transactions.dto.BoardDTO">
+<!--파라미터로 넘어온 count는 main에 띄운 게시글의 마지막 idx값. 내림차순이므로 가장 작은 값-->
+    <select id="selectBoardList"  parameterType="int"  resultType="com.daelim.transactions.dto.BoardDTO">
         SELECT
             boardIdx,
             loginId,
             title,
             price,
+            category,
             contents,
             deleteYn,
             insertTime,
@@ -64,8 +66,14 @@
              listboard
         WHERE
             deleteYn = 'N'
+        <!--count가 0이 아닐 때 새로운 조건 추가.-->
+            <if test="count != 0">
+                AND boardIdx <![CDATA[ < ]]> #{count}
+            </if>
         ORDER BY
             boardIdx DESC
+        LIMIT
+            4
     </select>
 
     <select id="selectBoardListById"  parameterType="String"  resultType="com.daelim.transactions.dto.BoardDTO">
