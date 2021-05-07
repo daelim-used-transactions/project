@@ -2,6 +2,7 @@ package com.daelim.transactions.controller;
 
 import com.daelim.transactions.dto.AttachDTO;
 import com.daelim.transactions.dto.BoardDTO;
+import com.daelim.transactions.dto.BuyBoardDTO;
 import com.daelim.transactions.dto.MemberDTO;
 import com.daelim.transactions.service.BoardService;
 import com.daelim.transactions.service.ServiceTest;
@@ -81,6 +82,13 @@ public class MainController {
         BoardDTO board = new BoardDTO();
         model.addAttribute("board",board);
         return "/productUpload";
+    }
+
+    @GetMapping(value="/main/buylist.do")
+    public String buyUpload(Model model){
+        BuyBoardDTO buyBoard = new BuyBoardDTO();
+        model.addAttribute("buyBoard",buyBoard);
+        return "/buyUpload";
     }
 
     /**

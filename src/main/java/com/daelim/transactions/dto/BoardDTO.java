@@ -22,7 +22,7 @@ public class BoardDTO {
     private String title;
 
     //가격
-    private int price;
+    private String price;
 
     //카테고리
     private String category;
