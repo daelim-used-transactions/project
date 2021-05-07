@@ -42,10 +42,11 @@ public class MainController {
 
     @GetMapping(value = "/main/myPage.do")
     public String toMyPage(HttpServletRequest request, Model model) {
-        MemberDTO member = commonSession(request);
+        MemberDTO member = (MemberDTO) request.getSession().getAttribute("member");
+
         List<BoardDTO> boardList = boardService.getBoardList(member.getLoginId());
         List<AttachDTO> attachList = boardService.getAttachList(boardList);
-        System.out.println(attachList.get(0));
+
         model.addAttribute("boardList", boardList);
         model.addAttribute("attachList", attachList);
         model.addAttribute("memNick",member.getNickName());
@@ -93,10 +94,6 @@ public class MainController {
         return "/search";
     }
 
-    @GetMapping(value="/main/buyList")
-    public String showBuyList(){
-        return "/buyList";
-    }
 
     /**
      * 카테고리 클릭 시 동작

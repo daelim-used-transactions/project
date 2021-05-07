@@ -26,7 +26,20 @@ public class BuyBoardServiceImpl implements BuyBoardService {
         return daoBuyBoard.insertBoard(board) == 1;  //DB에 들어갔다면 True
     }
 
+    /**
+     *  모든 게시판 찾기
+     * */
+    public List<BuyBoardDTO> getAttachList( ){
+        List<BuyBoardDTO> boardList = Collections.emptyList();
 
+        int boardTotalCount = daoBuyBoard.selectBoardTotalCount();
+
+        if (boardTotalCount > 0) {
+            boardList = daoBuyBoard.selectBoardList();
+        }
+
+        return boardList;
+    };
 
 
 }

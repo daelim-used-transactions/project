@@ -53,6 +53,7 @@
             boardIdx,
             loginId,
             title,
+            category,
             contents,
             deleteYn,
             insertTime,

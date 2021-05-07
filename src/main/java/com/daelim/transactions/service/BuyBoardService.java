@@ -8,6 +8,11 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public interface BuyBoardService {
+
     public boolean registerBoard(BuyBoardDTO board);
 
+    /**
+     *  모든 게시판 찾기
+     * */
+    public List<BuyBoardDTO> getAttachList( );
 }

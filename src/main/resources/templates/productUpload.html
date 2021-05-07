@@ -303,7 +303,7 @@
             </div>
             <div class="spanLine">
                 <div class="spanSpace">
-                    <input class="int" type="number" id="price" th:field="*{price}" name="price" maxlength="10"  oninput="maxLengthCheck(this)"  placeholder="가격을 입력해 주세요." required>
+                    <input class="int" type="text" id="price" th:field="*{price}" name="price" maxlength="10"  oninput="maxLengthCheck(this)"  placeholder="가격을 입력해 주세요." required>
                 </div>
             </div>
 
@@ -328,6 +328,18 @@
 <script>
     let nFiles = 0;
     let fileIdx = 0; /*[- 파일 인덱스 처리용 전역 변수 -]*/
+    let price = document.querySelector('#price');
+    let priceValue = price.value;
+    console.log(priceValue);
+
+    price.addEventListener('keyup',function(){
+        priceValue = price.value;
+        priceValue = priceValue.replace(/[^0-9]/g,"");
+        <!--숫자가 아닌 것이 들어오면 공백으로 바꾸는 정규식        -->
+        priceValue = priceValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        <!--      3단위마다 , 처리하는 정규식         -->
+        price.value = priceValue;
+    });
 
     function preview(e){
         let reader = new FileReader();
@@ -430,6 +442,7 @@ function changeFilename(file) {
 	const target = file.prevAll('input');
 	target.val(filename);
 }
+
 
 
 </script>
