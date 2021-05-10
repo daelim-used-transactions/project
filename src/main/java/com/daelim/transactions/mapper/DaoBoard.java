@@ -20,6 +20,8 @@ public interface DaoBoard {
 
     public List<BoardDTO> selectBoardList(int count);
 
+    public List<BoardDTO> selectBoardList();
+
     public int selectBoardTotalCount();
 
     public List<BoardDTO> selectBoardListById(String loginId);

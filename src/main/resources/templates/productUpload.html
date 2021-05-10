@@ -318,7 +318,7 @@
                 </div>
             </div>
             <div id=joinButton>
-                <button type="submit"> 등록하기 </button>
+                <button type="submit" > 등록하기 </button>
             </div>
         </form>
     </div>
@@ -326,6 +326,7 @@
 </div>
 
 <script>
+
     let nFiles = 0;
     let fileIdx = 0; /*[- 파일 인덱스 처리용 전역 변수 -]*/
     let price = document.querySelector('#price');
@@ -391,6 +392,7 @@
             alert("카테고리를 선택해 주세요.");
             return false;
         }else{
+            alert('상품 등록이 완료 되었습니다.')
             return true;
         }
   }

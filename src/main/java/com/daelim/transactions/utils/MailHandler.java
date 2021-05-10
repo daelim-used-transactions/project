@@ -15,14 +15,14 @@ public class MailHandler {
 
     private JavaMailSender sender;
     private MimeMessage message;
-    private MimeMessageHelper messageHelper;
+        private MimeMessageHelper messageHelper;
 
-    // 생성자
+        // 생성자
     public MailHandler(JavaMailSender jSender) throws
-            MessagingException {
-        this.sender = jSender;
-        message = jSender.createMimeMessage();
-        messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+        MessagingException {
+            this.sender = jSender;
+            message = jSender.createMimeMessage();
+            messageHelper = new MimeMessageHelper(message, true, "UTF-8");
     }
 
     // 보내는 사람 이메일

@@ -1,0 +1,199 @@
+*{margin: 0px; padding: 0px;}
+ul{list-style: none;} /* 리스트 앞에 . 같은거 제거*/
+a{text-decoration: none;} /* 링크에 밑줄 같은거 제거*/
+
+header{
+    width: 1000px; /*메인 이미지의 너비 사이즈와 같음*/
+    height: 95px;
+    background-color: #154e99;
+    padding: 10px;
+    position: relative;
+}
+
+/* 제목영역안에 있는 메인 로고 이미지 위치 지정 */
+#logo{
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    right: 30px;
+}
+
+/* 제목영역안에 오른쪽 상단에 top_menu 배치 */
+#top_menu{
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    color: white;
+}
+
+/* top_menu a의 글시 하얀색으로 */
+#top_menu a{color: white;}
+
+/* 헤더 영역안에 네비게이션 메뉴 배치 */
+nav{
+    position: absolute;
+    bottom: 10px;
+    left: 220px;
+    font-size: 16px;
+}
+
+nav li{
+    display: inline;
+    margin-left: 30px;
+}
+
+nav li a{color: white;}
+
+.forSalePage{
+    padding: 10px;
+    overflow: hidden;
+}
+.product{
+    min-height: 245px;
+    padding: 5px;
+}
+.pdView{
+    float:left;
+}
+.photo{
+    position: relative;
+    overflow: hidden;
+}
+.countbox{
+    margin: 0px;
+    overflow: hidden;
+    flex-direction: row;
+    justify-content : space-between;
+    display: flex;
+    color: gray;
+}
+.count{
+    padding-left: 20px;
+    margin: 0px;
+    overflow: hidden;
+    flex-direction: row;
+    justify-content : space-between;
+    display: flex;
+}
+.viewCount{
+    display: flex;
+    text-align: center;
+    margin-right : 10px;
+}
+.likeCount{
+    display: flex;
+    text-align: center;
+    margin-right : 10px;
+}
+.commentCount{
+    display: flex;
+    text-align: center;
+    margin-right : 10px;
+}
+.uplDate{
+    display: flex;
+    text-align: center;
+    padding-right: 30px;
+    font-size: 1em;
+}
+.content{
+    padding: 10px;
+    padding-left: 15px;
+    overflow: hidden;
+}
+.other{
+    display: inline-flex;
+    min-width: 660px;
+    position: relative;
+    margin: 5px;
+    flex-direction: row;
+}
+.combox{
+    min-width: 780px;
+}
+.title{
+    margin: 0px;
+    padding-bottom: 10px;
+    justify-content : space-between;
+    display: flex;
+}
+.title>button{
+    float: right;
+    margin: 0px;
+    overflow: hidden;
+    flex-direction: row;
+
+    display: flex;
+}
+.price{
+    padding-bottom: 10px;
+}
+.explain{
+    padding: 5px;
+}
+.comment{
+    display: inline-block;
+    padding: 10px;
+    padding-left: 15px;
+    overflow:hidden;
+}
+.comLabel{
+    float: left;
+    margin: 10px;
+    display: inline-flex;
+}
+.comSpace{
+    margin: 10px;
+    display: inline-flex;
+    position: relative;
+    width: 100%;
+    height: 51px;
+    border: solid 1px #dadada;
+    padding: 10px 90px 10px 14px;
+    background: #fff;
+    box-sizing: border-box;
+}
+.comSpace>button{
+    position: absolute;
+    left: 90%;
+    top: 8%;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+}
+.comset{
+    width:100%;
+    border: none;
+    height: 29px;
+    display: inline-block;
+}
+.userinfo{
+    margin: 20px;
+    padding : 20px;
+    text-align: center;
+}
+.userinfobox{
+    text-align: center;
+}
+
+/* 콘텐츠 영역의 알래에 있는 배너 이미지 inline으로
+#content li{
+    display: inline;
+    margin-left: 50px;
+}
+*/
+
+/* footer 영역 */
+footer{ /*헤더와 같은 사이즈*/
+    /*
+    width: 1000px;
+    height: 90px;
+    margin-top: 20px;
+    text-align: center;
+    background-color: #f1f1f1;
+    position: relative;
+    */
+}
+
+/* 전체 페이지가 가운데로 오도록 */
+#page{width: 1020px; margin: 0px auto;}

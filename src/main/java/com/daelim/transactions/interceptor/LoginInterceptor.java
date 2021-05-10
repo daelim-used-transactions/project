@@ -14,14 +14,10 @@ import javax.servlet.http.HttpSession;
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
 
-    @Autowired
-    ServiceTest serviceTest;
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String loginId = (String)request.getSession().getAttribute("memId");
         if(loginId != null){
-
             return true;
         }else{
             String destUri = request.getRequestURI();

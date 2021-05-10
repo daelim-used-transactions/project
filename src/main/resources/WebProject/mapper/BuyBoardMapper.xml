@@ -96,4 +96,22 @@
             loginId = #{loginId}
     </select>
 
+    <select id="selectBoardDetail" parameterType="long" resultType="com.daelim.transactions.dto.BuyBoardDTO">
+        SELECT
+            boardIdx,
+            loginId,
+            title,
+            category,
+            contents,
+            deleteYn,
+            insertTime,
+            deleteTime
+        FROM
+            buylistboard
+        WHERE
+            deleteYn = 'N'
+        AND
+            boardIdx = #{idx}
+    </select>
+
 </mapper>

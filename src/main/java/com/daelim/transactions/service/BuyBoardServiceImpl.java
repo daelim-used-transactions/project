@@ -39,7 +39,15 @@ public class BuyBoardServiceImpl implements BuyBoardService {
         }
 
         return boardList;
-    };
+    }
+
+    @Override
+    public BuyBoardDTO getBoardDetail(long idx) {
+
+        return daoBuyBoard.selectBoardDetail(idx);
+    }
+
+    ;
 
 
 }

@@ -15,4 +15,6 @@ public interface BuyBoardService {
      *  모든 게시판 찾기
      * */
     public List<BuyBoardDTO> getAttachList( );
+
+    public BuyBoardDTO getBoardDetail(long idx);
 }

@@ -28,4 +28,8 @@ public interface DaoBuyBoard {
     public int selectBoardMemberCount(String loginId);
 
 
+    /**
+     *  상세페이지 가져오기
+     * */
+    public BuyBoardDTO selectBoardDetail(Long idx);
 }

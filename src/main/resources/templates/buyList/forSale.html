@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>forSale</title>
+    <link rel="stylesheet" href="/css/forSale.css" media="(min-width:600px)">
+</head>
+<body>
+<div id="page">
+
+    <div class="forSalePage">
+        <div class="pdHead">
+            <div class="countbox">
+                <div class="count">
+                    <div class="viewCount">
+                        <img src="#" alt="#">
+                        조회수 25 |
+                    </div>
+                    <div class="likeCount">
+                        <img src="#" alt="#">
+                        찜 4 |
+                    </div>
+                    <div class="commentCount">
+                        <img src="#" alt="#">
+                        댓글 9
+                    </div>
+                </div>
+                <div class="uplDate">
+                    작성일&nbsp;
+                    <small>
+                        2017-02-20 13:52
+                    </small>
+                </div>
+            </div>
+        </div>
+        <div class="product">
+            <div class="pdView">
+                <div class="photo">
+                    <img src="product1.png" alt="#">
+                </div>
+            </div>
+            <div class="content" th:object="${board}">
+                <div class="title">
+                    <div class="pdName">
+                        <h2>
+                            <label th:text=*{title} for="pdName">랄로</label>
+                        </h2>
+                    </div>
+                    <button type="button" class="report">
+                        <img src="report1.png" alt="report">
+                        <img src="report.png" alt="report">
+                    </button>
+                </div>
+                <div class="price">
+                    <h2>
+                        <label for="price">1비트</label>
+                    </h2>
+                </div>
+                <div id="explain" >
+                    <div th:text="*{contents}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="other">
+        <div class="combox">
+            <div class="comLabel">
+                <h2>
+                    <label for="combox">Comment</label>
+                </h2>
+            </div>
+            <span class="comSpace">
+                    <input class="comset" type="text" id="comment" name="comment" maxlength="200"
+                             placeholder="상품문의 입력">
+                    <button type="button" >등록</button>
+                </span>
+        </div>
+        <div class="userinfo">
+            <div>
+                <h2>
+                    <label>유저 정보</label>
+                </h2>
+            </div>
+            <div>
+                <div class="selfie">
+                    <img src="#" alt="#">
+                </div>
+                <div class ="userinfobox">
+                    <h3>
+                        <label>PAKA</label>
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relpd"></div>
+    <footer>
+    </footer>
+</div>
+</body>
+</html>

@@ -38,6 +38,19 @@ public class BuyBoardController {
         List<BuyBoardDTO> boardList = buyBoardService.getAttachList();
 
         model.addAttribute("boardList", boardList);
-        return "/buyList";
+        return "buyList/buyList";
+    }
+
+    @GetMapping(value ="/main/buyList/view")
+    public String openDetailBoard(@RequestParam(value="idx", required = false)Long idx,Model model){
+        if(idx == null){
+            return "redirect:/main/buyList";
+        }
+        BuyBoardDTO buyBoard = buyBoardService.getBoardDetail(idx);
+        if(buyBoard == null || "Y".equals(buyBoard.getDeleteYn())){
+            return "redirect:/main/buyList";
+        }
+        model.addAttribute("board", buyBoard);
+        return "buyList/forSale";
     }
 }
