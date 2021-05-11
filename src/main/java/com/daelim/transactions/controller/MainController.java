@@ -1,9 +1,6 @@
 package com.daelim.transactions.controller;
 
-import com.daelim.transactions.dto.AttachDTO;
-import com.daelim.transactions.dto.BoardDTO;
-import com.daelim.transactions.dto.BuyBoardDTO;
-import com.daelim.transactions.dto.MemberDTO;
+import com.daelim.transactions.dto.*;
 import com.daelim.transactions.service.BoardService;
 import com.daelim.transactions.service.ServiceTest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,24 +90,28 @@ public class MainController {
 
     /**
      * 검색할 경우 동작
-     * @param product ->검색 값
+     * @param
      * @return html 파일
      */
     @GetMapping(value = "/search")
-    public String searchProduct(String product){
-        System.out.println("검색 값 : " +product);
+    public String searchProduct(@ModelAttribute("params")BoardDTO params){
+        System.out.println("검색 값 : " +params.getSearchKeyword());
+        System.out.println("현재페이지 값 : " +params.getCurrentPageNo());
         return "/search";
     }
 
-
     /**
      * 카테고리 클릭 시 동작
-     * @param categoriesProduct -> 카테고리
+     * @param
      * @return html 파일
      */
     @GetMapping(value = "/categories")
-    public String categoriesProduct(String categoriesProduct){
-        System.out.println("카테고리 선택 값 : " +categoriesProduct);
+    public String categoriesProduct(@ModelAttribute("params")BoardDTO params, Model model){
+        System.out.println("카테고리 선택 값 : " + params.getCategoriesProduct());
+        List<BoardDTO> boardList = boardService.getCategoryBoardList(params);
+        List<AttachDTO> attachList = boardService.getAttachList(boardList);
+        model.addAttribute("boardList", boardList);
+        model.addAttribute("attachList", attachList);
         return "/search";
     }
 

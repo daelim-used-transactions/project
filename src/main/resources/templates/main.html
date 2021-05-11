@@ -181,7 +181,6 @@
 	    let lastIdx = {};
         function moreList() {
         count++;
-        console.log(count);
         if(count === 1){
             let boardList =  /*[[ ${boardList} ]]*/;
             lastIdx = {
@@ -202,7 +201,7 @@
                         }
                     }
                     for(let board of data.listMore){
-                        if(data.listMore.length < 4){
+                        if(data.listMore.length < 8){
                             $('#btn').remove();
                         }
                         const product =  document.querySelector('.product');
@@ -249,7 +248,7 @@
                     }
                 },
                 error: function(){
-                    alert('status 500(Server Error)');
+                    alert('not Data');
                 }
             });
       	}

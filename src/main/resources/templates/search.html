@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>대림장터</title>
     <link rel="stylesheet" href="/css/main.css" />
-    <meta name="viewport" content="initial-scale=0.8;" />
+    <link rel="stylesheet" href="/css/search.css" />
+    <meta name="viewport" content="initial-scale=0.8" />
     <script src="https://kit.fontawesome.com/7725a9a983.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
@@ -13,12 +14,44 @@
     <nav th:replace="fragments/nav :: main-nav"> </nav>
     <main>
         <div class="center-align">
+            <h2 class = "h2-design">검색 결과</h2>
+            <div class="product">
+                <div th:if="${not #lists.isEmpty(boardList)}" th:each="row: ${boardList}" class="product-list">
+                    <div class="product-wrap">
+                        <div  class="product-img">
+                            <div th:if="${not #lists.isEmpty(attachList) && row.boardIdx==img.boardIdx && img.count==1}" th:each="img: ${attachList}" class="product-img">
+                                <img th:src="@{${img.saveName}}" alt="남성지갑"/>
+                                <!--          \images\board\210421            -->
+                            </div>
 
+                            <div class="product-text">
+                                <div th:text="${row.title}" class="product-content">남성 반지갑 팝니다ddddddddddddd</div>
+                                <div class="product-info">
+                                    <div th:text="${row.price}" class="product-price">150,000원</div>
+                                    <span th:text="${row.insertTime}" class="time">2일 전</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div th:unless="${not #lists.isEmpty(boardList)}">
+                        <div> 조회된 결과가 없습니다.</div>
+                    </div>
+                </div>
+            </div>
         </div>
+            <div th:replace="fragments/pagination :: search-pagination"></div>
     </main>
     <footer>
         <p class="test">13916 경기도 안양시 동안구 임곡로 29 대림대학교 | 대표 김태양: 031-1111-2222 | 팩스 : 031-3333-4444</p>
         <p class="test">© 2020 BY Daelim University College. ALL RIGHTS RESERVED</p>
     </footer>
+    <script src="/scripts/search/search.js"></script>
+    <script th:inline="javascript">
+			/*<![CDATA[*/
+			function movePage(uri, queryString) {
+				location.href = uri + queryString;
+			}
+			/*]]>*/
+	</script>
 </body>
 </html>

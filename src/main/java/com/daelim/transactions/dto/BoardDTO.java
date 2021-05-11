@@ -9,9 +9,8 @@ import java.time.LocalDateTime;
 
 @Setter
 @Getter
-@Builder
 @AllArgsConstructor
-public class BoardDTO {
+public class BoardDTO extends CommonDTO {
     //게시글 번호
     private int boardIdx;
 
@@ -30,14 +29,7 @@ public class BoardDTO {
     //내용
     private String contents;
 
-    //삭제 여부
-    private String deleteYn;
 
-    //입력 시간
-    private LocalDateTime insertTime;
-
-    //삭제 시간
-    private LocalDateTime  deleteTime;
 
     public BoardDTO(){
 

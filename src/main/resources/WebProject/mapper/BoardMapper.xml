@@ -48,6 +48,20 @@
             deleteYn = 'N'
     </select>
 
+    <select id="selectBoardTotalCount2" parameterType="hashmap" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            listboard
+        WHERE
+            deleteYn = 'N'
+            <if test="searchType == 1">
+                AND category = #{params.categoriesProduct}
+            </if>
+            <if test="searchType == 2">
+                AND title = #{params.categoriesProduct}
+            </if>
+    </select>
 
 <!-- interface에서 list로 리턴값을 두고 mybatis에서 객채를 리턴하면 알아서 리스트 안으로 들어가게 되어있다함   -->
 <!--파라미터로 넘어온 count는 main에 띄운 게시글의 마지막 idx값. 내림차순이므로 가장 작은 값-->
@@ -73,7 +87,7 @@
         ORDER BY
             boardIdx DESC
         LIMIT
-            4
+            8
     </select>
 
     <select id="selectBoardListById"  parameterType="String"  resultType="com.daelim.transactions.dto.BoardDTO">
@@ -105,6 +119,29 @@
             deleteYn = 'N'
         AND
             loginId = #{loginId}
+    </select>
+
+    <select id="selectBoardListCategory"  parameterType="com.daelim.transactions.dto.BoardDTO"  resultType="com.daelim.transactions.dto.BoardDTO">
+        SELECT
+            boardIdx,
+            loginId,
+            title,
+            price,
+            category,
+            contents,
+            deleteYn,
+            insertTime,
+            deleteTime
+        FROM
+            listboard
+        WHERE
+            deleteYn = 'N'
+        AND
+            category = #{categoriesProduct}
+        ORDER BY
+            boardIdx DESC
+        LIMIT
+            #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
     </select>
 
 </mapper>

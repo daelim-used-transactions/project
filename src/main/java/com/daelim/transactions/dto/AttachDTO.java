@@ -9,10 +9,8 @@ import java.time.LocalDateTime;
 
 @Setter
 @Getter
-@Builder
 @AllArgsConstructor
-
-public class AttachDTO {
+public class AttachDTO extends CommonDTO{
 
     /** 파일 번호 (PK) */
     private int idx;
@@ -25,15 +23,6 @@ public class AttachDTO {
 
     /** 파일 크기 */
     private long size;
-
-    /**삭제 여부 */
-    private String deleteYn;
-
-    /** 입력 시간 */
-    private LocalDateTime insertTime;
-
-    /**삭제 시간 */
-    private LocalDateTime  deleteTime;
 
     /**파일 카운트(갯수) 웹에서 사용해야함**/
     private int count;

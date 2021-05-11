@@ -6,7 +6,7 @@ searchValue.addEventListener('keydown', test);
 
 // 검색버튼 클릭 이벤트
 function searchClick(){
-        location.href="http://localhost:8080/search?product=" + searchValue.value.trim();
+        location.href="http://localhost:8080/search?searchKeyword=" + searchValue.value.trim();
 }
 
 //엔터키 이벤트.

@@ -2,6 +2,7 @@ package com.daelim.transactions.service;
 
 import com.daelim.transactions.dto.AttachDTO;
 import com.daelim.transactions.dto.BoardDTO;
+import com.daelim.transactions.dto.PaginationInfo;
 import com.daelim.transactions.mapper.DaoAttach;
 import com.daelim.transactions.mapper.DaoBoard;
 import com.daelim.transactions.utils.FileUtils;
@@ -13,7 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.Access;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service @RequiredArgsConstructor
 public class BoardServiceImpl implements BoardService {
@@ -23,6 +26,7 @@ public class BoardServiceImpl implements BoardService {
     private final FileUtils fileUtils;
 
     private final DaoAttach daoAttach;
+
 
     @Override
     public boolean registerBoard(BoardDTO board) {
@@ -77,6 +81,7 @@ public class BoardServiceImpl implements BoardService {
         return boardList;
     }
 
+
     @Override
     public List<BoardDTO> getBoardList(String loginId) {
         List<BoardDTO> boardList = Collections.emptyList();
@@ -117,6 +122,31 @@ public class BoardServiceImpl implements BoardService {
         return attachList;
     }
 
+    @Override
+    public List<BoardDTO> getSearchBoardList(BoardDTO params) {
 
-}
+        return null;
+    }
+
+    @Override
+    public List<BoardDTO> getCategoryBoardList(BoardDTO params) {
+
+        List<BoardDTO> boardList = Collections.emptyList();
+        Map<String, Object> map = new HashMap<>();
+        map.put("params", params);
+        map.put("searchType", 1);
+        int boardTotalCount = daoBoard.selectBoardTotalCount2(map);
+        System.out.println("카테고리에 해당하는 수 : " + boardTotalCount);
+        PaginationInfo paginationInfo = new PaginationInfo(params);
+        paginationInfo.setTotalRecordCount(boardTotalCount);
+
+        params.setPaginationInfo(paginationInfo);
+        if (boardTotalCount > 0) {
+            boardList = daoBoard.selectBoardListCategory(params);
+        }
+
+        return boardList;
+    }
+
+}//end class
 

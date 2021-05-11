@@ -24,4 +24,7 @@ public interface BoardService {
      * */
     public List<AttachDTO> getAttachList(List<BoardDTO> boardList);
     public List<BoardDTO> getBoardList(int count);
+
+    public List<BoardDTO> getSearchBoardList(BoardDTO params);
+    public List<BoardDTO> getCategoryBoardList(BoardDTO params);
 }
