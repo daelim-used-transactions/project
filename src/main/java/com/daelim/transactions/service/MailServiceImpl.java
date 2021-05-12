@@ -49,7 +49,7 @@ public class MailServiceImpl implements MailService{
 
         MailHandler mailHandler;
         RandomPassword randomPassword = new RandomPassword();
-        String senderAdr = "sksrpf1126@gmail.com"; // ???
+        String senderAdr = "explore2012121@gmail.com"; // ???
         String AuthenticationNumber = randomPassword.getRandom(6);;
         try{
             mailHandler = new MailHandler(mailSender);

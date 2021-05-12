@@ -1,64 +1,66 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>forSale</title>
+     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/forSale.css" media="(min-width:600px)">
+    <meta name="viewport" content="initial-scale=0.8" />
+    <script src="https://kit.fontawesome.com/7725a9a983.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 </head>
 <body>
-<div id="page">
-
+<header th:replace="fragments/header :: main-header"> </header>
+<nav th:replace="fragments/nav :: main-nav"> </nav>
+<div id="page" >
     <div class="forSalePage">
         <div class="pdHead">
             <div class="countbox">
                 <div class="count">
                     <div class="viewCount">
-                        <img src="#" alt="#">
-                        조회수 25 |
+                        조회수 25
                     </div>
                     <div class="likeCount">
-                        <img src="#" alt="#">
-                        찜 4 |
+                        <img src="/images/buyList/forsale/free-icon-like-126473.png" alt="#">
+                        찜 4
                     </div>
                     <div class="commentCount">
-                        <img src="#" alt="#">
+                        <img src="/images/buyList/forsale/speech-bubble.png" alt="#">
                         댓글 9
                     </div>
                 </div>
-                <div class="uplDate">
+                <div class="uplDate" >
                     작성일&nbsp;
-                    <small>
+                    <small th:text="${board.insertTime}">
                         2017-02-20 13:52
                     </small>
                 </div>
             </div>
         </div>
-        <div class="product">
+        <div class="pdDetail">
             <div class="pdView">
-                <div class="photo">
-                    <img src="product1.png" alt="#">
+                <div class="slider">
+                    <div><img class="img_size" src="/images/buyList/forsale/product1.png" alt=""></div>
+                    <div><img class="img_size" src="/images/buyList/forsale/product1.png" alt=""></div>
                 </div>
             </div>
-            <div class="content" th:object="${board}">
+            <div class="content">
                 <div class="title">
                     <div class="pdName">
-                        <h2>
-                            <label th:text=*{title} for="pdName">랄로</label>
-                        </h2>
+                        <h2 th:text=${board.title}></h2>
                     </div>
-                    <button type="button" class="report">
-                        <img src="report1.png" alt="report">
-                        <img src="report.png" alt="report">
-                    </button>
+                    <form action="http://www.naver.com">
+                        <button type="submit" class="report">
+                            <img src="/images/buyList/forsale/report.png" alt="report">
+                        </button>
+                    </form>
                 </div>
                 <div class="price">
-                    <h2>
-                        <label for="price">1비트</label>
-                    </h2>
+                    <h2 th:text=${board.category}></h2>
                 </div>
-                <div id="explain" >
-                    <div th:text="*{contents}"></div>
-                </div>
+                <div class id="explain" th:text=${board.contents}></div>
             </div>
         </div>
     </div>
@@ -71,31 +73,63 @@
             </div>
             <span class="comSpace">
                     <input class="comset" type="text" id="comment" name="comment" maxlength="200"
-                             placeholder="상품문의 입력">
+                           placeholder="상품문의 입력">
                     <button type="button" >등록</button>
                 </span>
         </div>
         <div class="userinfo">
             <div>
-                <h2>
-                    <label>유저 정보</label>
-                </h2>
+                <h2>유저 정보</h2>
             </div>
             <div>
                 <div class="selfie">
-                    <img src="#" alt="#">
+                    <img src="/images/buyList/forsale/Gender_Neutral_User_icon-icons.com_55902.png" alt="#">
                 </div>
                 <div class ="userinfobox">
-                    <h3>
-                        <label>PAKA</label>
-                    </h3>
+                    <h3 th:text="${board.loginId}">PAKA</h3>
                 </div>
             </div>
         </div>
     </div>
     <div class="relpd"></div>
-    <footer>
-    </footer>
 </div>
+<footer>
+    <p class="test">13916 경기도 안양시 동안구 임곡로 29 대림대학교 | 대표 김태양: 031-1111-2222 | 팩스 : 031-3333-4444</p>
+    <p class="test">© 2020 BY Daelim University College. ALL RIGHTS RESERVED</p>
+</footer>
+<script>
+         let prev = document.querySelector('.bx-prev');
+        let next = document.querySelector('.bx-next');
+        $(document).ready(function(){
+          $('.slider').bxSlider({
+           auto:true,
+           speed:500,
+           pause:4000,
+           mode:'fade',
+           pager:false
+          });
+
+          $('.bx-viewport').mouseenter(function(){
+            $('.bx-prev').css('display','inline-block');
+            $('.bx-next').css('display','inline-block');
+          })
+          $('.bx-viewport').mouseleave(function(){
+            $('.bx-prev').css('display','none');
+            $('.bx-next').css('display','none');
+          })
+
+
+          $('.bx-next').mouseover(function(){
+            $('.bx-next').css('display','inline-block');
+            $('.bx-prev').css('display','inline-block');
+
+          });
+          $('.bx-prev').mouseover(function(){
+            $('.bx-prev').css('display','inline-block');
+            $('.bx-next').css('display','inline-block');
+
+          });
+        });
+    </script>
 </body>
 </html>
