@@ -12,6 +12,6 @@ function searchClick(){
 //엔터키 이벤트.
 function test(e){
     if(e.keyCode === 13){
-            location.href="http://localhost:8080/search?product=" + searchValue.value.trim();
+            location.href="http://localhost:8080/search?searchKeyword=" + searchValue.value.trim();
     }
 }

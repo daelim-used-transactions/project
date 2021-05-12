@@ -94,9 +94,13 @@ public class MainController {
      * @return html 파일
      */
     @GetMapping(value = "/search")
-    public String searchProduct(@ModelAttribute("params")BoardDTO params){
+    public String searchProduct(@ModelAttribute("params")BoardDTO params, Model model){
         System.out.println("검색 값 : " +params.getSearchKeyword());
-        System.out.println("현재페이지 값 : " +params.getCurrentPageNo());
+        List<BoardDTO> boardList = boardService.getSearchBoardList(params);
+        List<AttachDTO> attachList = boardService.getAttachList(boardList);
+        model.addAttribute("boardList", boardList);
+        model.addAttribute("attachList", attachList);
+        model.addAttribute("searchType", 2);
         return "/search";
     }
 
@@ -112,6 +116,7 @@ public class MainController {
         List<AttachDTO> attachList = boardService.getAttachList(boardList);
         model.addAttribute("boardList", boardList);
         model.addAttribute("attachList", attachList);
+        model.addAttribute("searchType", 1);
         return "/search";
     }
 

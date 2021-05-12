@@ -59,7 +59,7 @@
                 AND category = #{params.categoriesProduct}
             </if>
             <if test="searchType == 2">
-                AND title = #{params.categoriesProduct}
+                AND title LIKE CONCAT('%', #{params.searchKeyword}, '%')
             </if>
     </select>
 
@@ -121,6 +121,29 @@
             loginId = #{loginId}
     </select>
 
+    <select id="selectBoardListSearch"  parameterType="com.daelim.transactions.dto.BoardDTO"  resultType="com.daelim.transactions.dto.BoardDTO">
+        SELECT
+            boardIdx,
+            loginId,
+            title,
+            price,
+            category,
+            contents,
+            deleteYn,
+            insertTime,
+            deleteTime
+        FROM
+            listboard
+        WHERE
+            deleteYn = 'N'
+        AND
+            title LIKE CONCAT('%', #{searchKeyword}, '%')
+        ORDER BY
+            boardIdx DESC
+        LIMIT
+            #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
+    </select>
+
     <select id="selectBoardListCategory"  parameterType="com.daelim.transactions.dto.BoardDTO"  resultType="com.daelim.transactions.dto.BoardDTO">
         SELECT
             boardIdx,
@@ -143,5 +166,6 @@
         LIMIT
             #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
     </select>
+
 
 </mapper>
