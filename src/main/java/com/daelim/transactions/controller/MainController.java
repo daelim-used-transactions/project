@@ -9,16 +9,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -31,35 +29,17 @@ public class MainController {
     BoardService boardService;
 
     @GetMapping(value = "/main")
-    public String goMain(Model model, HttpServletRequest request) throws UnsupportedEncodingException {
-
-        System.out.println("여기는 메인인데요");
+    public String goMain(Model model) {
         List<BoardDTO> boardList = boardService.getBoardList();
         List<AttachDTO> attachList = boardService.getAttachList();
-        List<String> cookieList = null;
-        String cookieStr ="";
-        String idxId = (String)request.getSession().getAttribute("idxId");
-        Cookie[] cookie = request.getCookies();
-        if(cookie != null){
-            for (Cookie cc:cookie) {
-                if(cc.getName().equals(idxId)){
-                    cookieStr = URLDecoder.decode(cc.getValue(),"utf-8");
-                }
-            }
-            System.out.println("안녕 "+ cookieStr);
-            cookieList = Arrays.asList(cookieStr.split(","));
-        }
-        System.out.println(cookieList);
-
         model.addAttribute("boardList", boardList);
         model.addAttribute("attachList", attachList);
-        model.addAttribute("cookieList",cookieList);
         return "main";
     }
 
 
     @GetMapping(value = "/main/myPage.do")
-    public String toMyPage(HttpServletRequest request, Model model, HttpServletResponse response) {
+    public String toMyPage(HttpServletRequest request, Model model) {
         MemberDTO member = (MemberDTO) request.getSession().getAttribute("member");
 
         List<BoardDTO> boardList = boardService.getBoardList(member.getLoginId());

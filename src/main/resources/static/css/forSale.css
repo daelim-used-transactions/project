@@ -1,24 +1,14 @@
-*{
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-}
+*{margin: 0px; padding: 0px;}
 ul{list-style: none;} /* 리스트 앞에 . 같은거 제거*/
 a{text-decoration: none;} /* 링크에 밑줄 같은거 제거*/
 
-html, body{
-    padding:  0px;
-    margin:  0px;
-    /* font-family: Dotum,'돋움', Helvetica, "Apple SD Gothic Neo" ,sans-serif; */
-}
-
 header{
-    padding: 9px 0 4px 0;
-        background-color:#6495ED;
+    width: 1000px; /*메인 이미지의 너비 사이즈와 같음*/
+    height: 95px;
+    background-color: #154e99;
+    padding: 10px;
+    position: relative;
 }
-
-/* 전체 페이지가 가운데로 오도록 */
-#page{width: 1024px; margin: 0px auto;}
 
 /* 제목영역안에 있는 메인 로고 이미지 위치 지정 */
 #logo{
@@ -41,29 +31,26 @@ header{
 
 /* 헤더 영역안에 네비게이션 메뉴 배치 */
 nav{
-    display: inline-block;
-    position: sticky;
-    width: 100%;
-    height: 50px;
-    padding-top: 10px;
-    text-align: center;
-    z-index: 20;
-    top:0;
-    background-color: white;
-    border-bottom: 1px solid lightgray;
+    position: absolute;
+    bottom: 10px;
+    left: 220px;
+    font-size: 16px;
 }
 
+nav li{
+    display: inline;
+    margin-left: 30px;
+}
 
+nav li a{color: white;}
 
 .forSalePage{
     padding: 10px;
     overflow: hidden;
 }
-.pdDetail{
+.product{
     min-height: 245px;
     padding: 5px;
-    display: flex;
-    flex-direction: row;
 }
 .pdView{
     float:left;
@@ -98,21 +85,10 @@ nav{
     text-align: center;
     margin-right : 10px;
 }
-
-.likeCount > img{
-    width: 20px;
-    margin-top: 2px;
-    height: 20px;
-}
 .commentCount{
     display: flex;
     text-align: center;
     margin-right : 10px;
-}
-.commentCount > img{
-    width: 20px;
-    margin-top: 2px;
-    height: 20px;
 }
 .uplDate{
     display: flex;
@@ -124,7 +100,6 @@ nav{
     padding: 10px;
     padding-left: 15px;
     overflow: hidden;
-    width: 577px;
 }
 .other{
     display: inline-flex;
@@ -142,19 +117,13 @@ nav{
     justify-content : space-between;
     display: flex;
 }
-.report{
+.title>button{
     float: right;
     margin: 0px;
     overflow: hidden;
     flex-direction: row;
-    border: none;
+
     display: flex;
-}
-.selfie > img{
-    width: 104px;
-    height: 104px;
-    border: 1px solid black;
-    border-radius: 104px;
 }
 .price{
     padding-bottom: 10px;
@@ -186,7 +155,7 @@ nav{
 }
 .comSpace>button{
     position: absolute;
-    left: 92%;
+    left: 90%;
     top: 8%;
     border: none;
     padding: 10px;
@@ -199,7 +168,7 @@ nav{
     display: inline-block;
 }
 .userinfo{
-    margin: 43px;
+    margin: 20px;
     padding : 20px;
     text-align: center;
 }
@@ -207,15 +176,24 @@ nav{
     text-align: center;
 }
 
-.pdHead{
-    margin-bottom: 10px;
+/* 콘텐츠 영역의 알래에 있는 배너 이미지 inline으로
+#content li{
+    display: inline;
+    margin-left: 50px;
 }
-.img_size{
-    width: 400px;
-    height: 300px;
-}
-.bx-wrapper {
-width: 400px;
+*/
+
+/* footer 영역 */
+footer{ /*헤더와 같은 사이즈*/
+    /*
+    width: 1000px;
+    height: 90px;
+    margin-top: 20px;
+    text-align: center;
+    background-color: #f1f1f1;
+    position: relative;
+    */
 }
 
-
+/* 전체 페이지가 가운데로 오도록 */
+#page{width: 1020px; margin: 0px auto;}
