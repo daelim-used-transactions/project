@@ -1,7 +1,10 @@
 package com.daelim.transactions.configuration;
 
 import com.daelim.transactions.interceptor.LoginInterceptor;
+import org.apache.tomcat.util.http.LegacyCookieProcessor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
+import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.MultipartResolver;
@@ -51,6 +54,7 @@ public class MvcConfiguration implements WebMvcConfigurer {
         registry.addInterceptor(loginInterceptor)
                 .addPathPatterns("/*/*.do");
     }
+
 }
 
 

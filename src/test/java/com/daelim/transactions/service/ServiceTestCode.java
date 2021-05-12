@@ -3,6 +3,7 @@ package com.daelim.transactions.service;
 import com.daelim.transactions.configuration.MvcConfiguration;
 import com.daelim.transactions.dto.AttachDTO;
 import com.daelim.transactions.dto.BoardDTO;
+import com.daelim.transactions.dto.BuyBoardDTO;
 import com.daelim.transactions.dto.MemberDTO;
 import com.daelim.transactions.mapper.DaoAttach;
 import com.daelim.transactions.mapper.DaoBoard;
@@ -15,6 +16,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @SpringBootTest
@@ -34,6 +36,10 @@ public class ServiceTestCode {
 
     @Autowired
     DaoAttach daoAttach;
+
+    @Autowired
+    BuyBoardService buyBoardService;
+
     @Autowired
     BoardService boardService;
 
@@ -158,5 +164,18 @@ public class ServiceTestCode {
 
         }
 
+    }
+
+
+    @Test
+    public void insertBoard(){
+        BuyBoardDTO buyBoardDTO = new BuyBoardDTO();
+        buyBoardDTO.setLoginId("rlaxodid123");
+        buyBoardDTO.setCategory("애완3");
+        buyBoardDTO.setContents("애완3");
+        buyBoardDTO.setTitle("강아지 분양3");
+        buyBoardDTO.setInsertTime(LocalDateTime.now());
+
+        buyBoardService.registerBoard(buyBoardDTO);
     }
 }

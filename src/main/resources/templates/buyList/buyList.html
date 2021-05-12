@@ -5,7 +5,7 @@
     <title>대림장터 메인홈페이지</title>
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/buyList.css">
-    <meta name="viewport" content="initial-scale=0.8;" />
+    <meta name="viewport" content="initial-scale=0.8"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 
     <script src="https://kit.fontawesome.com/7725a9a983.js" crossorigin="anonymous"></script>
@@ -38,10 +38,12 @@
             <div><img class="img_size" src="/images/main/gd.jpg" alt=""></div>
             <div><img class="img_size" src="/images/main/dz.jpg" alt=""></div>
         </div>
-        <span><h2 class="inline-block">구해요 리스트</h2></span><span class="write"> <a href="/main/buylist.do"><button>글쓰기</button></a></span>
+        <span><h2 class="inline-block">구해요 리스트</h2></span>
+        <span class="write"> <a href="/main/buylist.do"><button>글쓰기</button></a></span>
+
         <div class="product">
             <div th:if="${not #lists.isEmpty(boardList)}" th:each="row: ${boardList}" class="product-list">
-                <a class="a_wrap" th:href="@{/main/buyList/view( idx=${row.boardIdx} )}">
+                <a class="a_wrap" th:href="@{/main/buyList/view(idx=${row.boardIdx})}">
                     <div class="list-wrap">
                     <div  class="product-img" >
                         <div class="product-text">
@@ -60,10 +62,11 @@
                         </div>
                         <ul class="status"><li class="attach inline-block commonImg">1</li><li title="공감" class="vote inline-block commonImg">0</li><li title="댓글" class="comment inline-block commonImg">6</li></ul>
                     </div>
-                </div></a>
-                <div th:unless="${not #lists.isEmpty(boardList)}">
-                    <div> 조회된 결과가 없습니다.</div>
                 </div>
+                </a>
+            </div>
+            <div th:unless="${not #lists.isEmpty(boardList)}">
+                <div> 조회된 결과가 없습니다.</div>
             </div>
 
         </div><!--상품리스트 끝-->
