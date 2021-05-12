@@ -1,0 +1,27 @@
+.paging-div{
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.paging-div li{
+    list-style: none;
+    border: 1px solid rgb(222, 222, 222);
+    width: 35px;
+    display: flex;
+    justify-content: center;
+    height: 35px;
+    align-items: center;
+}
+
+.paging-div li a{
+    text-decoration: none;
+}
+
+.active{
+    background-color: blue;
+}
+
+.active a{
+    color : white;
+}

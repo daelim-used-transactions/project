@@ -125,7 +125,21 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public List<BoardDTO> getSearchBoardList(BoardDTO params) {
 
-        return null;
+        List<BoardDTO> boardList = Collections.emptyList();
+        Map<String, Object> map = new HashMap<>();
+        map.put("params", params);
+        map.put("searchType", 2);
+        int boardTotalCount = daoBoard.selectBoardTotalCount2(map);
+        System.out.println("검색값에 해당하는 수 : " + boardTotalCount);
+        PaginationInfo paginationInfo = new PaginationInfo(params);
+        paginationInfo.setTotalRecordCount(boardTotalCount);
+
+        params.setPaginationInfo(paginationInfo);
+        if (boardTotalCount > 0) {
+            boardList = daoBoard.selectBoardListSearch(params);
+        }
+
+        return boardList;
     }
 
     @Override
