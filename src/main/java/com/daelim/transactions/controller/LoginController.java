@@ -40,6 +40,7 @@ public class LoginController {
     public String loginTest(final MemberDTO memberDTO, HttpServletRequest hsr, RedirectAttributes rttr) throws NoSuchAlgorithmException {
         HttpSession session = hsr.getSession();
         MemberDTO member = serviceTest.getLogin(memberDTO);
+        System.out.println("프로필 뭐야 "+member.getProfile());
         if (member == null) {
             session.setAttribute("member", null);
             rttr.addFlashAttribute("msg", false);

@@ -1,6 +1,7 @@
 package com.daelim.transactions.mapper;
 
 import com.daelim.transactions.dto.BoardDTO;
+import com.daelim.transactions.dto.BuyBoardDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -39,4 +40,8 @@ public interface DaoBoard {
     public int selectBoardMemberCount(String loginId);
 
 
+    /**
+     *  상세페이지 가져오기
+     * */
+    public BoardDTO selectBoardDetail(Long idx);
 }

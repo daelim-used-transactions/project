@@ -167,5 +167,23 @@
             #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
     </select>
 
+    <select id="selectBoardDetail" parameterType="long" resultType="com.daelim.transactions.dto.BoardDTO">
+        SELECT
+            boardIdx,
+            loginId,
+            title,
+            price,
+            category,
+            contents,
+            deleteYn,
+            insertTime,
+            deleteTime
+        FROM
+            listboard
+        WHERE
+            deleteYn = 'N'
+        AND
+            boardIdx = #{boardIdx}
+    </select>
 
 </mapper>

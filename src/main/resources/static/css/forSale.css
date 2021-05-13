@@ -197,10 +197,11 @@ nav{
     border: none;
     height: 29px;
     display: inline-block;
+    background: white;
 }
 .userinfo{
-    margin: 43px;
-    padding : 20px;
+    width: 170px;
+    margin: 24px;
     text-align: center;
 }
 .userinfobox{
@@ -216,6 +217,34 @@ nav{
 }
 .bx-wrapper {
 width: 400px;
+margin-bottom: 30px;
 }
-
+.name{
+    float:left;
+    margin-right: 5px;
+}
+.time{
+    display: block;
+    float: right;
+     text-align: right;
+     width: 81%;
+}
+.desc{
+float: left;
+margin:10px;
+color:#888888;
+width:742px;
+}
+.relpd{
+    margin:10px;
+}
+.relpd li{
+position: relative;
+overflow: hidden;
+margin-bottom: 17px;
+}
+.btn{
+    float:left;
+    margin-top: 2px;
+}
 

@@ -14,90 +14,9 @@
 </head>
 <body>
 <header th:replace="fragments/header :: main-header"> </header>
-<!--    <header>-->
-<!--        <div class ="center-align">-->
-<!--            <div class ="inline-block">-->
-<!--                <img src ="/images/main/logowhite.png" alt ="대림장터 로고" />-->
-<!--            </div>-->
-<!--            <div class ="util-group inline-block" th:if="${session.member != null}">-->
-<!--                <span th:text="${session.member.getNickName()}"></span>-->
-<!--                <span> 님 안녕하세요</span>-->
-<!--                <a href="/main">HOME</a>-->
-<!--                <a href="/main/dlogout">| 로그아웃</a>-->
-<!--                <a th:href="@{/main/myPage.do}">| 마이페이지</a>-->
-<!--            </div>-->
-<!--            <div class ="util-group inline-block" th:if="${session.member==null}">-->
-<!--                <a href="/main">HOME</a>-->
-<!--                <a href="/login">| 로그인</a>-->
-<!--                <a th:href="@{/main/myPage.do}">| 마이페이지</a>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </header>-->
 <nav th:replace="fragments/nav :: main-nav"> </nav>
-<!--<nav>-->
-<!--    <div class ="center-align">-->
-<!--        <div class="flex-menu">-->
-<!--            <div class="menu-bar">-->
-<!--                <i class="fas fa-bars fa-lg"></i>-->
-<!--                <ul class="category">-->
-<!--                    <li>카테고리</li>-->
-<!--                    <a href="">여성의류</a>-->
-<!--                    <a href="">남성의류</a>-->
-<!--                    <a href="">패션잡화</a>-->
-<!--                    <a href="">디지털/가전</a>-->
-<!--                    <a href="">도서/티켓/취미</a>-->
-<!--                    <a href="">애완</a>-->
-<!--                    <a href="">스타굿즈</a>-->
-<!--                    <a href="">생활/식품</a>-->
-<!--                    <a href="">문구/가구</a>-->
-<!--                    <a href="">스포츠/레저</a>-->
-<!--                    <a href="">뷰티/미용</a>-->
-<!--                    <a href="">차량/오토바이</a>-->
-<!--                    <a href="">재능</a>-->
-<!--                    <a href="">나눔터</a>-->
-<!--                    <a href="">기타</a>-->
-<!--                </ul>-->
-<!--            </div>-->
-<!--            <div class="fieldset-block">-->
-<!--                <fieldset>-->
-<!--                    <input placeholder="검색할 상품을 입력해주세요"/>-->
-<!--                    <button>-->
-<!--                        <i class="fas fa-search"></i>-->
-<!--                    </button>-->
-<!--                </fieldset>-->
-<!--            </div>-->
-<!--            <div class="nav-util">-->
-<!--                <a href="/main/product.do" class="flex-a">-->
-<!--                    <img src="/images/main/sale.png" alt="팔아요"/>-->
-<!--                    <span class="sale-text">팔아요</span>-->
-<!--                </a>-->
-<!--                <a href="http://www.naver.com" class="flex-a">-->
-<!--                    <img src="/images/main/find.png" alt="구해요"/>-->
-<!--                    <span class>구해요</span>-->
-<!--                </a>-->
-<!--                <a href="http://www.naver.com" class="flex-a">-->
-<!--                    <i class="far fa-bell fa-lg bell"></i>-->
-<!--                    <span class="sale-text">알림</span>-->
-<!--                </a>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="div-fixed">-->
-<!--            <div class="div-fixed-one">-->
-<!--                <div class="fixed-text">찜한상품</div>-->
-<!--                <div><i class="fas fa-heart">0</i></div>-->
-<!--            </div>-->
-<!--            <div class="div-fixed-two">-->
-<!--                <div class="fixed-text">최근본상품</div>-->
-<!--                <div class="watch-count"></div>-->
-<!--            </div>-->
-<!--            <div class="div-fixed-three">-->
-<!--                <div>TOP</div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</nav>-->
-<main>
 
+<main>
     <div class="center-align">
         <div class="slider">
             <div><img class="img_size" src="/images/main/dz.jpg" alt=""></div>
@@ -109,31 +28,34 @@
         <h2>상품 리스트</h2>
         <div class="product">
             <div th:if="${not #lists.isEmpty(boardList)}" th:each="row: ${boardList}" class="product-list">
-                <div class="product-wrap">
-                    <div  class="product-img">
-                        <div th:if="${not #lists.isEmpty(attachList) && row.boardIdx==img.boardIdx && img.count==1}" th:each="img: ${attachList}" class="product-img">
-                            <img th:src="@{${img.saveName}}" alt="남성지갑"/>
-    <!--          \images\board\210421            -->
-                        </div>
+                <a class="a_wrap" th:href="@{/main/saleList/view(idx=${row.boardIdx})}">
+                    <div class="product-wrap">
+                        <div  class="product-img">
+                            <div th:if="${not #lists.isEmpty(attachList) && row.boardIdx==img.boardIdx && img.count==1}" th:each="img: ${attachList}" class="product-img">
+                                <img th:src="@{${img.saveName}}" alt="남성지갑"/>
+        <!--          \images\board\210421            -->
+                            </div>
 
-                        <div class="product-text">
-                            <div th:text="${row.title}" class="product-content">남성 반지갑 팝니다ddddddddddddd</div>
-                            <div class="product-info">
-                                <div th:text="${row.price}" class="product-price">150,000원</div>
-                                <span th:text="${row.insertTime}" class="time">2일 전</span>
+                            <div class="product-text">
+                                <div th:text="${row.title}" class="product-content">남성 반지갑 팝니다ddddddddddddd</div>
+                                <div class="product-info">
+                                    <div th:text="${row.price}" class="product-price">150,000원</div>
+                                    <span th:text="${row.insertTime}" class="time">2일 전</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
                             <div th:unless="${not #lists.isEmpty(boardList)}">
                                 <div> 조회된 결과가 없습니다.</div>
                             </div>
             </div>
-
         </div><!--상품리스트 끝-->
+
         <div class="btn-area">
             <button id="btn" onclick="moreList();">더보기</button>
         </div>
+    </div>
     <!--main안의 중앙정렬 끝-->
 </main>
 <footer>
@@ -206,6 +128,7 @@
                         }
                         const product =  document.querySelector('.product');
                         const productList = document.createElement('div');
+
                         const productWrap = document.createElement('div');
                         const productImg = document.createElement('div');
                         const productImg2 = document.createElement('div');
@@ -231,6 +154,7 @@
                                 imgContents.setAttribute('src',file.saveName);
                             }
                         }
+
                         productContent.innerHTML = board.title;
                         productPrice.innerHTML = board.price;
                         time.innerHTML = board.insertTime;

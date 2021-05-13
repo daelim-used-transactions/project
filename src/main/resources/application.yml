@@ -14,6 +14,11 @@ spring:
       pool-name: sccPool
       auto-commit: false
 
+#html 컨버터를 Gson으로 설정
+  mvc:
+    converters:
+      preferred-json-mapper: gson
+
 #메일 의존성 주입
   mail:
     host: smtp.gmail.com

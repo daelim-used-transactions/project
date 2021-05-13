@@ -6,35 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>대림장터 | 로그인</title>
     <link rel="stylesheet" href="/css/login/login.css">
+    <link rel="stylesheet" href="/css/main.css" />
     <script src="/scripts/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <section class="login-form">
-            <h1><img src="/images/login/login_topLogo.png" alt="로고"></h1>
-            <form th:action="@{/main/dlogin}" th:object="${loginInfo}" method="post">
-                <div class="int-area">
-                    <input type="text" name="id" id="id"  th:field="*{loginId}"  required>
-                    <label for="id">USER NAME</label>
-                </div>
-                <div class="int-area">
-                    <input type="password" name="pass" id="pass" th:field="*{loginPw}"  required>
-                    <label for="pass">PASSWORD</label>
-                </div>
-                <div class="falseCheck" th:if="${flag==false}"></div>
+        <div class="container">
+            <section class="login-form">
+                <h1><a href="/main"><img src="/images/login/login_topLogo.png" alt="로고"></a></h1>
+                <form th:action="@{/main/dlogin}" th:object="${loginInfo}" method="post">
+                    <div class="int-area">
+                        <input type="text" name="id" id="id"  th:field="*{loginId}"  required>
+                        <label for="id">USER NAME</label>
+                    </div>
+                    <div class="int-area">
+                        <input type="password" name="pass" id="pass" th:field="*{loginPw}"  required>
+                        <label for="pass">PASSWORD</label>
+                    </div>
+                    <div class="falseCheck" th:if="${flag==false}"></div>
 
-                <div class="btn-area">
-                    <button id="btn"type="submit">LOGIN</button>
-                </div>
-            </form>
+                    <div class="btn-area">
+                        <button id="btn"type="submit">LOGIN</button>
+                    </div>
+                </form>
 
-            <div class="caption">
-                <a href="/login/findId">아이디 찾기 </a>|
-                <a href="/login/findPw"> 비밀번호 찾기 </a>|
-                <a href="/login/join"> 회원가입</a>
-            </div>
-        </section>
-    </div>
+                <div class="caption">
+                    <a href="/login/findId">아이디 찾기 </a>|
+                    <a href="/login/findPw"> 비밀번호 찾기 </a>|
+                    <a href="/login/join"> 회원가입</a>
+                </div>
+            </section>
+        </div>
 
 
     <script>

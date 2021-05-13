@@ -1,11 +1,17 @@
 package com.daelim.transactions.controller;
 
+import com.daelim.transactions.adapter.GsonLocalDateTimeAdapter;
 import com.daelim.transactions.dto.*;
 import com.daelim.transactions.service.BoardService;
 import com.daelim.transactions.service.ServiceTest;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,6 +24,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.*;
 
 
@@ -90,7 +97,13 @@ public class MainController {
         MemberDTO member = commonSession(request);
         System.out.println("member ="+member.getLoginId());
         boolean isChange = serviceTest.changProfile(member,file);
-
+        request.getSession().removeAttribute("member");
+        request.getSession().removeAttribute("memProfile");
+        request.getSession().removeAttribute("memNick");
+        request.getSession().setAttribute("member", member);
+        request.getSession().setAttribute("memProfile", member.getProfile());
+        request.getSession().setAttribute("memNick", member.getNickName());
+        request.getSession().setMaxInactiveInterval(60 * 30);
         return "redirect:/main/myPage.do";
     }
 
@@ -147,15 +160,37 @@ public class MainController {
         return "/search";
     }
 
+//    @PostMapping(value = "/mainPaging")
+////    @ResponseBody
+////    public Object mainBoardListControl(@RequestBody Map<String,Integer> param){
+////        Map<String, Object> map = new HashMap<>();
+////        List<BoardDTO> listMore = boardService.getBoardList(param.get("Idx"));
+////        List<AttachDTO> attachMore = boardService.getAttachList(listMore);
+////        map.put("listMore", listMore);
+////        map.put("attachMore", attachMore);
+////        return map;
+////    }
+
     @PostMapping(value = "/mainPaging")
     @ResponseBody
-    public Object mainBoardListControl(@RequestBody Map<String,Integer> param){
-        Map<String, Object> map = new HashMap<>();
-        List<BoardDTO> listMore = boardService.getBoardList(param.get("Idx"));
+    public Object mainBoardListControl(@RequestBody final BoardDTO param){
+        JsonObject jsonObj = new JsonObject();
+        System.out.println("뭐가 드가지 "+ param);
+        List<BoardDTO> listMore =  boardService.getBoardList(param.getBoardIdx());
         List<AttachDTO> attachMore = boardService.getAttachList(listMore);
-        map.put("listMore", listMore);
-        map.put("attachMore", attachMore);
-        return map;
+
+        if (CollectionUtils.isEmpty(listMore) == false) {
+            Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new GsonLocalDateTimeAdapter()).create();
+            JsonArray jsonArr = gson.toJsonTree(listMore).getAsJsonArray();
+            jsonObj.add("listMore", jsonArr);
+        }
+        if (CollectionUtils.isEmpty(attachMore) == false) {
+            Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new GsonLocalDateTimeAdapter()).create();
+            JsonArray jsonArr = gson.toJsonTree(attachMore).getAsJsonArray();
+            jsonObj.add("attachMore", jsonArr);
+        }
+
+        return jsonObj;
     }
 
     /**

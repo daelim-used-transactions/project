@@ -2,6 +2,7 @@ package com.daelim.transactions.service;
 
 import com.daelim.transactions.dto.AttachDTO;
 import com.daelim.transactions.dto.BoardDTO;
+import com.daelim.transactions.dto.BuyBoardDTO;
 import com.daelim.transactions.dto.PaginationInfo;
 import com.daelim.transactions.mapper.DaoAttach;
 import com.daelim.transactions.mapper.DaoBoard;
@@ -160,6 +161,15 @@ public class BoardServiceImpl implements BoardService {
         }
 
         return boardList;
+    }
+
+    /**
+     *  boardIdx에 맞는 글 가져오기
+     * */
+    @Override
+    public BoardDTO getBoardDetail(long idx) {
+
+        return daoBoard.selectBoardDetail(idx);
     }
 
 }//end class

@@ -84,8 +84,12 @@ public class BuyBoardController {
         Cookie[] cookie = request.getCookies();
         String idxId = (String) request.getSession().getAttribute("idxId");
         String str = (String) request.getSession().getAttribute("str");
+        MemberDTO member = (MemberDTO) request.getSession().getAttribute("member");
         String copyList ="";
 
+        if(member != null){
+            model.addAttribute("member", member);
+        }
         System.out.println("메인 세션 아이디 : "+idxId);
         if(cookie != null && idxId !=null ){
 

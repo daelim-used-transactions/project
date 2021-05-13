@@ -50,9 +50,16 @@
             deleteYn = 'N'
         AND
             boardIdx IN(
-                <foreach collection="list" item="item" separator=",">
-                    #{item.boardIdx}
-                </foreach>
+            <choose>
+                <when test="list.size != 0">
+                    <foreach collection="list" item="item" separator=",">
+                        #{item.boardIdx}
+                    </foreach>
+                </when>
+                <otherwise>
+                    0
+                </otherwise>
+            </choose>
             )
     </select>
 
@@ -87,9 +94,16 @@
             deleteYn = 'N'
         AND
             boardIdx IN (
-            <foreach collection="list" item="item" separator=",">
-                #{item.boardIdx}
-            </foreach>
+            <choose>
+                <when test="list.size != 0">
+                    <foreach collection="list" item="item" separator=",">
+                        #{item.boardIdx}
+                    </foreach>
+                </when>
+                <otherwise>
+                    0
+                </otherwise>
+            </choose>
         )
         ORDER BY
             boardIdx DESC

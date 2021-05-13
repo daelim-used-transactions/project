@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>forSale</title>
-     <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/main.css" />
 
     <meta name="viewport" content="initial-scale=0.8" />
     <script src="https://kit.fontawesome.com/7725a9a983.js" crossorigin="anonymous"></script>
@@ -60,7 +60,7 @@
                     </form>
                 </div>
                 <div class="price">
-                    <h2 th:text=${board.category}></h2>
+                    <h2 th:text=${board.price}></h2>
                 </div>
                 <div class id="explain" th:text=${board.contents}></div>
             </div>
@@ -93,19 +93,19 @@
                         <button type="button" th:onclick="js:insertComment([[${board.boardIdx}]])">등록</button>
                         <button type="button" class =""th:unless="${member !=null}">로그인 시 가능</button>
                     </span>
-                    <span class="comSpace" th:unless="${member != null}">
+                <span class="comSpace" th:unless="${member != null}">
                             <input class="comset" type="text"  name="comment" maxlength="200"
                                    disabled placeholder="로그인 시 이용 가능합니다.">
                             <button type="button">등록</button>
                     </span>
-                    <ul class="relpd">
-    <!--                    <li>-->
-    <!--                        <span class="name"> 김태양</span>-->
-    <!--                        <span class="time">ㅇㅁㄴㅇㄴㅁㅇㅁㄴ</span>-->
-    <!--                        <span class="desc">ㅇㅁㄴㅇㅇㅁㄴ</span>-->
-    <!--                        <button type="button" class="delBtn" aria-hidden="true">버튼</button>-->
-    <!--                    </li>-->
-                    </ul>
+                <ul class="relpd">
+                    <!--                    <li>-->
+                    <!--                        <span class="name"> 김태양</span>-->
+                    <!--                        <span class="time">ㅇㅁㄴㅇㄴㅁㅇㅁㄴ</span>-->
+                    <!--                        <span class="desc">ㅇㅁㄴㅇㅇㅁㄴ</span>-->
+                    <!--                        <button type="button" class="delBtn" aria-hidden="true">버튼</button>-->
+                    <!--                    </li>-->
+                </ul>
             </form>
         </div>
     </div>

@@ -2,6 +2,7 @@ package com.daelim.transactions.service;
 
 import com.daelim.transactions.dto.AttachDTO;
 import com.daelim.transactions.dto.BoardDTO;
+import com.daelim.transactions.dto.BuyBoardDTO;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -32,4 +33,10 @@ public interface BoardService {
      */
     public List<BoardDTO> getSearchBoardList(BoardDTO params);
     public List<BoardDTO> getCategoryBoardList(BoardDTO params);
+
+
+    /**
+     *  상세페이지 가져오기
+     * */
+    public BoardDTO getBoardDetail(long idx);
 }

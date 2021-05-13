@@ -7,6 +7,10 @@
     width: 1015px;
     height: 300px;
 }
+
+a:link { color:black; text-decoration: none;}
+a:visited { color:black; text-decoration: none;}
+a:hover { color:black; text-decoration: underline;}
 .bx-prev{
     display:none;
 }
