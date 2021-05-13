@@ -1,9 +1,6 @@
 package com.daelim.transactions.controller;
 
-import com.daelim.transactions.dto.AttachDTO;
-import com.daelim.transactions.dto.BoardDTO;
-import com.daelim.transactions.dto.BuyBoardDTO;
-import com.daelim.transactions.dto.MemberDTO;
+import com.daelim.transactions.dto.*;
 import com.daelim.transactions.service.BoardService;
 import com.daelim.transactions.service.BuyBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,18 +32,41 @@ public class BuyBoardController {
 
 
     @Autowired
+    MainController mainController;
+    @Autowired
     BuyBoardService buyBoardService;
 
-    @GetMapping(value="/main/buyList.do")
-    public String registerBoard(){
-        return "buyUpload";
+    /**
+     * @param board  -> 게시글 등록 form 태그로 전달되는 객체
+     * @RequestParam(value = "files") MultipartFile[] files -> 파일 저장을 위한 객체
+     */
+    @PostMapping(value="/main/buyUpload.do/register")
+    public String registerBoard(BuyBoardDTO board, @RequestParam(value = "files") MultipartFile[] files, HttpServletRequest request) {
+        MemberDTO member = mainController.commonSession(request);
+        board.setLoginId(member.getLoginId());
+        board.setInsertTime(LocalDateTime.now());
+        if(buyBoardService.registerBoard(board, files)){
+            //insert 성공
+        }else{
+            //실패
+        }
+
+        return "redirect:/main/buyList";
     }
+
+
+//    @GetMapping(value="/main/buyList.do")
+//    public String registerBoard(){
+//        return "buyUpload";
+//    }
 
 
     @GetMapping(value="/main/buyList")
     public String showBuyList( Model model){
-        List<BuyBoardDTO> boardList = buyBoardService.getAttachList();
+
+        List<BuyBoardDTO> boardList = buyBoardService.getAttachList( );
         System.out.println("여기는 구해요 게시판 인데요");
+
         model.addAttribute("boardList", boardList);
         return "buyList/buyList";
     }

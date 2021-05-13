@@ -101,7 +101,14 @@ public class MainController {
         return "/productUpload";
     }
 
-    @GetMapping(value="/main/buylist.do")
+    @GetMapping(value="main/buylist")
+    public String buyList(Model model){
+        BuyBoardDTO board = new BuyBoardDTO();
+        model.addAttribute("board",board);
+        return "/buyList";
+    }
+
+    @GetMapping(value="/main/buyUpload.do")
     public String buyUpload(Model model){
         BuyBoardDTO buyBoard = new BuyBoardDTO();
         model.addAttribute("buyBoard",buyBoard);

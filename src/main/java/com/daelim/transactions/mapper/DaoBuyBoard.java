@@ -19,10 +19,17 @@ public interface DaoBuyBoard {
 
     public int deleteBoard(int boardIdx);
 
-    public List<BuyBoardDTO> selectBoardList();
+    //메인 페이징
+    public List<BuyBoardDTO> selectBoardList(int count);
+
+    //검색 결과 반환
+    public List<BuyBoardDTO> selectBoardListSearch(BuyBoardDTO params);
+    //카테고리 반환
+    public List<BuyBoardDTO> selectBoardListCategory(BuyBoardDTO params);
 
     public int selectBoardTotalCount();
-
+    //1번째 : BuyBoardDTO parmas, 2번째 : searchType : 1이면 카테고리 2면 검색
+    public int selectBoardTotalCount2(Map<String,Object> map);
     public List<BuyBoardDTO> selectBoardListById(String loginId);
 
     public int selectBoardMemberCount(String loginId);

@@ -230,7 +230,7 @@
             <label for="id">구매 등록 정보</label>
             <span class="spanNeed">*필수항목</span>
         </h2>
-        <form th:action="@{/main/buylist.do/register}" method="post" th:object="${buyBoard}" onsubmit="return checkIt()" enctype="multipart/form-data">
+        <form th:action="@{/main/buyUpload.do/register}" method="post" th:object="${buyBoard}" onsubmit="return checkIt()" enctype="multipart/form-data">
             <div class="spanName">
                 제목
                 <span class="spanNeed">*</span>
@@ -317,18 +317,7 @@
 <script>
     let nFiles = 0;
     let fileIdx = 0; /*[- 파일 인덱스 처리용 전역 변수 -]*/
-    let price = document.querySelector('#price');
-    let priceValue = price.value;
-    console.log(priceValue);
 
-    price.addEventListener('keyup',function(){
-        priceValue = price.value;
-        priceValue = priceValue.replace(/[^0-9]/g,"");
-        <!--숫자가 아닌 것이 들어오면 공백으로 바꾸는 정규식        -->
-        priceValue = priceValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        <!--      3단위마다 , 처리하는 정규식         -->
-        price.value = priceValue;
-    });
 
     function preview(e){
         let reader = new FileReader();
@@ -435,3 +424,5 @@ function changeFilename(file) {
 
 
 </script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.daelim.transactions.mapper.DaoIttach">
+    <sql id="ittachColumns">
+        ittachIdx
+        , boardIdx
+        , saveName
+        , size
+        , deleteYn
+        , insertTime
+        , deleteTime
+        , count
+    </sql>
+
+    <insert id="insertIttach" parameterType="list">
+        INSERT INTO ittach (
+        <include refid="ittachColumns" />
+        ) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.idx}
+            , #{item.boardIdx}
+            , #{item.saveName}
+            , #{item.size}
+            , 'N'
+            , NOW()
+            , NULL
+            , #{item.count}
+            )
+        </foreach>
+    </insert>
+
+    <select id="selectIttachTotalCount" parameterType="com.daelim.transactions.dto.IttachDTO" resultType="int">
+        SELECT
+        COUNT(*)
+        FROM
+        ittach
+        WHERE
+        deleteYn = 'N'
+    </select>
+
+
+    <select id="selectIttachIdxCount" parameterType="list" resultType="int">
+        SELECT
+        COUNT(*)
+        FROM
+        ittach
+        WHERE
+        deleteYn = 'N'
+        AND
+        boardIdx IN(
+        <foreach collection="list" item="item" separator=",">
+            #{item.boardIdx}
+        </foreach>
+        )
+    </select>
+
+    <select id="selectIttachOneCount" parameterType="int" resultType="int">
+        SELECT
+        COUNT(*)
+        FROM
+        ittach
+        WHERE
+        deleteYn = 'N'
+        AND
+        boardIdx =#{boardIdx}
+    </select>
+
+    <select id="selectIttachList"  parameterType="com.daelim.transactions.dto.IttachDTO"  resultType="com.daelim.transactions.dto.IttachDTO">
+        SELECT
+        <include refid="ittachColumns" />
+        FROM
+        ittach
+        WHERE
+        deleteYn = 'N'
+        ORDER BY
+        boardIdx DESC
+    </select>
+
+    <select id="selectIttachListByBoardIdx"  parameterType="list"  resultType="com.daelim.transactions.dto.IttachDTO">
+        SELECT
+        <include refid="ittachColumns" />
+        FROM
+        ittach
+        WHERE
+        deleteYn = 'N'
+        AND
+        boardIdx IN (
+        <foreach collection="list" item="item" separator=",">
+            #{item.boardIdx}
+        </foreach>
+        )
+        ORDER BY
+        boardIdx DESC
+    </select>
+
+    <select id="selectIttachOne"  parameterType="int"  resultType="com.daelim.transactions.dto.IttachDTO">
+        SELECT
+        <include refid="ittachColumns" />
+        FROM
+        ittach
+        WHERE
+        deleteYn = 'N'
+        AND
+        boardIdx= #{boardIdx}
+        AND
+        count = #{count}
+    </select>
+
+</mapper>
