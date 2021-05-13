@@ -27,6 +27,7 @@ public class BuyBoardDTO extends CommonDTO {
     private String contents;
 
 
+    private String views;
     public BuyBoardDTO(){
 
     }

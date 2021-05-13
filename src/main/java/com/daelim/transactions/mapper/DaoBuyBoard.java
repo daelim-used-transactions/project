@@ -2,6 +2,7 @@ package com.daelim.transactions.mapper;
 
 import com.daelim.transactions.dto.BoardDTO;
 import com.daelim.transactions.dto.BuyBoardDTO;
+import com.daelim.transactions.dto.BuyLikeDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.ArrayList;
@@ -33,6 +34,12 @@ public interface DaoBuyBoard {
     public List<BuyBoardDTO> selectBoardListById(String loginId);
 
     public int selectBoardMemberCount(String loginId);
+
+    public void updateBoardViews(long boardIdx);
+
+    public void insertBuyLike(BuyLikeDTO param);
+    public void deleteBuyLike(long idx);
+    public BuyLikeDTO selectBuyLike(long idx);
 
 
     /**

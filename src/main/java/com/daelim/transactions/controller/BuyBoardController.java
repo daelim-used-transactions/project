@@ -8,10 +8,7 @@ import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
 
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Cookie;
@@ -20,10 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import static java.util.Arrays.asList;
 
@@ -64,7 +58,7 @@ public class BuyBoardController {
     @GetMapping(value="/main/buyList")
     public String showBuyList( Model model){
 
-        List<BuyBoardDTO> boardList = buyBoardService.getBoardList( );
+        List<BuyBoardDTO> boardList = buyBoardService.getBoardList();
         System.out.println("여기는 구해요 게시판 인데요");
 
         model.addAttribute("boardList", boardList);
@@ -76,7 +70,9 @@ public class BuyBoardController {
         if (idx == null) {
             return "redirect:/main/buyList";
         }
+        buyBoardService.addBoardViews(idx);
         BuyBoardDTO buyBoard = buyBoardService.getBoardDetail(idx);
+        boolean likeCheck = false;
         if (buyBoard == null || "Y".equals(buyBoard.getDeleteYn())) {
             return "redirect:/main/buyList";
         }
@@ -86,6 +82,10 @@ public class BuyBoardController {
         String str = (String) request.getSession().getAttribute("str");
         MemberDTO member = (MemberDTO) request.getSession().getAttribute("member");
         String copyList ="";
+
+        if(member != null && buyBoardService.getBuyLikes(idx)){
+            likeCheck = true;
+        }
 
         if(member != null){
             model.addAttribute("member", member);
@@ -122,6 +122,31 @@ public class BuyBoardController {
     }
         System.out.println("여기는 상세페이지요");
         model.addAttribute("board", buyBoard);
+        model.addAttribute("likeCheck", likeCheck);
         return "buyList/forSale";
     }
+
+    @PostMapping(value ="/buyLikeAjax")
+    @ResponseBody
+    public Object buyLikeAjaxTest(@RequestBody Map<String,Object> param){//Stirng,Object로 해도 되네
+        String nickNameCheck = null;
+        System.out.println(param.get("sessionId") +"굿굿" + param.get("idx"));
+        BuyLikeDTO buyLike = new BuyLikeDTO();
+        buyLike.setLoginId((String) param.get("sessionId"));
+        buyLike.setBoardIdx((Integer) param.get("idx"));
+        buyBoardService.addBuyLikes(buyLike);
+
+        return null;
+    }
+
+    @PostMapping(value ="/buyLikeCancel")
+    @ResponseBody
+    public Object buyLikeAjaxCancel(@RequestBody Map<String,Object> param){//Stirng,Object로 해도 되네
+        String nickNameCheck = null;
+        System.out.println("굿굿" + param.get("idx"));
+        buyBoardService.removeBuyLikes((Integer) param.get("idx"));
+
+        return null;
+    }
+
 }

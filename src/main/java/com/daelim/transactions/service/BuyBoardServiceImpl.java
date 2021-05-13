@@ -2,6 +2,10 @@ package com.daelim.transactions.service;
 
 import ch.qos.logback.core.net.SyslogOutputStream;
 import com.daelim.transactions.dto.*;
+import com.daelim.transactions.dto.AttachDTO;
+import com.daelim.transactions.dto.BoardDTO;
+import com.daelim.transactions.dto.BuyBoardDTO;
+import com.daelim.transactions.dto.BuyLikeDTO;
 import com.daelim.transactions.mapper.DaoAttach;
 import com.daelim.transactions.mapper.DaoBoard;
 import com.daelim.transactions.mapper.DaoBuyBoard;
@@ -168,6 +172,26 @@ public class BuyBoardServiceImpl implements BuyBoardService {
 
     ;
 
+
+    @Override
+    public void addBoardViews(long idx) {
+        daoBuyBoard.updateBoardViews(idx);
+    }
+
+    @Override
+    public void addBuyLikes(BuyLikeDTO param) {
+        daoBuyBoard.insertBuyLike(param);
+    }
+
+    @Override
+    public void removeBuyLikes(long idx) {
+        daoBuyBoard.deleteBuyLike(idx);
+    }
+
+    @Override
+    public boolean getBuyLikes(long idx) {
+        return (daoBuyBoard.selectBuyLike(idx) != null);
+    }
 
 
 }

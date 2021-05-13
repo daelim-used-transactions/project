@@ -173,10 +173,10 @@ public class MainController {
 
     @PostMapping(value = "/mainPaging")
     @ResponseBody
-    public Object mainBoardListControl(@RequestBody final BoardDTO param){
+    public Object mainBoardListControl(@RequestBody Map<String,Integer> param){
         JsonObject jsonObj = new JsonObject();
-        System.out.println("뭐가 드가지 "+ param);
-        List<BoardDTO> listMore =  boardService.getBoardList(param.getBoardIdx());
+        System.out.println("뭐가 드가지 "+ param.get("Idx"));
+        List<BoardDTO> listMore =  boardService.getBoardList(param.get("Idx"));
         List<AttachDTO> attachMore = boardService.getAttachList(listMore);
 
         if (CollectionUtils.isEmpty(listMore) == false) {

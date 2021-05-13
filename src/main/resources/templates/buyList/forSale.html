@@ -22,10 +22,12 @@
             <div class="countbox">
                 <div class="count">
                     <div class="viewCount">
-                        조회수 25
+                        조회수&nbsp;
+                        <p class="views" th:text=${board.views}></p>
                     </div>
                     <div class="likeCount">
-                        <img src="/images/buyList/forsale/free-icon-like-126473.png" alt="#">
+                        <img th:if="*{likeCheck == true}" src="/images/buyList/forsale/heart2.png" alt="#" class="heart">
+                        <img th:unless="*{likeCheck == true}" src="/images/buyList/forsale/heart1.png" alt="#" class="heart">
                         찜 4
                     </div>
                     <div class="commentCount">
@@ -114,6 +116,65 @@
     <p class="test">13916 경기도 안양시 동안구 임곡로 29 대림대학교 | 대표 김태양: 031-1111-2222 | 팩스 : 031-3333-4444</p>
     <p class="test">© 2020 BY Daelim University College. ALL RIGHTS RESERVED</p>
 </footer>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+        document.querySelector('.likeCount').addEventListener('click', (e)=>{
+            let session =  /*[[ ${session.member} ]]*/;
+            let boardIdx = /*[[ ${board.boardIdx} ]]*/;
+            if(session){
+                console.log(document.querySelector('.heart').src);
+                if(document.querySelector('.heart').src === "http://localhost:8080/images/buyList/forsale/heart1.png"){
+                    alert('찜을 하셨습니다.');
+                    document.querySelector('.heart').src ="/images/buyList/forsale/heart2.png";
+                    let jsontest = {
+                        sessionId : session.loginId,
+                        idx : boardIdx,
+                    };
+                    $.ajax({
+                        url : '/buyLikeAjax',
+                        type : 'POST',
+                        data : JSON.stringify(jsontest),
+                        dataType : 'json',
+                        contentType : "application/json; charset=UTF-8",
+                        success : function(data){
+                        },
+                        error: function(){
+                        }
+                 });//ajax end
+                }else{
+                    alert('찜을 취소 하셨습니다.');
+                    let jsontest = {
+                        idx : boardIdx,
+                    };
+                    $.ajax({
+                        url : '/buyLikeCancel',
+                        type : 'POST',
+                        data : JSON.stringify(jsontest),
+                        dataType : 'json',
+                        contentType : "application/json; charset=UTF-8",
+                        success : function(data){
+                        },
+                        error: function(){
+                        }
+                 });//ajax end
+                    document.querySelector('.heart').src ="/images/buyList/forsale/heart1.png";
+                }
+                return false;
+            }else{
+                alert('찜을 하기 위해서는 로그인을 해야 합니다!!');
+            }
+        });
+
+    /*]]>*/
+</script>
+<script>
+    //조회수 콤마 처리
+    window.onload = function() {
+        const viewCount = document.querySelector('.views');
+        viewCount.textContent = Number(viewCount.innerText).toLocaleString();
+    };
+
+</script>
 <script>
          let prev = document.querySelector('.bx-prev');
         let next = document.querySelector('.bx-next');

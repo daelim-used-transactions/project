@@ -4,6 +4,7 @@ import com.daelim.transactions.dto.AttachDTO;
 import com.daelim.transactions.dto.BoardDTO;
 import com.daelim.transactions.dto.BuyBoardDTO;
 import com.daelim.transactions.dto.IttachDTO;
+import com.daelim.transactions.dto.BuyLikeDTO;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -36,5 +37,13 @@ public interface BuyBoardService {
 
     public BuyBoardDTO getBoardDetail(long idx);
 
+
     List<BuyBoardDTO> getAttachList();
+
+    public void addBoardViews(long idx);
+
+    public void addBuyLikes(BuyLikeDTO param);
+    public void removeBuyLikes(long idx);
+    public boolean getBuyLikes(long idx);
+
 }
