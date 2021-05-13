@@ -8,7 +8,9 @@
     <header th:fragment ="main-header">
         <div class ="center-align">
             <div class ="inline-block">
+                <a href="/main">
                 <img src ="/images/main/logowhite.png" alt ="대림장터 로고" />
+                </a>
             </div>
             <div class ="util-group inline-block" th:if="${session.member != null}">
                 <span th:text="${session.member.getNickName()}"></span>

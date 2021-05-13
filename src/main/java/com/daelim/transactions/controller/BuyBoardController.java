@@ -64,7 +64,7 @@ public class BuyBoardController {
     @GetMapping(value="/main/buyList")
     public String showBuyList( Model model){
 
-        List<BuyBoardDTO> boardList = buyBoardService.getAttachList( );
+        List<BuyBoardDTO> boardList = buyBoardService.getBoardList( );
         System.out.println("여기는 구해요 게시판 인데요");
 
         model.addAttribute("boardList", boardList);

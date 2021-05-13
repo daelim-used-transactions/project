@@ -160,16 +160,14 @@ public class BuyBoardServiceImpl implements BuyBoardService {
         return daoBuyBoard.selectBoardDetail(idx);
     }
 
-<<<<<<< Updated upstream
+
     @Override
     public List<BuyBoardDTO> getAttachList() {
         return null;
     }
 
     ;
-=======
 
->>>>>>> Stashed changes
 
 
 }
