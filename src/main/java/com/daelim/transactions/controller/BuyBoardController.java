@@ -60,7 +60,7 @@ public class BuyBoardController {
 
         List<BuyBoardDTO> boardList = buyBoardService.getBoardList();
         System.out.println("여기는 구해요 게시판 인데요");
-
+        System.out.println("보더리스트 뭐냐 " + boardList);
         model.addAttribute("boardList", boardList);
         return "buyList/buyList";
     }
@@ -72,7 +72,11 @@ public class BuyBoardController {
         }
         buyBoardService.addBoardViews(idx);
         BuyBoardDTO buyBoard = buyBoardService.getBoardDetail(idx);
+<<<<<<< Updated upstream
         boolean likeCheck = false;
+=======
+
+>>>>>>> Stashed changes
         if (buyBoard == null || "Y".equals(buyBoard.getDeleteYn())) {
             return "redirect:/main/buyList";
         }

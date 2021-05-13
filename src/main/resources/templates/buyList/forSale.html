@@ -261,9 +261,11 @@
 		url: uri,
 		type: "POST",
 		headers: headers,
+		jsonp:false,
 		dataType: "json",
 		data: JSON.stringify(params),
 		success: function(response) {
+		console.log(response.result)
 			if (response.result == false) {
 				alert("댓글 등록에 실패하였습니다.");
 				return false;
@@ -274,6 +276,7 @@
 		},
 		error: function(xhr, status, error) {
 			alert("에러가 발생하였습니다.");
+			console.log(error);
 			return false;
 		}
 	});

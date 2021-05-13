@@ -128,7 +128,7 @@
                         }
                         const product =  document.querySelector('.product');
                         const productList = document.createElement('div');
-
+                        const productLink = document.createElement('a');
                         const productWrap = document.createElement('div');
                         const productImg = document.createElement('div');
                         const productImg2 = document.createElement('div');
@@ -139,6 +139,8 @@
                         const time = document.createElement('span');
                         const imgContents = document.createElement('img');
 
+
+                        productLink.setAttribute('class', 'a_wrap');
                         productList.setAttribute('class', 'product-list');
                         productWrap.setAttribute('class', 'product-wrap');
                         productImg.setAttribute('class', 'product-img');
@@ -155,12 +157,13 @@
                             }
                         }
 
+
                         productContent.innerHTML = board.title;
                         productPrice.innerHTML = board.price;
                         time.innerHTML = board.insertTime;
-
                        product.appendChild(productList);
-                       productList.appendChild(productWrap);
+                       productList.appendChild(productLink);
+                       productLink.appendChild(productWrap);
                        productWrap.appendChild(productImg);
                        productImg.appendChild(productImg2);
                        productImg2.appendChild(imgContents);
@@ -169,6 +172,8 @@
                        productText.appendChild(productInfo);
                        productInfo.appendChild(productPrice);
                        productInfo.appendChild(time);
+
+                       productLink.setAttribute('href',`/main/saleList/view?idx=${board.boardIdx}`);
                     }
                 },
                 error: function(){

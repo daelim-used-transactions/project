@@ -25,7 +25,7 @@ public class BuyCommentServiceImpl implements BuyCommentService{
             queryResult = commentMapper.updateComment(params);
         }
 
-        return (queryResult == 1) ? true : false;
+        return (queryResult == 1) ? true : false ;
     }
 
     @Override
@@ -38,7 +38,7 @@ public class BuyCommentServiceImpl implements BuyCommentService{
             queryResult = commentMapper.deleteComment(idx);
         }
 
-        return (queryResult == 1) ? true : false;
+        return (queryResult == 1) ? true : false ;
     }
 
     @Override
