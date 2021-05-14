@@ -58,8 +58,10 @@ public class BuyBoardController {
     @GetMapping(value="/main/buyList")
     public String showBuyList(@ModelAttribute("params")BuyBoardDTO params, Model model){
         List<BuyBoardDTO> boardList = buyBoardService.getBuyBoardList(params);
+        List<IttachDTO> ittachList = buyBoardService.getIttachList(boardList);
         model.addAttribute("boardList", boardList);
         model.addAttribute("searchType", 3);
+        model.addAttribute("ittachList",ittachList);
         return "buyList/buyList";
     }
 
@@ -70,6 +72,7 @@ public class BuyBoardController {
         }
         buyBoardService.addBoardViews(idx);
         BuyBoardDTO buyBoard = buyBoardService.getBoardDetail(idx);
+        List<IttachDTO> ittachList = buyBoardService.getIttachList(idx);
         boolean likeCheck = false;
 
         if (buyBoard == null || "Y".equals(buyBoard.getDeleteYn())) {
@@ -123,6 +126,7 @@ public class BuyBoardController {
         model.addAttribute("board", buyBoard);
         model.addAttribute("likeCheck", likeCheck);
         model.addAttribute("buyLikeCount", buyBoardService.buyLikeTotalCount(idx));
+        model.addAttribute("ittachList", ittachList);
         return "buyList/forSale";
     }
 

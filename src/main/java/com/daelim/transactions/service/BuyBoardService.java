@@ -19,6 +19,8 @@ public interface BuyBoardService {
      *  모든 게시판 찾기
      * */
     public List<IttachDTO> getIttachList( );
+    public List<IttachDTO> getIttachList(long idx);
+    public List<IttachDTO> getIttachList(List<BuyBoardDTO> boardList);
 
     /**
      *  아이디로 게시판 찾기

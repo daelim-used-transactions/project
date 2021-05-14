@@ -1,5 +1,6 @@
 package com.daelim.transactions.controller;
 
+import com.daelim.transactions.dto.AttachDTO;
 import com.daelim.transactions.dto.BoardDTO;
 import com.daelim.transactions.dto.BuyBoardDTO;
 import com.daelim.transactions.dto.MemberDTO;
@@ -55,9 +56,12 @@ public class BoardController {
             return "redirect:/main";
         }
         BoardDTO Board = boardService.getBoardDetail(idx);
+//        List<AttachDTO> attachList = boardService.getAttachList(idx);
+
         if (Board == null || "Y".equals(Board.getDeleteYn())) {
             return "redirect:/main";
         }
+
 
         Cookie[] cookie = request.getCookies();
         String idxId = (String) request.getSession().getAttribute("idxId");

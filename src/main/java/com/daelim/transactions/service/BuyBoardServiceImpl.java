@@ -60,7 +60,7 @@ public class BuyBoardServiceImpl implements BuyBoardService {
         int boardTotalCount = daoBuyBoard.selectBoardTotalCount();
         System.out.println("구해요 게시글 수 : " + boardTotalCount);
         PaginationInfo paginationInfo = new PaginationInfo(params);
-        params.setRecordsPerPage(1); //페이지 당 보여줄 게시글 수(생성자에는 12)
+        params.setRecordsPerPage(10); //페이지 당 보여줄 게시글 수(생성자에는 12)
         paginationInfo.setTotalRecordCount(boardTotalCount);
 
         params.setPaginationInfo(paginationInfo);
@@ -129,6 +129,20 @@ public class BuyBoardServiceImpl implements BuyBoardService {
 
         return ittachList;
     }
+
+    @Override
+    public List<IttachDTO> getIttachList(long idx) {
+        List<IttachDTO> ittachList = Collections.emptyList();
+
+        int boardTotalCount = daoIttach.selectIttachOneCount2(idx);
+
+        if (boardTotalCount > 0) {
+            ittachList = daoIttach.selectIttachListByBoardIdx2(idx);
+        }
+
+        return ittachList;
+    }
+
     /**
      *  모든 게시판 찾기
      * */

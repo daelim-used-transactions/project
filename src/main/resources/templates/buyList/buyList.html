@@ -55,11 +55,12 @@
                             </div>
 
                         </div>
-<!--                        th:if="${not #lists.isEmpty(attachList) && row.boardIdx==img.boardIdx && img.count == 1}" th:each="img: ${attachList}"-->
+
                         <div  class="product-img" style="height: 80px;">
-<!--                            th:if="${row.boardIdx==img.boardIdx && img.count == 1}-->
-                            <img src="/images/main/dz.jpg" alt="남성지갑"/>
-                            <!--          \images\board\210421            -->
+                            <div th:if="${not #lists.isEmpty(ittachList) && row.boardIdx==img.boardIdx && img.count==1}" th:each="img: ${ittachList}" class="product-img">
+                                <img th:src="@{${img.saveName}}" alt="남성지갑"/>
+                                <!--          \images\board\210421            -->
+                            </div>
                         </div>
                         <ul class="status">
                             <li class="attach inline-block commonImg">1</li>

@@ -16,11 +16,13 @@ public interface DaoIttach {
 
     public int selectIttachTotalCount();
 
-    public int selectIttachOneCount(int boardIdx);
+    public int selectIttachOneCount2(long boardIdx);
 
     public int selectIttachIdxCount(List<BuyBoardDTO> boardList);
 
     public List<IttachDTO> selectIttachListByBoardIdx(List<BuyBoardDTO> boardList);
+
+    public List<IttachDTO> selectIttachListByBoardIdx2(long boardIdx);
 
     public IttachDTO selectIttachOne(@Param("boardIdx")int boardIdx, @Param("count")int count);
 

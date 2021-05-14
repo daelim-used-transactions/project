@@ -56,15 +56,15 @@
         )
     </select>
 
-    <select id="selectIttachOneCount" parameterType="int" resultType="int">
+    <select id="selectIttachOneCount2" parameterType="long" resultType="int">
         SELECT
-        COUNT(*)
+            COUNT(*)
         FROM
-        ittach
+            ittach
         WHERE
-        deleteYn = 'N'
+            deleteYn = 'N'
         AND
-        boardIdx =#{boardIdx}
+            boardIdx =#{boardIdx}
     </select>
 
     <select id="selectIttachList"  parameterType="com.daelim.transactions.dto.IttachDTO"  resultType="com.daelim.transactions.dto.IttachDTO">
@@ -93,6 +93,19 @@
         )
         ORDER BY
         boardIdx DESC
+    </select>
+
+    <select id="selectIttachListByBoardIdx2"  parameterType="long"  resultType="com.daelim.transactions.dto.IttachDTO">
+        SELECT
+        <include refid="ittachColumns" />
+        FROM
+            ittach
+        WHERE
+            deleteYn = 'N'
+        AND
+            boardIdx  = #{boardIdx}
+        ORDER BY
+            boardIdx DESC
     </select>
 
     <select id="selectIttachOne"  parameterType="int"  resultType="com.daelim.transactions.dto.IttachDTO">

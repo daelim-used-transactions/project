@@ -36,19 +36,25 @@
                         댓글 9
                     </div>
                 </div>
+
                 <div class="uplDate" >
+
                     작성일&nbsp;
-                    <small th:text="${board.insertTime}">
-                        2017-02-20 13:52
-                    </small>
+                    <small th:text="${board.insertTime}"></small>
+                    <form action="http://www.naver.com">
+                        <button type="submit" class="report">
+                            <img src="/images/buyList/forsale/report.png" alt="report">
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
         <div class="pdDetail">
-            <div class="pdView">
+            <div class="pdView" th:class="${#lists.isEmpty(ittachList)} ? 'remove-pdView'">
                 <div class="slider">
-                    <div><img class="img_size" src="/images/buyList/forsale/product1.png" alt=""></div>
-                    <div><img class="img_size" src="/images/buyList/forsale/product1.png" alt=""></div>
+                    <div th:if="${not #lists.isEmpty(ittachList)}" th:each="img: ${ittachList}" class="product-img">
+                          <img th:src="@{${img.saveName}}" alt="남성지갑"/>
+                    </div>
                 </div>
             </div>
             <div class="content">
@@ -56,11 +62,6 @@
                     <div class="pdName">
                         <h2 th:text=${board.title}></h2>
                     </div>
-                    <form action="http://www.naver.com">
-                        <button type="submit" class="report">
-                            <img src="/images/buyList/forsale/report.png" alt="report">
-                        </button>
-                    </form>
                 </div>
                 <div class="price">
                     <h2 th:text=${board.category}></h2>
@@ -182,7 +183,7 @@
 
 </script>
 <script>
-         let prev = document.querySelector('.bx-prev');
+        let prev = document.querySelector('.bx-prev');
         let next = document.querySelector('.bx-next');
         $(document).ready(function(){
           $('.slider').bxSlider({

@@ -254,8 +254,8 @@ main .center-align{
 }
 
 .product-list{
-    /*display: flex;
-    flex-wrap: wrap;*/
+    isplay: flex;
+    flex-wrap: wrap;
 }
 
 .product-text{

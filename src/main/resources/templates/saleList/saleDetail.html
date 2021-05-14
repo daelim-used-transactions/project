@@ -44,8 +44,8 @@
         <div class="pdDetail">
             <div class="pdView">
                 <div class="slider">
-                    <div><img class="img_size" src="/images/buyList/forsale/product1.png" alt=""></div>
-                    <div><img class="img_size" src="/images/buyList/forsale/product1.png" alt=""></div>
+                    <div th:if="${not #lists.isEmpty(attachList)}" th:each="img: ${attachList}" class="product-img">
+                        <img th:src="@{${img.saveName}}" alt="남성지갑"/>
                 </div>
             </div>
             <div class="content">
@@ -53,11 +53,6 @@
                     <div class="pdName">
                         <h2 th:text=${board.title}></h2>
                     </div>
-                    <form action="http://www.naver.com">
-                        <button type="submit" class="report">
-                            <img src="/images/buyList/forsale/report.png" alt="report">
-                        </button>
-                    </form>
                 </div>
                 <div class="price">
                     <h2 th:text=${board.price}></h2>
