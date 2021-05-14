@@ -226,11 +226,13 @@ margin-bottom: 30px;
 .name{
     float:left;
     margin-right: 5px;
+    margin-top: 5px;
 }
 .time{
     display: block;
     float: right;
      text-align: right;
+         margin-top: 5px;
      width: 81%;
 }
 .desc{
@@ -245,11 +247,11 @@ width:742px;
 .relpd li{
 position: relative;
 overflow: hidden;
-margin-bottom: 17px;
+
 }
 .btn{
     float:left;
-    margin-top: 2px;
+    margin-top: 7px;
 }
 
 .remove-pdView{

@@ -71,6 +71,7 @@ public class ServiceTestImpl implements ServiceTest {
         CryptoUtil cryptoUtil =new CryptoUtil();
         String enPass = cryptoUtil.sha256(memberDTO.getLoginPw());
         memberDTO.setLoginPw(enPass);
+        System.out.println("뭐냐이거 "+daoTest.selectLogin(memberDTO));
         return  daoTest.selectLogin(memberDTO);
     }
 
