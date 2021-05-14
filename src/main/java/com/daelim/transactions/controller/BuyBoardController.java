@@ -72,11 +72,7 @@ public class BuyBoardController {
         }
         buyBoardService.addBoardViews(idx);
         BuyBoardDTO buyBoard = buyBoardService.getBoardDetail(idx);
-<<<<<<< Updated upstream
         boolean likeCheck = false;
-=======
-
->>>>>>> Stashed changes
         if (buyBoard == null || "Y".equals(buyBoard.getDeleteYn())) {
             return "redirect:/main/buyList";
         }

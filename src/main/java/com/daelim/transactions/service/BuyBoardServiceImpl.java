@@ -164,18 +164,10 @@ public class BuyBoardServiceImpl implements BuyBoardService {
         return daoBuyBoard.selectBoardDetail(idx);
     }
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
     @Override
     public List<BuyBoardDTO> getAttachList() {
         return null;
     }
-
-<<<<<<< Updated upstream
-    ;
-
 
     @Override
     public void addBoardViews(long idx) {
@@ -196,9 +188,6 @@ public class BuyBoardServiceImpl implements BuyBoardService {
     public boolean getBuyLikes(long idx) {
         return (daoBuyBoard.selectBuyLike(idx) != null);
     }
-
-=======
->>>>>>> Stashed changes
 
 }
 

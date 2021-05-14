@@ -181,6 +181,9 @@ public class ServiceTestCode {
     @Autowired
     private BuyCommentService commentService;
 
+    @Autowired
+    private MainCommentService mainCommentService;
+
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Test
@@ -188,11 +191,11 @@ public class ServiceTestCode {
         int number = 20;
 
         for (int i = 1; i <= number; i++) {
-            BuyCommentDTO params = new BuyCommentDTO();
+            MainCommentDTO params = new MainCommentDTO();
             params.setBoardIdx((long) 2); // 댓글을 추가할 게시글 번호
             params.setContent(i + "번 댓글을 추가합니다!");
             params.setWriter(i + "번 회원");
-            commentService.registerComment(params);
+            mainCommentService.registerComment(params);
         }
 
         logger.debug("댓글 " + number + "개가 등록되었습니다.");

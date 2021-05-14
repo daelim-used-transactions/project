@@ -86,7 +86,7 @@
                     <label for="combox">Comment</label>
                 </h2>
             </div>
-            <form>
+            <form method="post">
                     <span class="comSpace" th:if="${member != null}">
                         <input class="comset" type="text" id="comment" name="comment" maxlength="200"
                                placeholder="상품문의 입력" >
@@ -155,15 +155,15 @@
 
 	function printCommentList() {
 
-		var uri = "[[ @{/buycomments/} + ${board.boardIdx} ]]";
+		let uri = "[[ @{/maincomments/} + ${board.boardIdx} ]]";
 
 		$.get(uri, function(response) {
-		console.log(`${uri}`)
+            console.log(response)
 			if (response !== null) {
 				var commentsHtml = "";
 
 				$(response.commentList).each(function(idx, comment) {
-				console.log(`${comment.writer}`)
+				    console.log(comment.content)
 					commentsHtml += `
 						<li>
 							<h4 class="name" style="display : inline-block";>${comment.writer}</h4>
@@ -192,7 +192,7 @@
 		return false;
 	}
 
-	var uri = "[[ @{/buycomments} ]]"
+	var uri = "[[ @{/maincomments} ]]"
 	let headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
 	var params = {"boardIdx": boardIdx, "content": content.value, "writer": "관리자"};
 
@@ -201,13 +201,13 @@
 		type: "POST",
 		headers: headers,
 		dataType: "json",
+		jsonp:false,
 		data: JSON.stringify(params),
 		success: function(response) {
 			if (response.result == false) {
 				alert("댓글 등록에 실패하였습니다.");
 				return false;
 			}
-
 			printCommentList();
 			content.value = "";
 		},

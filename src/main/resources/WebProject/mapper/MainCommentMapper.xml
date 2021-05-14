@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.daelim.transactions.mapper.MainCommentMapper">
+
+    <sql id="commentColumns">
+        idx
+        , boardIdx
+        , content
+        , writer
+        , deleteYn
+        , insertTime
+        , updateTime
+        , deleteTime
+    </sql>
+
+    <insert id="insertComment" parameterType="com.daelim.transactions.dto.MainCommentDTO">
+        INSERT INTO main_comment (
+        <include refid="commentColumns" />
+        ) VALUES (
+        #{idx}
+        , #{boardIdx}
+        , #{content}
+        , #{writer}
+        , IFNULL(#{deleteYn}, 'N')
+        , NOW()
+        , NULL
+        , NULL
+        )
+    </insert>
+
+    <select id="selectCommentDetail" parameterType="long" resultType="com.daelim.transactions.dto.MainCommentDTO">
+        SELECT
+        <include refid="commentColumns" />
+        FROM
+        main_comment
+        WHERE
+        deleteYn = 'N'
+        AND
+        idx = #{idx}
+    </select>
+
+    <update id="updateComment" parameterType="com.daelim.transactions.dto.MainCommentDTO">
+        UPDATE main_comment
+        SET
+        updateTime = NOW()
+        , content = #{content}
+        , writer = #{writer}
+        WHERE
+        idx = #{idx}
+    </update>
+
+    <update id="deleteComment" parameterType="long">
+        UPDATE main_comment
+        SET
+        deleteYn = 'Y'
+        , deleteTime = NOW()
+        WHERE
+        idx = #{idx}
+    </update>
+
+    <select id="selectCommentList" parameterType="com.daelim.transactions.dto.MainCommentDTO" resultType="com.daelim.transactions.dto.MainCommentDTO">
+        SELECT
+        <include refid="commentColumns" />
+        FROM
+            main_comment
+        WHERE
+            deleteYn = 'N'
+        AND
+            boardIdx = #{boardIdx}
+        ORDER BY
+            idx DESC,
+            insertTime DESC
+    </select>
+
+    <select id="selectCommentTotalCount" parameterType="com.daelim.transactions.dto.MainCommentDTO" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            main_comment
+        WHERE
+            deleteYn = 'N'
+        AND
+            boardIdx = #{boardIdx}
+    </select>
+
+</mapper>

@@ -1,0 +1,250 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+ul{list-style: none;} /* 리스트 앞에 . 같은거 제거*/
+a{text-decoration: none;} /* 링크에 밑줄 같은거 제거*/
+
+html, body{
+    padding:  0px;
+    margin:  0px;
+    /* font-family: Dotum,'돋움', Helvetica, "Apple SD Gothic Neo" ,sans-serif; */
+}
+
+header{
+    padding: 9px 0 4px 0;
+        background-color:#6495ED;
+}
+
+/* 전체 페이지가 가운데로 오도록 */
+#page{width: 1024px; margin: 0px auto;}
+
+/* 제목영역안에 있는 메인 로고 이미지 위치 지정 */
+#logo{
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    right: 30px;
+}
+
+/* 제목영역안에 오른쪽 상단에 top_menu 배치 */
+#top_menu{
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    color: white;
+}
+
+/* top_menu a의 글시 하얀색으로 */
+#top_menu a{color: white;}
+
+/* 헤더 영역안에 네비게이션 메뉴 배치 */
+nav{
+    display: inline-block;
+    position: sticky;
+    width: 100%;
+    height: 50px;
+    padding-top: 10px;
+    text-align: center;
+    z-index: 20;
+    top:0;
+    background-color: white;
+    border-bottom: 1px solid lightgray;
+}
+
+
+
+.forSalePage{
+    padding: 10px;
+    overflow: hidden;
+}
+.pdDetail{
+    min-height: 245px;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+}
+.pdView{
+    float:left;
+}
+.photo{
+    position: relative;
+    overflow: hidden;
+}
+.countbox{
+    margin: 0px;
+    overflow: hidden;
+    flex-direction: row;
+    justify-content : space-between;
+    display: flex;
+    color: gray;
+}
+.count{
+    padding-left: 20px;
+    margin: 0px;
+    overflow: hidden;
+    flex-direction: row;
+    justify-content : space-between;
+    display: flex;
+}
+.viewCount{
+    display: flex;
+    text-align: center;
+    margin-right : 10px;
+}
+.likeCount{
+    display: flex;
+    text-align: center;
+    margin-right : 10px;
+}
+
+.likeCount > img{
+    width: 20px;
+    margin-top: 2px;
+    height: 20px;
+}
+.commentCount{
+    display: flex;
+    text-align: center;
+    margin-right : 10px;
+}
+.commentCount > img{
+    width: 20px;
+    margin-top: 2px;
+    height: 20px;
+}
+.uplDate{
+    display: flex;
+    text-align: center;
+    padding-right: 30px;
+    font-size: 1em;
+}
+.content{
+    padding: 10px;
+    padding-left: 15px;
+    overflow: hidden;
+    width: 577px;
+}
+.other{
+    display: inline-flex;
+    min-width: 660px;
+    position: relative;
+    margin: 5px;
+    flex-direction: row;
+}
+.combox{
+    min-width: 780px;
+}
+.title{
+    margin: 0px;
+    padding-bottom: 10px;
+    justify-content : space-between;
+    display: flex;
+}
+.report{
+    float: right;
+    margin: 0px;
+    overflow: hidden;
+    flex-direction: row;
+    border: none;
+    display: flex;
+}
+.selfie > img{
+    width: 104px;
+    height: 104px;
+    border: 1px solid black;
+    border-radius: 104px;
+}
+.price{
+    padding-bottom: 10px;
+}
+.explain{
+    padding: 5px;
+}
+.comment{
+    display: inline-block;
+    padding: 10px;
+    padding-left: 15px;
+    overflow:hidden;
+}
+.comLabel{
+    float: left;
+    margin: 10px;
+    display: inline-flex;
+}
+.comSpace{
+    margin: 10px;
+    display: inline-flex;
+    position: relative;
+    width: 100%;
+    height: 51px;
+    border: solid 1px #dadada;
+    padding: 10px 90px 10px 14px;
+    background: #fff;
+    box-sizing: border-box;
+}
+.comSpace>button{
+    position: absolute;
+    left: 92%;
+    top: 8%;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+}
+.comset{
+    width:100%;
+    border: none;
+    height: 29px;
+    display: inline-block;
+    background: white;
+}
+.userinfo{
+    width: 170px;
+    margin: 24px;
+    text-align: center;
+}
+.userinfobox{
+    text-align: center;
+}
+
+.pdHead{
+    margin-bottom: 10px;
+}
+.img_size{
+    width: 400px;
+    height: 300px;
+}
+.bx-wrapper {
+width: 400px;
+margin-bottom: 30px;
+}
+.name{
+    float:left;
+    margin-right: 5px;
+}
+.time{
+    display: block;
+    float: right;
+     text-align: right;
+     width: 81%;
+}
+.desc{
+float: left;
+margin:10px;
+color:#888888;
+width:742px;
+}
+.relpd{
+    margin:10px;
+}
+.relpd li{
+position: relative;
+overflow: hidden;
+margin-bottom: 17px;
+}
+.btn{
+    float:left;
+    margin-top: 2px;
+}
+
