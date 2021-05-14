@@ -12,7 +12,7 @@
         contents,
         deleteYn,
         insertTime,
-        deleteTime,
+        deleteTime
         )values (
         #{boardIdx},
         #{loginId},
@@ -58,13 +58,16 @@
             deleteYn,
             insertTime,
             deleteTime,
-            views
+            views,
+            buyLikeCount
         FROM
              buylistboard
         WHERE
             deleteYn = 'N'
         ORDER BY
             boardIdx DESC
+        LIMIT
+            #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
     </select>
 
     <select id="selectBoardListById"  parameterType="String"  resultType="com.daelim.transactions.dto.BuyBoardDTO">
@@ -127,6 +130,17 @@
             boardIdx = #{idx}
     </update>
 
+    <insert id="updateBoardBuyLike"  parameterType="hashmap">
+        UPDATE
+            buylistboard
+        SET
+            buyLikeCount =  #{count}
+        WHERE
+            deleteYn = 'N'
+        AND
+            boardIdx = #{idx}
+    </insert>
+
     <insert id="insertBuyLike"  parameterType="com.daelim.transactions.dto.BuyLikeDTO">
         insert into buylike(
         loginId,
@@ -149,6 +163,15 @@
         SELECT
             loginId,
             boardIdx
+        FROM
+            buylike
+        WHERE
+            boardIdx = #{idx}
+    </select>
+
+    <select id="selectBuyLikeCount" parameterType="long" resultType="int">
+        SELECT
+            COUNT(*)
         FROM
             buylike
         WHERE

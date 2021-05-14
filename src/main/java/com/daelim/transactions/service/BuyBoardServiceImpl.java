@@ -54,28 +54,34 @@ public class BuyBoardServiceImpl implements BuyBoardService {
     }
 
     @Override
-    public List<BuyBoardDTO> getBoardList() {
+    public List<BuyBoardDTO> getBuyBoardList(BuyBoardDTO params) {
+
         List<BuyBoardDTO> boardList = Collections.emptyList();
-
         int boardTotalCount = daoBuyBoard.selectBoardTotalCount();
+        System.out.println("구해요 게시글 수 : " + boardTotalCount);
+        PaginationInfo paginationInfo = new PaginationInfo(params);
+        params.setRecordsPerPage(1); //페이지 당 보여줄 게시글 수(생성자에는 12)
+        paginationInfo.setTotalRecordCount(boardTotalCount);
 
+        params.setPaginationInfo(paginationInfo);
         if (boardTotalCount > 0) {
-            boardList = daoBuyBoard.selectBoardList(0);
+            boardList = daoBuyBoard.selectBoardList(params);
         }
 
         return boardList;
     }
 
+    //쓸 일이 있을려나?
     @Override
     public List<BuyBoardDTO> getBoardList(int count) {
         List<BuyBoardDTO> boardList = Collections.emptyList();
-
-        int boardTotalCount = daoBuyBoard.selectBoardTotalCount();
-
-        if (boardTotalCount > 0) {
-            boardList = daoBuyBoard.selectBoardList(count);
-        }
-
+//
+//        int boardTotalCount = daoBuyBoard.selectBoardTotalCount();
+//
+//        if (boardTotalCount > 0) {
+//            boardList = daoBuyBoard.selectBoardList(count);
+//        }
+//
         return boardList;
     }
 
@@ -164,10 +170,14 @@ public class BuyBoardServiceImpl implements BuyBoardService {
         return daoBuyBoard.selectBoardDetail(idx);
     }
 
+
+
     @Override
     public List<BuyBoardDTO> getAttachList() {
         return null;
     }
+
+
 
     @Override
     public void addBoardViews(long idx) {
@@ -175,19 +185,37 @@ public class BuyBoardServiceImpl implements BuyBoardService {
     }
 
     @Override
-    public void addBuyLikes(BuyLikeDTO param) {
+    public int addBuyLikes(BuyLikeDTO param) {
         daoBuyBoard.insertBuyLike(param);
+        Map<String, Integer> map = new HashMap<>();
+        int count = daoBuyBoard.selectBuyLikeCount(param.getBoardIdx());
+        map.put("idx", param.getBoardIdx());
+        map.put("count", count);
+        daoBuyBoard.updateBoardBuyLike(map);
+        return count;
     }
 
     @Override
-    public void removeBuyLikes(long idx) {
+    public int removeBuyLikes(long idx) {
         daoBuyBoard.deleteBuyLike(idx);
+        Map<String, Integer> map = new HashMap<>();
+        int count = daoBuyBoard.selectBuyLikeCount(idx);
+        map.put("idx", (int)idx);
+        map.put("count", count);
+        daoBuyBoard.updateBoardBuyLike(map);
+        return count;
     }
 
     @Override
     public boolean getBuyLikes(long idx) {
         return (daoBuyBoard.selectBuyLike(idx) != null);
     }
+
+    @Override
+    public int buyLikeTotalCount(long idx) {
+        return daoBuyBoard.selectBuyLikeCount(idx);
+    }
+
 
 }
 

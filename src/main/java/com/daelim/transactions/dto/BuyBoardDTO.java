@@ -26,8 +26,10 @@ public class BuyBoardDTO extends CommonDTO {
     //내용
     private String contents;
 
+    //조회수
+    private int views;
 
-    private String views;
+    private int buyLikeCount;
     public BuyBoardDTO(){
 
     }

@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
     <script th:src="@{/plugin/common/moment.js}"></script>
-    <link rel="stylesheet" href="/css/saleDetail.css" media="(min-width:600px)">
+    <link rel="stylesheet" href="/css/forSale.css" media="(min-width:600px)">
 </head>
 <body>
 <header th:replace="fragments/header :: main-header"> </header>
@@ -28,7 +28,8 @@
                     <div class="likeCount">
                         <img th:if="*{likeCheck == true}" src="/images/buyList/forsale/heart2.png" alt="#" class="heart">
                         <img th:unless="*{likeCheck == true}" src="/images/buyList/forsale/heart1.png" alt="#" class="heart">
-                        찜 4
+                        찜&nbsp;
+                        <p class="buylikecount" th:text=${buyLikeCount}></p>
                     </div>
                     <div class="commentCount">
                         <img src="/images/buyList/forsale/speech-bubble.png" alt="#">
@@ -71,7 +72,7 @@
     <div class="other">
         <div class="userinfo">
             <div>
-                <h2>유저 정보</h2>
+                <h2>작성자 정보</h2>
             </div>
             <div>
                 <div class="selfie">
@@ -122,44 +123,49 @@
             let session =  /*[[ ${session.member} ]]*/;
             let boardIdx = /*[[ ${board.boardIdx} ]]*/;
             if(session){
-                console.log(document.querySelector('.heart').src);
                 if(document.querySelector('.heart').src === "http://localhost:8080/images/buyList/forsale/heart1.png"){
                     alert('찜을 하셨습니다.');
                     document.querySelector('.heart').src ="/images/buyList/forsale/heart2.png";
                     let jsontest = {
-                        sessionId : session.loginId,
-                        idx : boardIdx,
+                        loginId : session.loginId,
+                        boardIdx : boardIdx,
                     };
                     $.ajax({
                         url : '/buyLikeAjax',
                         type : 'POST',
                         data : JSON.stringify(jsontest),
-                        dataType : 'json',
+                        dataType : 'text',
                         contentType : "application/json; charset=UTF-8",
                         success : function(data){
+                            console.log(data);
+                            document.querySelector('.buylikecount').innerText = data;
                         },
-                        error: function(){
+                        error: function(request,status,error){
+                        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                         }
                  });//ajax end
                 }else{
                     alert('찜을 취소 하셨습니다.');
                     let jsontest = {
-                        idx : boardIdx,
+                        loginId : session.loginId,
+                        boardIdx : boardIdx,
                     };
                     $.ajax({
                         url : '/buyLikeCancel',
                         type : 'POST',
                         data : JSON.stringify(jsontest),
-                        dataType : 'json',
+                        dataType : 'text',
                         contentType : "application/json; charset=UTF-8",
                         success : function(data){
+                            console.log(data);
+                            document.querySelector('.buylikecount').innerText = data;
                         },
-                        error: function(){
+                        error: function(request,status,error){
+                        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                         }
                  });//ajax end
                     document.querySelector('.heart').src ="/images/buyList/forsale/heart1.png";
                 }
-                return false;
             }else{
                 alert('찜을 하기 위해서는 로그인을 해야 합니다!!');
             }
@@ -219,12 +225,10 @@
 		var uri = "[[ @{/buycomments/} + ${board.boardIdx} ]]";
 
 		$.get(uri, function(response) {
-		console.log(`${uri}`)
 			if (response !== null) {
 				var commentsHtml = "";
 
 				$(response.commentList).each(function(idx, comment) {
-				console.log(`${comment.writer}`)
 					commentsHtml += `
 						<li>
 							<h4 class="name" style="display : inline-block";>${comment.writer}</h4>
@@ -263,6 +267,7 @@
 		headers: headers,
 		jsonp:false,
 		dataType: "json",
+		jsonp : false,
 		data: JSON.stringify(params),
 		success: function(response) {
 		console.log(response.result)

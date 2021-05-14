@@ -13,6 +13,6 @@ public class MainMvcConfiguartion implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         SessionInterceptor sessionInterceptor = new SessionInterceptor();
         registry.addInterceptor(sessionInterceptor)
-                .addPathPatterns("/main");
+                .addPathPatterns("/**");
     }
 }

@@ -13,7 +13,7 @@ public interface BuyBoardService {
 
     public boolean registerBoard(BuyBoardDTO board);
     public boolean registerBoard(BuyBoardDTO board, MultipartFile[] files);
-    public List<BuyBoardDTO> getBoardList();
+    public List<BuyBoardDTO> getBuyBoardList(BuyBoardDTO params);
 
     /**
      *  모든 게시판 찾기
@@ -42,8 +42,9 @@ public interface BuyBoardService {
 
     public void addBoardViews(long idx);
 
-    public void addBuyLikes(BuyLikeDTO param);
-    public void removeBuyLikes(long idx);
+    public int addBuyLikes(BuyLikeDTO param);
+    public int removeBuyLikes(long idx);
     public boolean getBuyLikes(long idx);
+    public int buyLikeTotalCount(long idx);
 
 }

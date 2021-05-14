@@ -37,6 +37,7 @@ public class Criteria {
      * 
      * @param pageNo 사용자가 가고자 하는 페이지
      * @param searchType 1이면 카테고리로 검색, 2이면 검색창을 통한 검색
+     * 3이면 구해요 게시글
      * @return
      */
     public String makeQueryString(int pageNo, int searchType) {
@@ -50,13 +51,18 @@ public class Criteria {
                     //.queryParam("searchType", searchType)
                     .build()
                     .encode();
-        }else{
+        }else if(searchType == 2){
             uriComponents = UriComponentsBuilder.newInstance()
                     .queryParam("currentPageNo", pageNo)
                     .queryParam("searchKeyword", searchKeyword)
                     //.queryParam("recordsPerPage", recordsPerPage)
                     //.queryParam("pageSize", pageSize)
                     //.queryParam("searchType", searchType)
+                    .build()
+                    .encode();
+        }else{//구해요 게시글
+            uriComponents = UriComponentsBuilder.newInstance()
+                    .queryParam("currentPageNo", pageNo)
                     .build()
                     .encode();
         }

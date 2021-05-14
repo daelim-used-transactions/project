@@ -56,12 +56,10 @@ public class BuyBoardController {
 
 
     @GetMapping(value="/main/buyList")
-    public String showBuyList( Model model){
-
-        List<BuyBoardDTO> boardList = buyBoardService.getBoardList();
-        System.out.println("여기는 구해요 게시판 인데요");
-        System.out.println("보더리스트 뭐냐 " + boardList);
+    public String showBuyList(@ModelAttribute("params")BuyBoardDTO params, Model model){
+        List<BuyBoardDTO> boardList = buyBoardService.getBuyBoardList(params);
         model.addAttribute("boardList", boardList);
+        model.addAttribute("searchType", 3);
         return "buyList/buyList";
     }
 
@@ -73,6 +71,7 @@ public class BuyBoardController {
         buyBoardService.addBoardViews(idx);
         BuyBoardDTO buyBoard = buyBoardService.getBoardDetail(idx);
         boolean likeCheck = false;
+
         if (buyBoard == null || "Y".equals(buyBoard.getDeleteYn())) {
             return "redirect:/main/buyList";
         }
@@ -123,30 +122,27 @@ public class BuyBoardController {
         System.out.println("여기는 상세페이지요");
         model.addAttribute("board", buyBoard);
         model.addAttribute("likeCheck", likeCheck);
+        model.addAttribute("buyLikeCount", buyBoardService.buyLikeTotalCount(idx));
         return "buyList/forSale";
     }
 
     @PostMapping(value ="/buyLikeAjax")
     @ResponseBody
-    public Object buyLikeAjaxTest(@RequestBody Map<String,Object> param){//Stirng,Object로 해도 되네
-        String nickNameCheck = null;
-        System.out.println(param.get("sessionId") +"굿굿" + param.get("idx"));
-        BuyLikeDTO buyLike = new BuyLikeDTO();
-        buyLike.setLoginId((String) param.get("sessionId"));
-        buyLike.setBoardIdx((Integer) param.get("idx"));
-        buyBoardService.addBuyLikes(buyLike);
+    public int buyLikeAjaxTest(@RequestBody BuyLikeDTO buyLike){//Stirng,Object로 해도 되네
+//        BuyLikeDTO buyLike = new BuyLikeDTO();
+//        buyLike.setLoginId((String) param.get("sessionId"));
+//        buyLike.setBoardIdx((Integer) param.get("idx"));
+//        System.out.println(param.get("sessionId") +"굿굿" + param.get("idx"));
 
-        return null;
+        return buyBoardService.addBuyLikes(buyLike);
     }
 
     @PostMapping(value ="/buyLikeCancel")
     @ResponseBody
-    public Object buyLikeAjaxCancel(@RequestBody Map<String,Object> param){//Stirng,Object로 해도 되네
-        String nickNameCheck = null;
-        System.out.println("굿굿" + param.get("idx"));
-        buyBoardService.removeBuyLikes((Integer) param.get("idx"));
+    public int buyLikeAjaxCancel(@RequestBody BuyLikeDTO buyLike){//Stirng,Object로 해도 되네
+        buyBoardService.removeBuyLikes(buyLike.getBoardIdx());
 
-        return null;
+        return buyBoardService.removeBuyLikes(buyLike.getBoardIdx());
     }
 
 }

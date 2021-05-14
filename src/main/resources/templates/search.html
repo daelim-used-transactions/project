@@ -18,22 +18,24 @@
             <h2 class = "h2-design">검색 결과</h2>
             <div class="product">
                 <div th:if="${not #lists.isEmpty(boardList)}" th:each="row: ${boardList}" class="product-list">
-                    <div class="product-wrap">
-                        <div  class="product-img">
-                            <div th:if="${not #lists.isEmpty(attachList) && row.boardIdx==img.boardIdx && img.count==1}" th:each="img: ${attachList}" class="product-img">
-                                <img th:src="@{${img.saveName}}" alt="남성지갑"/>
-                                <!--          \images\board\210421            -->
-                            </div>
+                    <a class="a_wrap" th:href="@{/main/saleList/view(idx=${row.boardIdx})}">
+                        <div class="product-wrap">
+                            <div  class="product-img">
+                                <div th:if="${not #lists.isEmpty(attachList) && row.boardIdx==img.boardIdx && img.count==1}" th:each="img: ${attachList}" class="product-img">
+                                    <img th:src="@{${img.saveName}}" alt="남성지갑"/>
+                                    <!--          \images\board\210421            -->
+                                </div>
 
-                            <div class="product-text">
-                                <div th:text="${row.title}" class="product-content">남성 반지갑 팝니다ddddddddddddd</div>
-                                <div class="product-info">
-                                    <div th:text="${row.price}" class="product-price">150,000원</div>
-                                    <span th:text="${row.insertTime}" class="time">2일 전</span>
+                                <div class="product-text">
+                                    <div th:text="${row.title}" class="product-content">남성 반지갑 팝니다ddddddddddddd</div>
+                                    <div class="product-info">
+                                        <div th:text="${row.price}" class="product-price">150,000원</div>
+                                        <span th:text="${row.insertTime}" class="time">2일 전</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                     <div th:unless="${not #lists.isEmpty(boardList)}">
                         <div> 조회된 결과가 없습니다.</div>
                     </div>

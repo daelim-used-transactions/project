@@ -5,6 +5,7 @@
     <title>대림장터 메인홈페이지</title>
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/buyList.css">
+    <link rel="stylesheet" href="/css/pagination.css" />
     <meta name="viewport" content="initial-scale=0.8"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 
@@ -60,7 +61,11 @@
                             <img src="/images/main/dz.jpg" alt="남성지갑"/>
                             <!--          \images\board\210421            -->
                         </div>
-                        <ul class="status"><li class="attach inline-block commonImg">1</li><li title="공감" class="vote inline-block commonImg">0</li><li title="댓글" class="comment inline-block commonImg">6</li></ul>
+                        <ul class="status">
+                            <li class="attach inline-block commonImg">1</li>
+                            <li title="공감" class="vote inline-block commonImg" th:text=${row.buyLikeCount}>0</li>
+                            <li title="댓글" class="comment inline-block commonImg">6</li>
+                        </ul>
                     </div>
                 </div>
                 </a>
@@ -71,6 +76,7 @@
 
         </div><!--상품리스트 끝-->
     </div>
+        <div th:replace="fragments/pagination :: search-pagination"></div>
     <!--main안의 중앙정렬 끝-->
 </main>
 <footer>
@@ -114,5 +120,12 @@
 
 
 </script>
+<script th:inline="javascript">
+			/*<![CDATA[*/
+			function movePage(uri, queryString) {
+				location.href = uri + queryString;
+			}
+			/*]]>*/
+	</script>
 </body>
 </html>

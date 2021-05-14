@@ -21,7 +21,7 @@ public interface DaoBuyBoard {
     public int deleteBoard(int boardIdx);
 
     //메인 페이징
-    public List<BuyBoardDTO> selectBoardList(int count);
+    public List<BuyBoardDTO> selectBoardList(BuyBoardDTO params);
 
     //검색 결과 반환
     public List<BuyBoardDTO> selectBoardListSearch(BuyBoardDTO params);
@@ -36,10 +36,12 @@ public interface DaoBuyBoard {
     public int selectBoardMemberCount(String loginId);
 
     public void updateBoardViews(long boardIdx);
+    public void updateBoardBuyLike(Map<String,Integer> map);
 
     public void insertBuyLike(BuyLikeDTO param);
     public void deleteBuyLike(long idx);
     public BuyLikeDTO selectBuyLike(long idx);
+    public int selectBuyLikeCount(long idx);
 
 
     /**
