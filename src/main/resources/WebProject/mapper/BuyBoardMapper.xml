@@ -159,14 +159,16 @@
             boardIdx = #{idx}
     </delete>
 
-    <select id="selectBuyLike" parameterType="long" resultType="com.daelim.transactions.dto.BuyLikeDTO">
+    <select id="selectBuyLike" parameterType="com.daelim.transactions.dto.BuyLikeDTO" resultType="com.daelim.transactions.dto.BuyLikeDTO">
         SELECT
             loginId,
             boardIdx
         FROM
             buylike
         WHERE
-            boardIdx = #{idx}
+            boardIdx = #{boardIdx}
+        AND
+            loginId = #{loginId}
     </select>
 
     <select id="selectBuyLikeCount" parameterType="long" resultType="int">

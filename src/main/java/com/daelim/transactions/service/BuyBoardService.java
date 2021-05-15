@@ -46,7 +46,7 @@ public interface BuyBoardService {
 
     public int addBuyLikes(BuyLikeDTO param);
     public int removeBuyLikes(long idx);
-    public boolean getBuyLikes(long idx);
+    public boolean getBuyLikes(BuyLikeDTO param);
     public int buyLikeTotalCount(long idx);
 
 }

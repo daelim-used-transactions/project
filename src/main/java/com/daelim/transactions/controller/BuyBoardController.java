@@ -85,12 +85,14 @@ public class BuyBoardController {
         MemberDTO member = (MemberDTO) request.getSession().getAttribute("member");
         String copyList ="";
 
-        if(member != null && buyBoardService.getBuyLikes(idx)){
-            likeCheck = true;
-        }
+
 
         if(member != null){
             model.addAttribute("member", member);
+            BuyLikeDTO buyLike = new BuyLikeDTO();
+            buyLike.setBoardIdx(Math.toIntExact(idx));
+            buyLike.setLoginId(member.getLoginId());
+            likeCheck = buyBoardService.getBuyLikes(buyLike);
         }
         System.out.println("메인 세션 아이디 : "+idxId);
         if(cookie != null && idxId !=null ){

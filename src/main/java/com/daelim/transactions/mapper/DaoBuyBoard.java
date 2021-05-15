@@ -40,7 +40,7 @@ public interface DaoBuyBoard {
 
     public void insertBuyLike(BuyLikeDTO param);
     public void deleteBuyLike(long idx);
-    public BuyLikeDTO selectBuyLike(long idx);
+    public BuyLikeDTO selectBuyLike(BuyLikeDTO param);
     public int selectBuyLikeCount(long idx);
 
 

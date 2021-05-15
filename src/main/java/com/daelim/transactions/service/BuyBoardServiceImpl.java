@@ -221,8 +221,16 @@ public class BuyBoardServiceImpl implements BuyBoardService {
     }
 
     @Override
-    public boolean getBuyLikes(long idx) {
-        return (daoBuyBoard.selectBuyLike(idx) != null);
+    public boolean getBuyLikes(BuyLikeDTO param) {
+        boolean check = false;
+        BuyLikeDTO buyLike = daoBuyBoard.selectBuyLike(param);
+        if(buyLike == null){
+            return check;
+        }
+        else if(buyLike.getBoardIdx() == buyLike.getBoardIdx() && buyLike.getLoginId().equals(param.getLoginId())) {
+            check = true;
+        }
+        return check;
     }
 
     @Override
