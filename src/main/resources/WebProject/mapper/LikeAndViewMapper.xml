@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.daelim.transactions.mapper.DaoLikeAndView">
+    <update id="updateBoardViews" parameterType="long">
+        UPDATE
+        buylistboard
+        SET
+        views = views +1
+        WHERE
+        deleteYn = 'N'
+        AND
+        boardIdx = #{idx}
+    </update>
+
+    <insert id="updateBoardBuyLike"  parameterType="hashmap">
+        UPDATE
+        buylistboard
+        SET
+        buyLikeCount =  #{count}
+        WHERE
+        deleteYn = 'N'
+        AND
+        boardIdx = #{idx}
+    </insert>
+
+    <insert id="insertBuyLike"  parameterType="com.daelim.transactions.dto.BuyLikeDTO">
+        insert into buylike(
+        loginId,
+        boardIdx
+        )values (
+        #{loginId},
+        #{boardIdx}
+        )
+    </insert>
+
+    <delete id="deleteBuyLike" parameterType="com.daelim.transactions.dto.BuyLikeDTO">
+        DELETE
+        FROM
+        buylike
+        WHERE
+        boardIdx = #{boardIdx}
+        AND
+        loginId = #{loginId}
+    </delete>
+
+    <select id="selectBuyLike" parameterType="com.daelim.transactions.dto.BuyLikeDTO" resultType="com.daelim.transactions.dto.BuyLikeDTO">
+        SELECT
+        loginId,
+        boardIdx
+        FROM
+        buylike
+        WHERE
+        boardIdx = #{boardIdx}
+        AND
+        loginId = #{loginId}
+    </select>
+
+    <select id="selectBuyLikeCount" parameterType="int" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            buylike
+        WHERE
+            boardIdx = #{idx}
+    </select>
+    <!--여기까지 구해요 게시글 조회수 및 찜-->
+
+    <update id="updateSaleBoardViews" parameterType="long">
+        UPDATE
+            listboard
+        SET
+            views = views +1
+        WHERE
+            deleteYn = 'N'
+        AND
+            boardIdx = #{idx}
+    </update>
+
+    <insert id="updateBoardSaleLike"  parameterType="hashmap">
+        UPDATE
+            listboard
+        SET
+            likeCount =  #{count}
+        WHERE
+            deleteYn = 'N'
+        AND
+            boardIdx = #{idx}
+    </insert>
+
+    <insert id="insertSaleLike"  parameterType="com.daelim.transactions.dto.SaleLikeDTO">
+        insert into salelike(
+        loginId,
+        boardIdx
+        )values (
+        #{loginId},
+        #{boardIdx}
+        )
+    </insert>
+
+    <delete id="deleteSaleLike" parameterType="com.daelim.transactions.dto.SaleLikeDTO">
+        DELETE
+        FROM
+            salelike
+        WHERE
+            boardIdx = #{boardIdx}
+        AND
+            loginId = #{loginId}
+    </delete>
+
+    <select id="selectSaleLike" parameterType="com.daelim.transactions.dto.SaleLikeDTO" resultType="com.daelim.transactions.dto.SaleLikeDTO">
+        SELECT
+            loginId,
+            boardIdx
+        FROM
+            salelike
+        WHERE
+            boardIdx = #{boardIdx}
+        AND
+            loginId = #{loginId}
+    </select>
+
+    <select id="selectSaleLikeCount" parameterType="int" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            salelike
+        WHERE
+            boardIdx = #{idx}
+    </select>
+</mapper>

@@ -35,15 +35,6 @@ public interface DaoBuyBoard {
 
     public int selectBoardMemberCount(String loginId);
 
-    public void updateBoardViews(long boardIdx);
-    public void updateBoardBuyLike(Map<String,Integer> map);
-
-    public void insertBuyLike(BuyLikeDTO param);
-    public void deleteBuyLike(long idx);
-    public BuyLikeDTO selectBuyLike(BuyLikeDTO param);
-    public int selectBuyLikeCount(long idx);
-
-
     /**
      *  상세페이지 가져오기
      * */

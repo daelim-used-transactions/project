@@ -177,7 +177,9 @@
             contents,
             deleteYn,
             insertTime,
-            deleteTime
+            deleteTime,
+            views,
+            likeCount
         FROM
             listboard
         WHERE

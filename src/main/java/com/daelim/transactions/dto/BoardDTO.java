@@ -29,7 +29,7 @@ public class BoardDTO extends CommonDTO {
     //내용
     private String contents;
 
-
+    private int likeCount;
 
     public BoardDTO(){
 

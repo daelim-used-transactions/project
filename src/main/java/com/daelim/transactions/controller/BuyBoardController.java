@@ -3,6 +3,7 @@ package com.daelim.transactions.controller;
 import com.daelim.transactions.dto.*;
 import com.daelim.transactions.service.BoardService;
 import com.daelim.transactions.service.BuyBoardService;
+import com.daelim.transactions.service.likeAndView.BuyLikeAndViewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -29,6 +30,8 @@ public class BuyBoardController {
     MainController mainController;
     @Autowired
     BuyBoardService buyBoardService;
+    @Autowired
+    BuyLikeAndViewService buyLikeAndViewService;
 
     /**
      * @param board  -> 게시글 등록 form 태그로 전달되는 객체
@@ -70,7 +73,7 @@ public class BuyBoardController {
         if (idx == null) {
             return "redirect:/main/buyList";
         }
-        buyBoardService.addBoardViews(idx);
+        buyLikeAndViewService.addBuyBoardViews(idx);
         BuyBoardDTO buyBoard = buyBoardService.getBoardDetail(idx);
         List<IttachDTO> ittachList = buyBoardService.getIttachList(idx);
         boolean likeCheck = false;
@@ -92,7 +95,7 @@ public class BuyBoardController {
             BuyLikeDTO buyLike = new BuyLikeDTO();
             buyLike.setBoardIdx(Math.toIntExact(idx));
             buyLike.setLoginId(member.getLoginId());
-            likeCheck = buyBoardService.getBuyLikes(buyLike);
+            likeCheck = buyLikeAndViewService.getBuyLikes(buyLike);
         }
         System.out.println("메인 세션 아이디 : "+idxId);
         if(cookie != null && idxId !=null ){
@@ -127,7 +130,7 @@ public class BuyBoardController {
         System.out.println("여기는 상세페이지요");
         model.addAttribute("board", buyBoard);
         model.addAttribute("likeCheck", likeCheck);
-        model.addAttribute("buyLikeCount", buyBoardService.buyLikeTotalCount(idx));
+        model.addAttribute("buyLikeCount", buyLikeAndViewService.buyLikeTotalCount(Math.toIntExact(idx)));
         model.addAttribute("ittachList", ittachList);
         return "buyList/forSale";
     }
@@ -140,15 +143,14 @@ public class BuyBoardController {
 //        buyLike.setBoardIdx((Integer) param.get("idx"));
 //        System.out.println(param.get("sessionId") +"굿굿" + param.get("idx"));
 
-        return buyBoardService.addBuyLikes(buyLike);
+        return buyLikeAndViewService.addBuyLikes(buyLike);
     }
 
     @PostMapping(value ="/buyLikeCancel")
     @ResponseBody
     public int buyLikeAjaxCancel(@RequestBody BuyLikeDTO buyLike){//Stirng,Object로 해도 되네
-        buyBoardService.removeBuyLikes(buyLike.getBoardIdx());
-
-        return buyBoardService.removeBuyLikes(buyLike.getBoardIdx());
+        System.out.println("찜 삭제... "+ buyLike.getLoginId());
+        return buyLikeAndViewService.removeBuyLikes(buyLike);
     }
 
 }

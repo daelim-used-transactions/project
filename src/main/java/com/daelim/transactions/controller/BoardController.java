@@ -1,10 +1,8 @@
 package com.daelim.transactions.controller;
 
-import com.daelim.transactions.dto.AttachDTO;
-import com.daelim.transactions.dto.BoardDTO;
-import com.daelim.transactions.dto.BuyBoardDTO;
-import com.daelim.transactions.dto.MemberDTO;
+import com.daelim.transactions.dto.*;
 import com.daelim.transactions.service.BoardService;
+import com.daelim.transactions.service.likeAndView.BuyLikeAndViewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +26,8 @@ public class BoardController {
     MainController mainController;
     @Autowired
     BoardService boardService;
+    @Autowired
+    BuyLikeAndViewService buyLikeAndViewService;
 
     /**
      * @param board -> 게시글 등록 form 태그로 전달되는 객체
@@ -52,8 +52,10 @@ public class BoardController {
         if (idx == null) {
             return "redirect:/main";
         }
+        buyLikeAndViewService.addSaleBoardViews(idx);
         BoardDTO Board = boardService.getBoardDetail(idx);
         List<AttachDTO> attachList = boardService.getAttachList(idx);
+        boolean likeCheck = false;
 
         if (Board == null || "Y".equals(Board.getDeleteYn())) {
             return "redirect:/main";
@@ -68,6 +70,10 @@ public class BoardController {
 
         if(member != null){
             model.addAttribute("member", member);
+            SaleLikeDTO saleLike = new SaleLikeDTO();
+            saleLike.setBoardIdx(Math.toIntExact(idx));
+            saleLike.setLoginId(member.getLoginId());
+            likeCheck = buyLikeAndViewService.getSaleLikes(saleLike);
         }
         System.out.println("메인 세션 아이디 : "+idxId);
         if(cookie != null && idxId !=null ){
@@ -101,7 +107,27 @@ public class BoardController {
         }
         System.out.println("여기는 상세페이지요");
         model.addAttribute("board", Board);
+        model.addAttribute("likeCheck", likeCheck);
+        model.addAttribute("saleLikeCount", buyLikeAndViewService.SaleLikeTotalCount(Math.toIntExact(idx)));
         model.addAttribute("attachList", attachList);
         return "saleList/saleDetail";
+    }
+
+    @PostMapping(value ="/saleLikeAjax")
+    @ResponseBody
+    public int buyLikeAjaxTest(@RequestBody SaleLikeDTO saleLike){//Stirng,Object로 해도 되네
+//        BuyLikeDTO buyLike = new BuyLikeDTO();
+//        buyLike.setLoginId((String) param.get("sessionId"));
+//        buyLike.setBoardIdx((Integer) param.get("idx"));
+//        System.out.println(param.get("sessionId") +"굿굿" + param.get("idx"));
+
+        return buyLikeAndViewService.addSaleLikes(saleLike);
+    }
+
+    @PostMapping(value ="/saleLikeCancel")
+    @ResponseBody
+    public int buyLikeAjaxCancel(@RequestBody SaleLikeDTO saleLike){//Stirng,Object로 해도 되네
+        System.out.println("찜 삭제... "+ saleLike.getLoginId());
+        return buyLikeAndViewService.removeSaleLikes(saleLike);
     }
 }

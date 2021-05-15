@@ -193,51 +193,5 @@ public class BuyBoardServiceImpl implements BuyBoardService {
 
 
 
-    @Override
-    public void addBoardViews(long idx) {
-        daoBuyBoard.updateBoardViews(idx);
-    }
-
-    @Override
-    public int addBuyLikes(BuyLikeDTO param) {
-        daoBuyBoard.insertBuyLike(param);
-        Map<String, Integer> map = new HashMap<>();
-        int count = daoBuyBoard.selectBuyLikeCount(param.getBoardIdx());
-        map.put("idx", param.getBoardIdx());
-        map.put("count", count);
-        daoBuyBoard.updateBoardBuyLike(map);
-        return count;
-    }
-
-    @Override
-    public int removeBuyLikes(long idx) {
-        daoBuyBoard.deleteBuyLike(idx);
-        Map<String, Integer> map = new HashMap<>();
-        int count = daoBuyBoard.selectBuyLikeCount(idx);
-        map.put("idx", (int)idx);
-        map.put("count", count);
-        daoBuyBoard.updateBoardBuyLike(map);
-        return count;
-    }
-
-    @Override
-    public boolean getBuyLikes(BuyLikeDTO param) {
-        boolean check = false;
-        BuyLikeDTO buyLike = daoBuyBoard.selectBuyLike(param);
-        if(buyLike == null){
-            return check;
-        }
-        else if(buyLike.getBoardIdx() == buyLike.getBoardIdx() && buyLike.getLoginId().equals(param.getLoginId())) {
-            check = true;
-        }
-        return check;
-    }
-
-    @Override
-    public int buyLikeTotalCount(long idx) {
-        return daoBuyBoard.selectBuyLikeCount(idx);
-    }
-
-
 }
 

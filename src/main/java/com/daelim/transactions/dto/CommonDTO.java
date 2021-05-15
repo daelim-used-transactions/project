@@ -24,6 +24,9 @@ public class CommonDTO extends Criteria{
     //삭제 시간
     private LocalDateTime  deleteTime;
 
+    //조회수
+    private int views;
+
     public CommonDTO(){
 
     }

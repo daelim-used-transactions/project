@@ -42,11 +42,5 @@ public interface BuyBoardService {
 
     List<BuyBoardDTO> getAttachList();
 
-    public void addBoardViews(long idx);
-
-    public int addBuyLikes(BuyLikeDTO param);
-    public int removeBuyLikes(long idx);
-    public boolean getBuyLikes(BuyLikeDTO param);
-    public int buyLikeTotalCount(long idx);
 
 }

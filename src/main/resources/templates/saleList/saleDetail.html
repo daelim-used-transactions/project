@@ -22,11 +22,14 @@
             <div class="countbox">
                 <div class="count">
                     <div class="viewCount">
-                        조회수 25
+                        조회수&nbsp;
+                        <p class="views" th:text=${board.views}></p>
                     </div>
                     <div class="likeCount">
-                        <img src="/images/buyList/forsale/free-icon-like-126473.png" alt="#">
-                        찜 4
+                        <img th:if="*{likeCheck == true}" src="/images/buyList/forsale/heart2.png" alt="#" class="heart">
+                        <img th:unless="*{likeCheck == true}" src="/images/buyList/forsale/heart1.png" alt="#" class="heart">
+                        찜&nbsp;
+                        <p class="saleLikeCount" th:text=${saleLikeCount}></p>
                     </div>
                     <div class="commentCount">
                         <img src="/images/buyList/forsale/speech-bubble.png" alt="#">
@@ -35,9 +38,12 @@
                 </div>
                 <div class="uplDate" >
                     작성일&nbsp;
-                    <small th:text="${board.insertTime}">
-                        2017-02-20 13:52
-                    </small>
+                    <small th:text="${board.insertTime}"></small>
+                    <form action="http://www.naver.com">
+                        <button type="submit" class="report">
+                            <img src="/images/buyList/forsale/report.png" alt="report">
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -212,6 +218,62 @@
 		}
 	});
 }
+</script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+        document.querySelector('.likeCount').addEventListener('click', (e)=>{
+            let session =  /*[[ ${session.member} ]]*/;
+            let boardIdx = /*[[ ${board.boardIdx} ]]*/;
+            if(session){
+                if(document.querySelector('.heart').src === "http://localhost:8080/images/buyList/forsale/heart1.png"){
+                    alert('찜을 하셨습니다.');
+                    document.querySelector('.heart').src ="/images/buyList/forsale/heart2.png";
+                    let jsontest = {
+                        loginId : session.loginId,
+                        boardIdx : boardIdx,
+                    };
+                    $.ajax({
+                        url : '/saleLikeAjax',
+                        type : 'POST',
+                        data : JSON.stringify(jsontest),
+                        dataType : 'text',
+                        contentType : "application/json; charset=UTF-8",
+                        success : function(data){
+                            console.log(data);
+                            document.querySelector('.saleLikeCount').innerText = data;
+                        },
+                        error: function(request,status,error){
+                        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                        }
+                 });//ajax end
+                }else{
+                    alert('찜을 취소 하셨습니다.');
+                    let jsontest = {
+                        loginId : session.loginId,
+                        boardIdx : boardIdx,
+                    };
+                    $.ajax({
+                        url : '/saleLikeCancel',
+                        type : 'POST',
+                        data : JSON.stringify(jsontest),
+                        dataType : 'text',
+                        contentType : "application/json; charset=UTF-8",
+                        success : function(data){
+                            console.log(data);
+                            document.querySelector('.saleLikeCount').innerText = data;
+                        },
+                        error: function(request,status,error){
+                        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                        }
+                 });//ajax end
+                    document.querySelector('.heart').src ="/images/buyList/forsale/heart1.png";
+                }
+            }else{
+                alert('찜을 하기 위해서는 로그인을 해야 합니다!!');
+            }
+        });
+
+    /*]]>*/
 </script>
 </body>
 </html>
