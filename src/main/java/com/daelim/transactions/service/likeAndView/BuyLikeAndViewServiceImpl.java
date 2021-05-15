@@ -1,5 +1,6 @@
 package com.daelim.transactions.service.likeAndView;
 
+import com.daelim.transactions.dto.BoardDTO;
 import com.daelim.transactions.dto.BuyLikeDTO;
 import com.daelim.transactions.dto.SaleLikeDTO;
 import com.daelim.transactions.mapper.DaoBuyBoard;
@@ -7,7 +8,9 @@ import com.daelim.transactions.mapper.DaoLikeAndView;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -106,6 +109,13 @@ public class BuyLikeAndViewServiceImpl implements BuyLikeAndViewService {
     @Override
     public int SaleLikeTotalCount(int idx) {
         return daoLikeAndView.selectSaleLikeCount(idx);
+    }
+
+    @Override
+    public List<SaleLikeDTO> getSaleLikes(String loginId) {
+        List<SaleLikeDTO> saleLikeList = Collections.emptyList();
+        saleLikeList = daoLikeAndView.selectSaleLikeListByLoginId(loginId);
+        return saleLikeList;
     }
 
 }

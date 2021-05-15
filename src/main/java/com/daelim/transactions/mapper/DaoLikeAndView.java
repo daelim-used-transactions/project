@@ -4,6 +4,7 @@ import com.daelim.transactions.dto.BuyLikeDTO;
 import com.daelim.transactions.dto.SaleLikeDTO;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
 import java.util.Map;
 
 @Mapper
@@ -23,4 +24,5 @@ public interface DaoLikeAndView {
     public void deleteSaleLike(SaleLikeDTO param);
     public SaleLikeDTO selectSaleLike(SaleLikeDTO param);
     public int selectSaleLikeCount(int idx);
+    public List<SaleLikeDTO> selectSaleLikeListByLoginId(String loginId);
 }

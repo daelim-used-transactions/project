@@ -128,4 +128,14 @@
         WHERE
             boardIdx = #{idx}
     </select>
+
+    <select id="selectSaleLikeListByLoginId" parameterType="String" resultType="com.daelim.transactions.dto.SaleLikeDTO">
+        SELECT
+            loginId,
+            boardIdx
+        FROM
+            salelike
+        WHERE
+            loginId = #{loginId}
+    </select>
 </mapper>

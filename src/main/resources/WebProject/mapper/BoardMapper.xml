@@ -188,4 +188,36 @@
             boardIdx = #{boardIdx}
     </select>
 
+    <select id="selectLikeBoard" parameterType="list" resultType="com.daelim.transactions.dto.BoardDTO">
+        SELECT
+            boardIdx,
+            loginId,
+            title,
+            price,
+            category,
+            contents,
+            deleteYn,
+            insertTime,
+            deleteTime,
+            views,
+            likeCount
+        FROM
+            listboard
+        WHERE
+            deleteYn = 'N'
+        AND
+        boardIdx IN(
+        <choose>
+            <when test="list.size != 0">
+                <foreach collection="list" item="item" separator=",">
+                    #{item.boardIdx}
+                </foreach>
+            </when>
+            <otherwise>
+                0
+            </otherwise>
+        </choose>
+        )
+    </select>
+
 </mapper>

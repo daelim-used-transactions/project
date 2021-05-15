@@ -79,6 +79,17 @@ public class MainController {
         return "/myPage/myPage";
     }
 
+    @GetMapping(value = "/main/myPage/favorites.do")
+    public String toFavorites(HttpServletRequest request, Model model){
+        MemberDTO member = (MemberDTO) request.getSession().getAttribute("member");
+        List<BoardDTO> boardList = boardService.getLikeBoardList(member.getLoginId());
+        List<AttachDTO> attachList = boardService.getAttachList(boardList);
+
+        model.addAttribute("boardList", boardList);
+        model.addAttribute("attachList", attachList);
+        return "/myPage/myPage";
+    }
+
     @GetMapping(value="/main/myPage/profile.do")
     public String toProfile(HttpServletRequest request, Model model){
         MemberDTO member = commonSession(request);

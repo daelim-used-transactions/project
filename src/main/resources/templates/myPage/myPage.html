@@ -17,7 +17,7 @@
                 <a class="asd" href="/main/myPage.do" >등록한 상품</a>
             </li>
             <li class="">
-                <a class="asd" href="">위시 리스트</a>
+                <a class="asd" href="/main/myPage/favorites.do">위시 리스트</a>
             </li>
             <li class="">
                 <a class="asd" href="#">구해요</a>
@@ -37,12 +37,12 @@
     <div id="two">
         <div id="menuCon">
             <div id="profileCon">
-                <a href="/main/myPage/profile.do"><div id="imgDiv"><img th:src="@{${memProfile}}" alt="백그라운드"></div></a>
+                <a href="/main/myPage/profile.do"><div id="imgDiv"><img th:src="@{${session.member.profile}}" alt="백그라운드"></div></a>
                 <div id="profileInfo">
                     <div id ="infoBox" >
                         <div id="myinfo" >
-                            <span th:text="${memNick}" id="nickName"> 태비서 </span><p class="inlineB">님 안녕하세요</p><br>
-                            <span > 태비서 </span><p class="inlineB">가입일 : 2021-03-18</p>
+                            <span th:text="${session.member.nickName}" id="nickName"> 태비서 </span><p class="inlineB">님 안녕하세요</p><br>
+                            <p class="inlineB">가입일 : 2021-03-18</p>
                         </div>
                         <div id="listNum" class="inlineB">
                             <a class="borLeft" href="#">
@@ -60,6 +60,7 @@
             <div id="fileBox">
                 <div id="myContent">
                     <div id="goodsBox" th:if="${not #lists.isEmpty(boardList)}" th:each="row: ${boardList}">
+                        <a class="a_wrap" th:href="@{/main/saleList/view(idx=${row.boardIdx})}">
                             <div th:if="${not #lists.isEmpty(attachList)&&row.boardIdx==img.boardIdx}" th:each="img: ${attachList}" class="goodsImg">
 <!--                                <img th:if="${row.boardIdx==img.boardIdx && img.count == 1}" th:src="@{${img.saveName}}" alt="남성지갑"/>-->
                                     <div  class="goodsImg_back" th:if="${img.count == 1}" th:style="'background-image:url(' + @{${img.saveName}} + '); background-repeat: no-repeat; background-size: 150px 150px;'"></div>
@@ -68,6 +69,7 @@
                                 <h3 th:text="${row.title}">상품 제목</h3>
                                 <p th:text="${row.price}">10,000원</p>
                             </div>
+                        </a>
                     </div>
                     <div th:unless="${not #lists.isEmpty(boardList)}">
                         <div> 조회된 결과가 없습니다.</div>

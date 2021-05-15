@@ -1,11 +1,9 @@
 package com.daelim.transactions.service;
 
-import com.daelim.transactions.dto.AttachDTO;
-import com.daelim.transactions.dto.BoardDTO;
-import com.daelim.transactions.dto.BuyBoardDTO;
-import com.daelim.transactions.dto.PaginationInfo;
+import com.daelim.transactions.dto.*;
 import com.daelim.transactions.mapper.DaoAttach;
 import com.daelim.transactions.mapper.DaoBoard;
+import com.daelim.transactions.service.likeAndView.BuyLikeAndViewService;
 import com.daelim.transactions.utils.FileUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +25,8 @@ public class BoardServiceImpl implements BoardService {
     private final FileUtils fileUtils;
 
     private final DaoAttach daoAttach;
+
+    private final BuyLikeAndViewService buyLikeAndViewService;
 
 
     @Override
@@ -185,6 +185,13 @@ public class BoardServiceImpl implements BoardService {
     public BoardDTO getBoardDetail(long idx) {
 
         return daoBoard.selectBoardDetail(idx);
+    }
+
+    @Override
+    public List<BoardDTO> getLikeBoardList(String loginId) {
+        List<SaleLikeDTO> saleLikeList = buyLikeAndViewService.getSaleLikes(loginId);
+
+        return daoBoard.selectLikeBoard(saleLikeList);
     }
 
 }//end class

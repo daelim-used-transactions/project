@@ -2,6 +2,7 @@ package com.daelim.transactions.mapper;
 
 import com.daelim.transactions.dto.BoardDTO;
 import com.daelim.transactions.dto.BuyBoardDTO;
+import com.daelim.transactions.dto.SaleLikeDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -44,4 +45,10 @@ public interface DaoBoard {
      *  상세페이지 가져오기
      * */
     public BoardDTO selectBoardDetail(Long idx);
+
+    /**
+     * 마이페이지 위시리스트(찜 한 팔아요 게시글)
+     */
+    public List<BoardDTO> selectLikeBoard(List<SaleLikeDTO> params);
+
 }
