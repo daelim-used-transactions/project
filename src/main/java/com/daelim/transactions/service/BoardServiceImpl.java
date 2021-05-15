@@ -52,6 +52,8 @@ public class BoardServiceImpl implements BoardService {
         return (queryResult > 0);
     }
 
+
+
     @Override
     public List<BoardDTO> getBoardList() {
         List<BoardDTO> boardList = Collections.emptyList();
@@ -104,6 +106,19 @@ public class BoardServiceImpl implements BoardService {
 
         if (boardTotalCount > 0) {
             attachList = daoAttach.selectAttachList();
+        }
+
+        return attachList;
+    }
+
+    @Override
+    public List<AttachDTO> getAttachList(long idx) {
+        List<AttachDTO> attachList = Collections.emptyList();
+
+        int boardTotalCount = daoAttach.selectAttachOneCount2(idx);
+
+        if (boardTotalCount > 0) {
+            attachList = daoAttach.selectAttachListByBoardIdx2(idx);
         }
 
         return attachList;

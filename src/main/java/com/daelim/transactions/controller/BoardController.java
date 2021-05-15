@@ -8,10 +8,7 @@ import com.daelim.transactions.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Cookie;
@@ -56,7 +53,7 @@ public class BoardController {
             return "redirect:/main";
         }
         BoardDTO Board = boardService.getBoardDetail(idx);
-//        List<AttachDTO> attachList = boardService.getAttachList(idx);
+        List<AttachDTO> attachList = boardService.getAttachList(idx);
 
         if (Board == null || "Y".equals(Board.getDeleteYn())) {
             return "redirect:/main";
@@ -104,6 +101,7 @@ public class BoardController {
         }
         System.out.println("여기는 상세페이지요");
         model.addAttribute("board", Board);
+        model.addAttribute("attachList", attachList);
         return "saleList/saleDetail";
     }
 }

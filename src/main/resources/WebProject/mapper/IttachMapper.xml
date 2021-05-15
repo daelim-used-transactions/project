@@ -71,22 +71,22 @@
         SELECT
         <include refid="ittachColumns" />
         FROM
-        ittach
+            ittach
         WHERE
-        deleteYn = 'N'
+            deleteYn = 'N'
         ORDER BY
-        boardIdx DESC
+            boardIdx DESC
     </select>
 
     <select id="selectIttachListByBoardIdx"  parameterType="list"  resultType="com.daelim.transactions.dto.IttachDTO">
         SELECT
         <include refid="ittachColumns" />
         FROM
-        ittach
+            ittach
         WHERE
-        deleteYn = 'N'
+            deleteYn = 'N'
         AND
-        boardIdx IN (
+            boardIdx IN (
         <foreach collection="list" item="item" separator=",">
             #{item.boardIdx}
         </foreach>

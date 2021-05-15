@@ -15,6 +15,7 @@ public interface BoardService {
      *  모든 게시판 찾기
      * */
     public List<AttachDTO> getAttachList( );
+    public List<AttachDTO> getAttachList(long idx);
     /**
      * 아이디로 게시판 찾기
      * */
