@@ -158,6 +158,7 @@ public class MainController {
         model.addAttribute("boardList", boardList);
         model.addAttribute("attachList", attachList);
         model.addAttribute("searchType", 2);
+        model.addAttribute("searchCount", boardService.getSearchCount(params));
         return "/search";
     }
 

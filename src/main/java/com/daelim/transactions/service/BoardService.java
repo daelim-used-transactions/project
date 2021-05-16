@@ -35,6 +35,7 @@ public interface BoardService {
      */
     public List<BoardDTO> getSearchBoardList(BoardDTO params);
     public List<BoardDTO> getCategoryBoardList(BoardDTO params);
+    public int getSearchCount(BoardDTO params);
 
 
     /**

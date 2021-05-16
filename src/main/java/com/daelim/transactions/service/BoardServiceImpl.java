@@ -177,6 +177,17 @@ public class BoardServiceImpl implements BoardService {
     }
 
     /**
+     * 검색값에 해당하는 게시글 수 select
+     */
+    @Override
+    public int getSearchCount(BoardDTO params) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("params", params);
+        map.put("searchType", 2);
+        return daoBoard.selectBoardTotalCount2(map);
+    }
+
+    /**
      *  boardIdx에 맞는 글 가져오기
      * */
     @Override
