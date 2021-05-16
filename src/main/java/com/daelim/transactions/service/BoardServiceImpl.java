@@ -3,15 +3,13 @@ package com.daelim.transactions.service;
 import com.daelim.transactions.dto.*;
 import com.daelim.transactions.mapper.DaoAttach;
 import com.daelim.transactions.mapper.DaoBoard;
-import com.daelim.transactions.service.likeAndView.BuyLikeAndViewService;
+import com.daelim.transactions.service.likeAndView.LikeAndViewService;
 import com.daelim.transactions.utils.FileUtils;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.Access;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +24,7 @@ public class BoardServiceImpl implements BoardService {
 
     private final DaoAttach daoAttach;
 
-    private final BuyLikeAndViewService buyLikeAndViewService;
+    private final LikeAndViewService buyLikeAndViewService;
 
 
     @Override

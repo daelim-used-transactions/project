@@ -55,8 +55,18 @@
         </div>
         <div class="div-fixed">
             <div class="div-fixed-one">
-                <div class="fixed-text">찜한상품</div>
-                <div><i class="fas fa-heart">0</i></div>
+                <a th:if=${session.member!=null} href="/main/myPage/favorites.do" style="text-decoration: none">
+                    <div class="fixed-text">찜한상품</div>
+                    <div class ="like-product">
+                        <img th:text="${likeCount}" src="/images/buyList/forsale/heart2.png" alt="#" class="heart-nav">
+                    </div>
+                </a>
+                <a th:unless=${session.member!=null} href="javascript:void(0)" style="text-decoration: none">
+                    <div class="fixed-text">찜한상품</div>
+                    <div class ="like-product">
+                        <i class="fas fa-heart">0</i>
+                    </div>
+                </a>
             </div>
             <div class="div-fixed-two">
                 <div class="fixed-text">최근본상품</div>

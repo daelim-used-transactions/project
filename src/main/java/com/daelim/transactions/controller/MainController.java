@@ -4,6 +4,7 @@ import com.daelim.transactions.adapter.GsonLocalDateTimeAdapter;
 import com.daelim.transactions.dto.*;
 import com.daelim.transactions.service.BoardService;
 import com.daelim.transactions.service.ServiceTest;
+import com.daelim.transactions.service.likeAndView.LikeAndViewService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
@@ -36,6 +37,8 @@ public class MainController {
 
     @Autowired
     BoardService boardService;
+    @Autowired
+    LikeAndViewService likeAndViewService;
 
     @GetMapping(value = "/main")
     public String goMain(Model model, HttpServletRequest request) throws UnsupportedEncodingException {
@@ -43,6 +46,10 @@ public class MainController {
         System.out.println("여기는 메인인데요");
         List<BoardDTO> boardList = boardService.getBoardList();
         List<AttachDTO> attachList = boardService.getAttachList();
+        MemberDTO member = (MemberDTO) request.getSession().getAttribute("member");
+        if(member != null){
+            model.addAttribute("likeCount",likeAndViewService.SaleLikeTotalCount(member.getLoginId()));
+        }
         List<String> cookieList = null;
         String cookieStr ="";
         String idxId = (String)request.getSession().getAttribute("idxId");
@@ -57,7 +64,6 @@ public class MainController {
             cookieList = Arrays.asList(cookieStr.split(","));
         }
         System.out.println(cookieList);
-
         model.addAttribute("boardList", boardList);
         model.addAttribute("attachList", attachList);
         model.addAttribute("cookieList",cookieList);

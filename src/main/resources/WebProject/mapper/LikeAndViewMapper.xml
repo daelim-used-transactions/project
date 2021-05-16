@@ -138,4 +138,13 @@
         WHERE
             loginId = #{loginId}
     </select>
+
+    <select id="selectSaleLikeCountById" parameterType="String"  resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            salelike
+        WHERE
+            loginId = #{loginId}
+    </select>
 </mapper>

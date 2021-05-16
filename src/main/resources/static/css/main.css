@@ -216,6 +216,15 @@ nav .center-align{
     padding: 10px;
 }
 
+.like-product{
+    display: flex;
+    justify-content: center;
+}
+
+.heart-nav{
+    height: 20px;
+}
+
 .div-fixed-two{
     border: 1px solid lightgray;
     width: 100px;

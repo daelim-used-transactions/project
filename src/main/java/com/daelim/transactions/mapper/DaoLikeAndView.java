@@ -25,4 +25,5 @@ public interface DaoLikeAndView {
     public SaleLikeDTO selectSaleLike(SaleLikeDTO param);
     public int selectSaleLikeCount(int idx);
     public List<SaleLikeDTO> selectSaleLikeListByLoginId(String loginId);
+    public int selectSaleLikeCountById(String loginId);
 }
