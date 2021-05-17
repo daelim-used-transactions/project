@@ -30,20 +30,20 @@ public class MainCommentController {
     private  MainCommentService mainCommentService;
 
     @GetMapping(value = "/maincomments/{boardIdx}")
-    public JsonObject getCommentList(@PathVariable("boardIdx") Long boardIdx, @ModelAttribute("params") MainCommentDTO params) {
+    public JsonObject getCommentList(@PathVariable("boardIdx") Long boardIdx, @ModelAttribute("params") MainCommentDTO params, HttpServletRequest request) {
 
         JsonObject jsonObj = new JsonObject();
 
         List<MainCommentDTO> commentList = mainCommentService.getCommentList(params);
-        for (MainCommentDTO m : commentList) {
-            System.out.println("뭘까요: "  +m.getContent());
-        }
+        MemberDTO member = (MemberDTO) request.getSession().getAttribute("member");
         if (CollectionUtils.isEmpty(commentList) == false) {
             Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new GsonLocalDateTimeAdapter()).create();
             JsonArray jsonArr = gson.toJsonTree(commentList).getAsJsonArray();
             jsonObj.add("commentList", jsonArr);
+            if(member != null){
+                jsonObj.add("member", gson.toJsonTree(member).getAsJsonObject());
+            }
         }
-
         return jsonObj;
     }
 

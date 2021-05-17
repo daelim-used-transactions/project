@@ -65,9 +65,7 @@ nav{
     display: flex;
     flex-direction: row;
 }
-.pdView{
-    float:left;
-}
+
 .photo{
     position: relative;
     overflow: hidden;
@@ -177,7 +175,7 @@ nav{
     margin: 10px;
     display: inline-flex;
     position: relative;
-    width: 100%;
+    width: 98%;
     height: 51px;
     border: solid 1px #dadada;
     padding: 10px 90px 10px 14px;

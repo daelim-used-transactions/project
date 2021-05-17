@@ -48,66 +48,64 @@
             </div>
         </div>
         <div class="pdDetail">
-            <div class="pdView">
                 <div class="slider">
                     <div th:if="${not #lists.isEmpty(attachList)}" th:each="img: ${attachList}" class="product-img">
                         <img th:src="@{${img.saveName}}" alt="남성지갑"/>
-                </div>
-            </div>
-            <div class="content">
-                <div class="title">
-                    <div class="pdName">
-                        <h2 th:text=${board.title}></h2>
                     </div>
                 </div>
-                <div class="price">
-                    <h2 th:text=${board.price}></h2>
+                <div class="content">
+                    <div class="title">
+                        <div class="pdName">
+                            <h2 th:text=${board.title}></h2>
+                        </div>
+                    </div>
+                    <div class="price">
+                        <h2 th:text=${board.price}></h2>
+                    </div>
+                    <div class id="explain" th:text=${board.contents}></div>
                 </div>
-                <div class id="explain" th:text=${board.contents}></div>
-            </div>
         </div>
-    </div>
-    <div class="other">
-        <div class="userinfo">
-            <div>
-                <h2>유저 정보</h2>
-            </div>
-            <div>
-                <div class="selfie">
-                    <img src="/images/buyList/forsale/Gender_Neutral_User_icon-icons.com_55902.png" alt="#">
+        <div class="other">
+            <div class="userinfo">
+                <div>
+                    <h2>유저 정보</h2>
                 </div>
-                <div class ="userinfobox">
-                    <h3 th:text="${board.loginId}">PAKA</h3>
+                <div>
+                    <div class="selfie">
+                        <img src="/images/buyList/forsale/Gender_Neutral_User_icon-icons.com_55902.png" alt="#">
+                    </div>
+                    <div class ="userinfobox">
+                        <h3 th:text="${board.loginId}">PAKA</h3>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="combox">
-            <div class="comLabel">
-                <h2>
-                    <label for="combox">Comment</label>
-                </h2>
-            </div>
-            <form method="post">
+            <div class="combox">
+                <div class="comLabel">
+                    <h2>
+                        <label for="combox">Comment</label>
+                    </h2>
+                </div>
+                <div >
                     <span class="comSpace" th:if="${member != null}">
                         <input class="comset" type="text" id="comment" name="comment" maxlength="200"
                                placeholder="상품문의 입력" >
                         <button type="button" th:onclick="js:insertComment([[${board.boardIdx}]])">등록</button>
-                        <button type="button" class =""th:unless="${member !=null}">로그인 시 가능</button>
                     </span>
-                <span class="comSpace" th:unless="${member != null}">
+                    <span class="comSpace" th:unless="${member != null}">
                             <input class="comset" type="text"  name="comment" maxlength="200"
                                    disabled placeholder="로그인 시 이용 가능합니다.">
                             <button type="button">등록</button>
                     </span>
-                <ul class="relpd">
-                    <!--                    <li>-->
-                    <!--                        <span class="name"> 김태양</span>-->
-                    <!--                        <span class="time">ㅇㅁㄴㅇㄴㅁㅇㅁㄴ</span>-->
-                    <!--                        <span class="desc">ㅇㅁㄴㅇㅇㅁㄴ</span>-->
-                    <!--                        <button type="button" class="delBtn" aria-hidden="true">버튼</button>-->
-                    <!--                    </li>-->
-                </ul>
-            </form>
+                    <ul class="relpd">
+                        <!--                    <li>-->
+                        <!--                        <span class="name"> 김태양</span>-->
+                        <!--                        <span class="time">ㅇㅁㄴㅇㄴㅁㅇㅁㄴ</span>-->
+                        <!--                        <span class="desc">ㅇㅁㄴㅇㅇㅁㄴ</span>-->
+                        <!--                        <button type="button" class="delBtn" aria-hidden="true">버튼</button>-->
+                        <!--                    </li>-->
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -150,6 +148,7 @@
         });
     </script>
 <script>
+
     $(function() {
 		printCommentList();
 	});
@@ -159,21 +158,42 @@
 		let uri = "[[ @{/maincomments/} + ${board.boardIdx} ]]";
 
 		$.get(uri, function(response) {
-            console.log(response)
+
 			if (response !== null) {
 				var commentsHtml = "";
 
 				$(response.commentList).each(function(idx, comment) {
-				    console.log(comment.content)
-					commentsHtml += `
-						<li>
-							<h4 class="name" style="display : inline-block";>${comment.writer}</h4>
-							<button type="button" class="btn"><i class="fa fa-close" aria-hidden="true"></i></button>
-							<span class="time">${moment(comment.insertTime).format('YYYY-MM-DD HH:mm:ss')}</span>
-							<span class="desc">${comment.content}</span>
-						</li>
-						<hr>
-					`;
+				    if(response.member !== undefined){
+                        if(response.member.nickName === comment.writer ){
+                            commentsHtml += `
+                                <li>
+                                    <h4 class="name" style="display : inline-block";>${comment.writer}</h4>
+                                    <button type="button" class="btn" onclick="js:deleteComment(${comment.idx})"><i class="fa fa-close" aria-hidden="true"></i></button>
+                                    <span class="time">${moment(comment.insertTime).format('YYYY-MM-DD HH:mm:ss')}</span>
+                                    <span class="desc">${comment.content}</span>
+                                </li>
+                                <hr>
+                            `;
+                        }else{
+                        commentsHtml += `
+                            <li>
+                                <h4 class="name" style="display : inline-block";>${comment.writer}</h4>
+                                <span class="time">${moment(comment.insertTime).format('YYYY-MM-DD HH:mm:ss')}</span>
+                                <span class="desc">${comment.content}</span>
+                            </li>
+                            <hr>
+                        `;
+                        }
+                    }else{
+                     commentsHtml += `
+                            <li>
+                                <h4 class="name" style="display : inline-block";>${comment.writer}</h4>
+                                <span class="time">${moment(comment.insertTime).format('YYYY-MM-DD HH:mm:ss')}</span>
+                                <span class="desc">${comment.content}</span>
+                            </li>
+                            <hr>
+                        `;
+                    }
 				});
 
 				$(".relpd").html(commentsHtml);
@@ -217,6 +237,35 @@
 			return false;
 		}
 	});
+}
+
+function deleteComment(idx){
+    if (!confirm('댓글을 삭제하시겠어요?')) {
+            return false;
+        }
+
+    let uri = [[ @{/maincomments/} ]] + idx;
+    let headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "DELETE"};
+    $.ajax({
+		url: uri,
+		type: "DELETE",
+		headers: headers,
+		dataType: "json",
+		success: function(response) {
+			if (response.result == false) {
+				alert("댓글 삭제에 실패하였습니다.");
+				return false;
+			}
+
+			printCommentList();
+
+		},
+		error: function(xhr, status, error) {
+			alert("에러가 발생하였습니다.");
+			return false;
+		}
+	});
+
 }
 </script>
 <script th:inline="javascript">

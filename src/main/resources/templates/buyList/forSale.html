@@ -95,7 +95,6 @@
                         <input class="comset" type="text" id="comment" name="comment" maxlength="200"
                                placeholder="상품문의 입력" >
                         <button type="button" th:onclick="js:insertComment([[${board.boardIdx}]])">등록</button>
-                        <button type="button" class =""th:unless="${member !=null}">로그인 시 가능</button>
                     </span>
                     <span class="comSpace" th:unless="${member != null}">
                             <input class="comset" type="text"  name="comment" maxlength="200"
@@ -230,15 +229,37 @@
 				var commentsHtml = "";
 
 				$(response.commentList).each(function(idx, comment) {
-					commentsHtml += `
-						<li>
-							<h4 class="name" style="display : inline-block";>${comment.writer}</h4>
-							<button type="button" class="btn btn-xs btn-circle"><i class="fa fa-close" aria-hidden="true"></i></button>
-							<span class="time">${moment(comment.insertTime).format('YYYY-MM-DD HH:mm:ss')}</span>
-							<span class="desc">${comment.content}</span>
-						</li>
-						<hr>
-					`;
+				    if(response.member !== undefined){
+                        if(response.member.nickName === comment.writer ){
+                            commentsHtml += `
+                                <li>
+                                    <h4 class="name" style="display : inline-block";>${comment.writer}</h4>
+                                    <button type="button" class="btn" onclick="js:deleteComment(${comment.idx})"><i class="fa fa-close" aria-hidden="true"></i></button>
+                                    <span class="time">${moment(comment.insertTime).format('YYYY-MM-DD HH:mm:ss')}</span>
+                                    <span class="desc">${comment.content}</span>
+                                </li>
+                                <hr>
+                            `;
+                        }else{
+                        commentsHtml += `
+                            <li>
+                                <h4 class="name" style="display : inline-block";>${comment.writer}</h4>
+                                <span class="time">${moment(comment.insertTime).format('YYYY-MM-DD HH:mm:ss')}</span>
+                                <span class="desc">${comment.content}</span>
+                            </li>
+                            <hr>
+                        `;
+                        }
+                    }else{
+                     commentsHtml += `
+                            <li>
+                                <h4 class="name" style="display : inline-block";>${comment.writer}</h4>
+                                <span class="time">${moment(comment.insertTime).format('YYYY-MM-DD HH:mm:ss')}</span>
+                                <span class="desc">${comment.content}</span>
+                            </li>
+                            <hr>
+                        `;
+                    }
 				});
 
 				$(".relpd").html(commentsHtml);
@@ -286,6 +307,36 @@
 			return false;
 		}
 	});
+}
+
+
+function deleteComment(idx){
+    if (!confirm('댓글을 삭제하시겠어요?')) {
+            return false;
+        }
+
+    let uri = [[ @{/buycomments/} ]] + idx;
+    let headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "DELETE"};
+    $.ajax({
+		url: uri,
+		type: "DELETE",
+		headers: headers,
+		dataType: "json",
+		success: function(response) {
+			if (response.result == false) {
+				alert("댓글 삭제에 실패하였습니다.");
+				return false;
+			}
+
+			printCommentList();
+
+		},
+		error: function(xhr, status, error) {
+			alert("에러가 발생하였습니다.");
+			return false;
+		}
+	});
+
 }
 </script>
 </body>

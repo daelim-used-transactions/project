@@ -140,6 +140,8 @@ body{
 .goodsImg_back{
     width: 150px;
     height: 150px;
+    border: none;
+    border-radius: 24px;
 }
 .goodsCon{
     width: 94%;

@@ -2,6 +2,7 @@ package com.daelim.transactions.controller;
 
 import com.daelim.transactions.adapter.GsonLocalDateTimeAdapter;
 import com.daelim.transactions.dto.BuyCommentDTO;
+import com.daelim.transactions.dto.MainCommentDTO;
 import com.daelim.transactions.dto.MemberDTO;
 import com.daelim.transactions.service.BuyCommentService;
 import com.daelim.transactions.service.ServiceTest;
@@ -28,17 +29,20 @@ public class BuyCommentController {
     private ServiceTest serviceTest;
 
     @GetMapping(value = "/buycomments/{boardIdx}")
-    public JsonObject getCommentList(@PathVariable("boardIdx") Long boardIdx, @ModelAttribute("params") BuyCommentDTO params) {
+    public JsonObject getCommentList(@PathVariable("boardIdx") Long boardIdx, @ModelAttribute("params") BuyCommentDTO params, HttpServletRequest request) {
 
         JsonObject jsonObj = new JsonObject();
 
         List<BuyCommentDTO> commentList = commentService.getCommentList(params);
+        MemberDTO member = (MemberDTO) request.getSession().getAttribute("member");
         if (CollectionUtils.isEmpty(commentList) == false) {
             Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new GsonLocalDateTimeAdapter()).create();
             JsonArray jsonArr = gson.toJsonTree(commentList).getAsJsonArray();
             jsonObj.add("commentList", jsonArr);
+            if(member != null){
+                jsonObj.add("member", gson.toJsonTree(member).getAsJsonObject());
+            }
         }
-
         return jsonObj;
     }
 
@@ -69,6 +73,20 @@ public class BuyCommentController {
             jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
         }
 
+        return jsonObj;
+    }
+
+    @DeleteMapping(value="/buycomments/{idx}")
+    public JsonObject deleteComment(@PathVariable("idx") final Long idx ){
+        JsonObject jsonObj = new JsonObject();
+        try{
+            boolean isDeleted = commentService.deleteComment(idx);
+            jsonObj.addProperty("result",isDeleted);
+        }catch (DataAccessException e){
+            jsonObj.addProperty("message","데이터베이스 처리 과정에 문제가 발생하였습니다.");
+        }catch (Exception e){
+            jsonObj.addProperty("message","시스템에 문제가 발생하였습니다.");
+        }
         return jsonObj;
     }
 }

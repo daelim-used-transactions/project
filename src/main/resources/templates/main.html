@@ -31,7 +31,8 @@
                 <a class="a_wrap" th:href="@{/main/saleList/view(idx=${row.boardIdx})}">
                     <div class="product-wrap">
                         <div  class="product-img">
-                            <div th:if="${not #lists.isEmpty(attachList) && row.boardIdx==img.boardIdx && img.count==1}" th:each="img: ${attachList}" class="product-img">
+                            <div class="img-hover"></div>
+                            <div th:if="${not #lists.isEmpty(attachList) && row.boardIdx==img.boardIdx && img.count==1}" th:each="img: ${attachList}" class="pho">
                                 <img th:src="@{${img.saveName}}" alt="남성지갑"/>
         <!--          \images\board\210421            -->
                             </div>
@@ -138,13 +139,15 @@
                         const productPrice = document.createElement('div');
                         const time = document.createElement('span');
                         const imgContents = document.createElement('img');
+                        const dHover = document.createElement('div');
 
-
+                        dHover.setAttribute('class', 'img-hover');
                         productLink.setAttribute('class', 'a_wrap');
                         productList.setAttribute('class', 'product-list');
                         productWrap.setAttribute('class', 'product-wrap');
                         productImg.setAttribute('class', 'product-img');
                         productImg2.setAttribute('class', 'product-img');
+                        productImg2.setAttribute('class', 'pho');
                         productText.setAttribute('class', 'product-text');
                         productInfo.setAttribute('class', 'product-info');
                         productPrice.setAttribute('class', 'product-price');
@@ -165,6 +168,7 @@
                        productList.appendChild(productLink);
                        productLink.appendChild(productWrap);
                        productWrap.appendChild(productImg);
+                       productImg.appendChild(dHover);
                        productImg.appendChild(productImg2);
                        productImg2.appendChild(imgContents);
                        productImg.appendChild(productText);
@@ -173,6 +177,12 @@
                        productInfo.appendChild(productPrice);
                        productInfo.appendChild(time);
 
+                        productWrap.addEventListener('mouseover',function(e){
+                            dHover.style.display='block';
+                        });
+                        productWrap.addEventListener('mouseout',function(e){
+                            dHover.style.display='none';
+                        });
                        productLink.setAttribute('href',`/main/saleList/view?idx=${board.boardIdx}`);
                     }
                 },
@@ -182,6 +192,21 @@
             });
       	}
 	/*]]>*/
+</script>
+<script>
+    let hover = document.querySelectorAll('.img-hover');
+    let Pwrap = document.querySelectorAll('.product-wrap');
+    console.log(Pwrap[1]);
+
+    for(let i of Pwrap){
+        i.addEventListener('mouseover',function(e){
+            console.log(i.childNodes[1].childNodes[1])
+           i.childNodes[1].childNodes[1].style.display='block';
+        });
+        i.addEventListener('mouseout',function(e){
+           i.childNodes[1].childNodes[1].style.display='none';
+        });
+    }
 </script>
 </body>
 </html>
