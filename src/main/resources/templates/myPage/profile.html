@@ -21,7 +21,7 @@
                 <a class="asd"href="/main/myPage/favorites.do">위시 리스트</a>
             </li>
             <li class="">
-                <a class="asd"href="#">구해요</a>
+                <a class="asd"href="/main/myPage/buyList.do">구해요</a>
             </li>
             <li class="">
                 <a class="asd"href="#">1:1 문의</a>
@@ -43,16 +43,16 @@
                     <div id ="infoBox" >
                         <div id="myinfo" >
                             <span th:text="${memNick}" id="nickName"> 태 </span><p class="inlineB">님 안녕하세요</p><br>
-                            <p class="inlineB">가입일 : 2021-03-18</p>
+                            <p class="inlineB" th:text="${createTime}">가입일 : 2021-03-18</p>
                         </div>
                         <div id="listNum" class="inlineB">
-                            <a class="borLeft" href="#">
+                            <a class="borLeft" href="/main/myPage.do">
                                 <i class=""></i>팔아요 &gt;
-                                <strong>5,319</strong>
+                                <strong th:text="${saleListCount}">5,319</strong>
                             </a>
-                            <a class="borLeft" href="#">
+                            <a class="borLeft" href="/main/myPage/buyList.do">
                                 <i class=""></i>구해요 &gt;
-                                <strong>4,600</strong>
+                                <strong th:text="${buyListCount}">4,600</strong>
                             </a>
                         </div>
                     </div>

@@ -57,7 +57,7 @@
                         </div>
 
                         <div  class="product-img" style="height: 80px;">
-                            <div th:if="${not #lists.isEmpty(ittachList) && row.boardIdx==img.boardIdx && img.count==1}" th:each="img: ${ittachList}" class="product-img">
+                            <div th:if="${not #lists.isEmpty(ittachList) && row.boardIdx==img.boardIdx && img.count==1 &&img.size != -1}" th:each="img: ${ittachList}" class="product-img">
                                 <img th:src="@{${img.saveName}}" alt="남성지갑"/>
                                 <!--          \images\board\210421            -->
                             </div>

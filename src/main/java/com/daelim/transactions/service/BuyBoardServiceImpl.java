@@ -191,6 +191,11 @@ public class BuyBoardServiceImpl implements BuyBoardService {
         return null;
     }
 
+    @Override
+    public void removeBuyBoardList(List<Integer> params) {
+        System.out.println(params);
+        daoBuyBoard.deleteBuyBoardList(params);
+    }
 
 
 }

@@ -27,7 +27,7 @@ public class FileUtils {
     //private final String uploadPath = Paths.get("src", "main", "resources","static","images","profile", today).toString();
     private final String uploadPath = Paths.get("c:", "fileUpload", "images","profile", today).toString();
     private final String uploadBoardPath = Paths.get("c:", "fileUpload", "images","profile","board", today).toString();
-    private final String uploadBuyBoardPath = Paths.get("c:", "fileUpload", "images","buyboard", today).toString();
+    private final String uploadBuyBoardPath = Paths.get("c:", "fileUpload", "images","profile","buyboard", today).toString();
     /**
      * 서버에 생성할 파일명을 처리할 랜덤 문자열 반환
      * @return 랜덤 문자열
@@ -140,13 +140,24 @@ public class FileUtils {
      */
     public List<IttachDTO> uploadBoardFile(MultipartFile[] files, int boardIdx) {
 
-        /* 파일이 비어있으면 비어있는 리스트 반환 */
-        if (files[0].getSize() < 1) {
-            return Collections.emptyList();
-        }
+
 
         /* 업로드 파일 정보를 담을 비어있는 리스트 */
         List<IttachDTO> attachList = new ArrayList<>();
+
+        /* 파일이 비어있으면 비어있는 리스트 반환 */
+        if (files[0].getSize() < 1) {
+            /* 파일 정보 저장 */
+            IttachDTO attach = new IttachDTO();
+            attach.setBoardIdx(boardIdx);
+            //attach.setOriginalName(file.getOriginalFilename());
+            attach.setSaveName("/images/buyList/basicImg.png");
+            attach.setSize(-1);
+            attach.setCount(1);
+
+            attachList.add(attach);
+            return attachList;
+        }
 
         /* uploadPath에 해당하는 디렉터리가 존재하지 않으면, 부모 디렉터리를 포함한 모든 디렉터리를 생성 */
         File dir = new File(uploadBuyBoardPath);

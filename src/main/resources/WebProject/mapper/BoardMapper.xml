@@ -220,4 +220,25 @@
         )
     </select>
 
+    <update id="deleteBoardList" parameterType="list">
+        UPDATE
+            listboard
+        SET
+            deleteYn = 'Y'
+        WHERE
+            deleteYn = 'N'
+        AND
+            boardIdx IN(
+        <choose>
+            <when test="list.size != 0">
+                <foreach collection="list" item="item" separator=",">
+                    #{item}
+                </foreach>
+            </when>
+            <otherwise>
+                0
+            </otherwise>
+        </choose>
+        )
+    </update>
 </mapper>

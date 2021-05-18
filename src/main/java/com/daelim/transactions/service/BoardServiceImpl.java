@@ -180,7 +180,7 @@ public class BoardServiceImpl implements BoardService {
      * 검색값에 해당하는 게시글 수 select
      */
     @Override
-    public int getSearchCount(BoardDTO params) {
+                public int getSearchCount(BoardDTO params) {
         Map<String, Object> map = new HashMap<>();
         map.put("params", params);
         map.put("searchType", 2);
@@ -201,6 +201,12 @@ public class BoardServiceImpl implements BoardService {
         List<SaleLikeDTO> saleLikeList = buyLikeAndViewService.getSaleLikes(loginId);
 
         return daoBoard.selectLikeBoard(saleLikeList);
+    }
+
+    @Override
+    public void removeBoardList(List<Integer> params) {
+        System.out.println(params);
+        daoBoard.deleteBoardList(params);
     }
 
 }//end class

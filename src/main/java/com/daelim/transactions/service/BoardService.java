@@ -31,7 +31,6 @@ public interface BoardService {
     /**
      * getSearchBoardList -> 검색값에 따라 게시글 검색
      * getCategoryBoardList -> 카테고리 값에 따라 게시글 검색
-     *
      */
     public List<BoardDTO> getSearchBoardList(BoardDTO params);
     public List<BoardDTO> getCategoryBoardList(BoardDTO params);
@@ -47,4 +46,8 @@ public interface BoardService {
      * 마이페이지 위시리스트(찜 한 팔아요 게시글)
      */
     public List<BoardDTO> getLikeBoardList(String loginId);
+    /**
+     * 마이페이지 게시글 삭제
+     */
+    public void removeBoardList(List<Integer> params);
 }

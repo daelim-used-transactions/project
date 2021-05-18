@@ -362,7 +362,7 @@
             nFiles++;
             }
         }
-        }else if(target.options[target.selectedIndex].value === 'default'){
+        if(target.options[target.selectedIndex].value === 'default'){
             alert("카테고리를 선택해 주세요.");
             return false;
         }else{

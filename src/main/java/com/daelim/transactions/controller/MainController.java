@@ -3,6 +3,7 @@ package com.daelim.transactions.controller;
 import com.daelim.transactions.adapter.GsonLocalDateTimeAdapter;
 import com.daelim.transactions.dto.*;
 import com.daelim.transactions.service.BoardService;
+import com.daelim.transactions.service.BuyBoardService;
 import com.daelim.transactions.service.ServiceTest;
 import com.daelim.transactions.service.likeAndView.LikeAndViewService;
 import com.google.gson.Gson;
@@ -26,6 +27,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 
@@ -37,6 +39,8 @@ public class MainController {
 
     @Autowired
     BoardService boardService;
+    @Autowired
+    BuyBoardService buyBoardService;
     @Autowired
     LikeAndViewService likeAndViewService;
 
@@ -77,12 +81,34 @@ public class MainController {
 
         List<BoardDTO> boardList = boardService.getBoardList(member.getLoginId());
         List<AttachDTO> attachList = boardService.getAttachList(boardList);
-
+        List<BuyBoardDTO> buyBoardList = buyBoardService.getBoardList(member.getLoginId());
+        String date = (String)member.getCreateTime().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        String createDate ="가입일 : " + date.substring(0, 4) + "년 " + date.substring(4, 6) + "월 " +date.substring(6) +"일 ";
+        model.addAttribute("createTime",createDate);
         model.addAttribute("boardList", boardList);
         model.addAttribute("attachList", attachList);
         model.addAttribute("memNick",member.getNickName());
         model.addAttribute("memProfile",member.getProfile());
+        model.addAttribute("buyListCount", buyBoardList.size());
         return "/myPage/myPage";
+    }
+
+    @GetMapping(value = "/main/myPage/buyList.do")
+    public String fromMyPageToBuyList(HttpServletRequest request, Model model){
+        MemberDTO member = (MemberDTO) request.getSession().getAttribute("member");
+
+        List<BuyBoardDTO> boardList = buyBoardService.getBoardList(member.getLoginId());
+        List<IttachDTO> attachList = buyBoardService.getAttachList(boardList);
+        List<BoardDTO> saleBoardList = boardService.getBoardList(member.getLoginId());
+        String date = (String)member.getCreateTime().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        String createDate ="가입일 : " + date.substring(0, 4) + "년 " + date.substring(4, 6) + "월 " +date.substring(6) +"일 ";
+        model.addAttribute("createTime",createDate);
+        model.addAttribute("boardList", boardList);
+        model.addAttribute("attachList", attachList);
+        model.addAttribute("memNick",member.getNickName());
+        model.addAttribute("memProfile",member.getProfile());
+        model.addAttribute("saleListCount", saleBoardList.size());
+        return "/myPage/myPageByBuyList";
     }
 
     @GetMapping(value = "/main/myPage/favorites.do")
@@ -90,20 +116,33 @@ public class MainController {
         MemberDTO member = (MemberDTO) request.getSession().getAttribute("member");
         List<BoardDTO> boardList = boardService.getLikeBoardList(member.getLoginId());
         List<AttachDTO> attachList = boardService.getAttachList(boardList);
-
+        List<BuyBoardDTO> buyBoardList = buyBoardService.getBoardList(member.getLoginId());
+        List<BoardDTO> saleBoardList = boardService.getBoardList(member.getLoginId());
+        String date = (String)member.getCreateTime().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        String createDate ="가입일 : " + date.substring(0, 4) + "년 " + date.substring(4, 6) + "월 " +date.substring(6) +"일 ";
+        model.addAttribute("createTime",createDate);
         model.addAttribute("boardList", boardList);
         model.addAttribute("attachList", attachList);
-        return "/myPage/myPage";
+        model.addAttribute("buyListCount", buyBoardList.size());
+        model.addAttribute("saleListCount", saleBoardList.size());
+        return "/myPage/favorites";
     }
 
     @GetMapping(value="/main/myPage/profile.do")
     public String toProfile(HttpServletRequest request, Model model){
         MemberDTO member = commonSession(request);
         MemberDTO newMemberPw = new MemberDTO();
+        List<BuyBoardDTO> buyBoardList = buyBoardService.getBoardList(member.getLoginId());
+        List<BoardDTO> saleBoardList = boardService.getBoardList(member.getLoginId());
+        String date = (String)member.getCreateTime().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        String createDate ="가입일 : " + date.substring(0, 4) + "년 " + date.substring(4, 6) + "월 " +date.substring(6) +"일 ";
+        model.addAttribute("createTime",createDate);
         model.addAttribute("memNick",member.getNickName());
         model.addAttribute("memProfile",member.getProfile());
         model.addAttribute("memName",member.getName());
         model.addAttribute("member",newMemberPw);
+        model.addAttribute("buyListCount", buyBoardList.size());
+        model.addAttribute("saleListCount", saleBoardList.size());
         System.out.println(member.getNickName());
         return "/myPage/profile";
     }

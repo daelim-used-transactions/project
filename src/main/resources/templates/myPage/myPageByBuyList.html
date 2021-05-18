@@ -46,13 +46,13 @@
                             <p class="inlineB" th:text="${createTime}">가입일 : 2021-03-18</p>
                         </div>
                         <div id="listNum" class="inlineB">
-                            <a class="borLeft" href="javascript:void(0)">
+                            <a class="borLeft" href="/main/myPage.do">
                                 <i class=""></i>팔아요 &gt;
-                                <strong th:text="${#lists.size(boardList)}">5,319</strong>
+                                <strong th:text="${saleListCount}">5,319</strong>
                             </a>
-                            <a class="borLeft" href="/main/myPage/buyList.do">
+                            <a class="borLeft" href="javascript:void(0)">
                                 <i class=""></i>구해요 &gt;
-                                <strong th:text="${buyListCount}">4,600</strong>
+                                <strong th:text="${#lists.size(boardList)}">4,600</strong>
                             </a>
                         </div>
                     </div>
@@ -67,14 +67,13 @@
                 </div>
                 <div id="myContent">
                     <div id="goodsBox" th:if="${not #lists.isEmpty(boardList)}" th:each="row: ${boardList}">
-                        <a class="a_wrap" th:href="@{/main/saleList/view(idx=${row.boardIdx})}">
+                        <a class="a_wrap" th:href="@{/main/buyList/view(idx=${row.boardIdx})}">
                             <div th:if="${not #lists.isEmpty(attachList)&&row.boardIdx==img.boardIdx&&img.count==1}" th:each="img: ${attachList}" class="goodsImg">
-<!--                                <img th:if="${row.boardIdx==img.boardIdx && img.count == 1}" th:src="@{${img.saveName}}" alt="남성지갑"/>-->
-                                    <div  class="goodsImg_back" th:if="${img.count == 1}" th:style="'background-image:url(' + @{${img.saveName}} + '); background-repeat: no-repeat; background-size: 150px 150px;'"></div>
+                                <!--                                <img th:if="${row.boardIdx==img.boardIdx && img.count == 1}" th:src="@{${img.saveName}}" alt="남성지갑"/>-->
+                                <div  class="goodsImg_back" th:if="${img.count == 1}" th:style="'background-image:url(' + @{${img.saveName}} + '); background-repeat: no-repeat; background-size: 150px 150px;'"></div>
                             </div>
                             <div class="goodsCon">
                                 <h3 th:text="${row.title}">상품 제목</h3>
-                                <p th:text="${row.price}">10,000원</p>
                             </div>
                         </a>
                         <input class="delete-check" type="checkbox" name = "remove" th:value =${row.boardIdx}>
@@ -87,6 +86,6 @@
         </div>
     </div>
 </div>
-<script src="/scripts/myPage/boardListRemove.js"></script>
+<script src="/scripts/myPage/buyBoardListRemove.js"></script>
 </body>
 </html>

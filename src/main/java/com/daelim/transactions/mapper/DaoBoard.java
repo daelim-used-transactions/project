@@ -50,5 +50,8 @@ public interface DaoBoard {
      * 마이페이지 위시리스트(찜 한 팔아요 게시글)
      */
     public List<BoardDTO> selectLikeBoard(List<SaleLikeDTO> params);
-
+    /**
+     * 마이페이지 게시글 삭제
+     */
+    public void deleteBoardList(List<Integer> params);
 }

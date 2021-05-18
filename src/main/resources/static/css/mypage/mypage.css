@@ -47,6 +47,27 @@ body{
     font-size: 1vw;
     cursor: pointer;
 }
+
+.deleteBox{
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+#delete-board{
+    height: 30px;
+    width: 70px;
+    background-color: white;
+    border-color: rgb(222,222,222);
+    margin: 5px 5px 5px 5px;
+    cursor: pointer;
+}
+
+#delete-board img{
+        width: 15px;
+        height: 15px;
+}
+
 #myContent{
     display: flex;
     flex-direction: row;

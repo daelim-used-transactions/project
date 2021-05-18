@@ -134,7 +134,9 @@ public class BuyBoardController {
         model.addAttribute("board", buyBoard);
         model.addAttribute("likeCheck", likeCheck);
         model.addAttribute("buyLikeCount", likeAndViewService.buyLikeTotalCount(Math.toIntExact(idx)));
-        model.addAttribute("ittachList", ittachList);
+        if(!ittachList.isEmpty() && ittachList.get(0).getSize() != -1){
+            model.addAttribute("ittachList", ittachList);
+        }
         return "buyList/forSale";
     }
 
@@ -156,4 +158,11 @@ public class BuyBoardController {
         return likeAndViewService.removeBuyLikes(buyLike);
     }
 
+    @PostMapping(value ="/removebuyboard")
+    @ResponseBody
+    public String boardListByRemoveIdx(@RequestParam(value="removeIdxArray[]")List<Integer> removeIdx){
+        System.out.println("삭제할 게시글 번호들"+ removeIdx);
+        buyBoardService.removeBuyBoardList(removeIdx);
+        return "넘어감?!";
+    }
 }

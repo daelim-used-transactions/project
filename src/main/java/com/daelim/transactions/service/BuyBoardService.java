@@ -39,8 +39,10 @@ public interface BuyBoardService {
 
     public BuyBoardDTO getBoardDetail(long idx);
 
-
+    /**
+     * 마이페이지 구해요 게시글 삭제
+     */
     List<BuyBoardDTO> getAttachList();
 
-
+    public void removeBuyBoardList(List<Integer> params);
 }

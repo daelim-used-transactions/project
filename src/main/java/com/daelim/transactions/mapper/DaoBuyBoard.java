@@ -39,4 +39,8 @@ public interface DaoBuyBoard {
      *  상세페이지 가져오기
      * */
     public BuyBoardDTO selectBoardDetail(Long idx);
+    /**
+     * 마이페이지 구해요 게시글 삭제
+     */
+    public void deleteBuyBoardList(List<Integer> params);
 }

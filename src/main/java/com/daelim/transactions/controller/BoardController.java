@@ -115,7 +115,7 @@ public class BoardController {
 
     @PostMapping(value ="/saleLikeAjax")
     @ResponseBody
-    public int buyLikeAjaxTest(@RequestBody SaleLikeDTO saleLike){//Stirng,Object로 해도 되네
+    public int buyLikeAjaxTest(@RequestBody SaleLikeDTO saleLike){
 //        BuyLikeDTO buyLike = new BuyLikeDTO();
 //        buyLike.setLoginId((String) param.get("sessionId"));
 //        buyLike.setBoardIdx((Integer) param.get("idx"));
@@ -126,8 +126,17 @@ public class BoardController {
 
     @PostMapping(value ="/saleLikeCancel")
     @ResponseBody
-    public int buyLikeAjaxCancel(@RequestBody SaleLikeDTO saleLike){//Stirng,Object로 해도 되네
+    public int buyLikeAjaxCancel(@RequestBody SaleLikeDTO saleLike){
         System.out.println("찜 삭제... "+ saleLike.getLoginId());
         return likeAndViewService.removeSaleLikes(saleLike);
     }
+
+    @PostMapping(value ="/removeboard")
+    @ResponseBody
+    public String boardListByRemoveIdx(@RequestParam(value="removeIdxArray[]")List<Integer> removeIdx){
+        System.out.println("삭제할 게시글 번호들"+ removeIdx);
+        boardService.removeBoardList(removeIdx);
+        return "넘어감?";
+    }
+
 }

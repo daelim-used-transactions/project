@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Setter@Getter@Builder@AllArgsConstructor
@@ -29,7 +30,7 @@ public class MemberDTO {
     private String status;
 
     //계정 생성 시간
-    private Date createTime;
+    private LocalDateTime createTime;
 
     // 로그인 여부
     private String loginFlag;
