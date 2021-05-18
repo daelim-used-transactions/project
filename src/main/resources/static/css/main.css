@@ -10,7 +10,7 @@
 
 a:link { color:black; text-decoration: none;}
 a:visited { color:black; text-decoration: none;}
-a:hover { color:black; text-decoration: underline;}
+a:hover { color:black; text-decoration: none;}
 .bx-prev{
     display:none;
 }
@@ -29,7 +29,7 @@ header{
     background-color:#6495ED;
 }
 
-.center-align{   
+.center-align{
     margin: 0 auto;
     width: 1024px;
 }
@@ -123,7 +123,7 @@ nav .center-align{
     margin: 7px 0 7px 0;
 }
 
-.fieldset-block{    
+.fieldset-block{
     margin-bottom: 10px;
     margin-left: 120px;
 }
@@ -145,14 +145,14 @@ nav .center-align{
     margin-left: 8px;
     outline: none;
     margin-bottom: 2px;
-    
+
 }
 
 .center-align fieldset button{
     border: none;
     background-color: white;
     margin-left: 20px;
-    outline: none; 
+    outline: none;
     cursor: pointer;
 }
 
@@ -176,6 +176,9 @@ nav .center-align{
     justify-content: center;
     align-items: center;
     margin-right: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    color: rgb(102, 102, 102);
 }
 
 .nav-util a img{
@@ -205,6 +208,7 @@ nav .center-align{
     width: 100px;
     height: 315px;
     top: 65px;
+    z-index: 1;
     right: calc(50% - 617px);
 }
 
@@ -214,15 +218,6 @@ nav .center-align{
     flex-basis: 60px;
     margin-bottom: 5px;
     padding: 10px;
-}
-
-.like-product{
-    display: flex;
-    justify-content: center;
-}
-
-.heart-nav{
-    height: 20px;
 }
 
 .div-fixed-two{
@@ -289,7 +284,7 @@ main .center-align{
 }
 
 .product-wrap{
-/*    border: 1px solid rgb(238, 238, 238);*/
+    border: 1px solid rgb(238, 238, 238);
     margin-right: 30px;
     width: 216px;
     margin-bottom: 11px;
@@ -298,19 +293,15 @@ main .center-align{
     text-align: center;
     cursor: pointer;
 }
-.pho{
-    margin-bottom: 10px;
-}
 .product-img img{
     width:100%;
     height: 300px;
-    box-shadow: 0px 10px 20px -10px
 }
 
 .product-content{
     font-size: 14px;
     font-weight: 500;
-    margin-bottom: 2px;
+    margin-bottom: 10px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -360,6 +351,50 @@ footer{
     border-radius: 25px;
     cursor: pointer;
 }
+.alert{
+    top: 40px;
+    left: 900px;
+    width: 300px;
+    height: 700px;
+    border: 1px solid lightgray;
+    position: absolute;
+    background: white;
+    z-index: 100;
+    display: none;
+}
+.alert >h3 {
+    text-align: left;
+    margin: 14px;
+}
+.heart-nav {
+    height: 20px;
+}
+.spa{
+    position: relative;
+}
+.btnBell{
+    cursor: pointer;
+}
+.response{
+    width: 284px;
+    margin: 5px;
+    text-align: left;
+}
+.bellCon{
+    font-size: 15px;
+    font-weight: 600;
+    color: rgb(102, 102, 102);
+}
+.dataTime{
+    color: #aaa;
+    font-size: 11px;
+}
+.response:hover{
+    border: 1px solid black;
+    border-radius: 2px;
+
+}
+
 .img-hover{
         height: 355px;
         background: rgba(0,0,0,.4);

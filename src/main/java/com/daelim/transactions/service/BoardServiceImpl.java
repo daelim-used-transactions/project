@@ -204,9 +204,14 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+<<<<<<< Updated upstream
     public void removeBoardList(List<Integer> params) {
         System.out.println(params);
         daoBoard.deleteBoardList(params);
+=======
+    public int getCommentCount() {
+        return 0;
+>>>>>>> Stashed changes
     }
 
 }//end class

@@ -15,3 +15,15 @@ function test(e){
             location.href="http://localhost:8080/search?searchKeyword=" + searchValue.value.trim();
     }
 }
+    const alert = document.querySelector('.alert');
+    const bell = document.querySelector('.btnBell');
+
+    bell.addEventListener('click',divClick);
+    function divClick(){
+        console.log('클릭 되고 있냐 ?')
+        if(alert.style.display =='none'){
+            alert.style.display = "block";
+        }else{
+            alert.style.display = "none";
+        }
+    }
