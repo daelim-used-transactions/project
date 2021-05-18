@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지</title>
+    <link rel="stylesheet" href="/css/mypage/memDel.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="/scripts/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<header th:replace="fragments/header :: main-header"> </header>
+<div id="allSec">
+    <div id="selectMenu">
+        <ul id="menu">
+            <li class="on">
+                <a class="asd" href="/main/myPage.do" >등록한 상품</a>
+            </li>
+            <li class="">
+                <a class="asd"href="/main/myPage/favorites.do">위시 리스트</a>
+            </li>
+            <li class="">
+                <a class="asd"href="#">구해요</a>
+            </li>
+            <li class="">
+                <a class="asd"href="#">1:1 문의</a>
+            </li>
+            <li>
+                <a class="asd" href="/main/myPage/profile.do">정보 수정</a>
+            </li>
+            <li>
+                <a class="asd" href="/main/myPage/memDel.do" >회원탈퇴</a>
+            </li>
+        </ul>
+    </div>
+
+    <div id="two">
+        <div id="menuCon">
+            <div id="profileCon">
+                <a href="/main/myPage/profile.do"><div id="imgDiv"><img th:src="@{${memProfile}}" alt="백그라운드"></div></a>
+                <div id="profileInfo">
+                    <div id ="infoBox" >
+                        <div id="myinfo" >
+                            <span th:text="${memNick}" id="nickName"> 태 </span><p class="inlineB">님 안녕하세요</p><br>
+                            <p class="inlineB">가입일 : 2021-03-18</p>
+                        </div>
+                        <div id="listNum" class="inlineB">
+                            <a class="borLeft" href="#">
+                                <i class=""></i>팔아요 &gt;
+                                <strong>5,319</strong>
+                            </a>
+                            <a class="borLeft" href="#">
+                                <i class=""></i>구해요 &gt;
+                                <strong>4,600</strong>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="fileBox">
+                <div id="myContent">
+                    <div id="goodsBox">
+
+
+                        <div class="revice">
+                            <form th:action="@{/main/myPage/profile/passUpdate.do}" method="post" th:object="${member}">
+                                <div class="meminfo">
+                                    <label class="con" for="name">이름</label>
+                                    <div class="int_area">
+                                        <input class="int" type="text" th:placeholder="${memName}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="meminfo">
+                                    <label  class="con"  for="name">현재 비밀번호</label>
+                                    <div class="int_area">
+                                        <input class="int"  id="nowPass" type="password">
+                                    </div>
+                                    <div id="cur_chk_area"></div>
+                                </div>
+
+
+                                <div class="meminfo">
+                                    <label class="con"  for="name">비밀번호 확인</label>
+                                    <div class="int_area">
+                                        <input class="int" id="passChk" type="password">
+                                    </div>
+                                    <div id="chg_pass_area"></div>
+
+                                </div>
+
+                                <button class="rein" type="submit">회원 탈퇴 </button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let chgPassArea = document.querySelector('#chg_pass_area');
+    let passChk = document.querySelector('#passChk');
+
+    let curChkArea = document.querySelector('#cur_chk_area');
+    let currentPass = document.querySelector('#nowPass');
+
+    let rein = document.querySelector('.rein');
+    rein.disabled=true;
+    rein.style.backgroundColor = "#8e8e8e"
+    rein.style.color = "white";
+    let bolchk1;
+    let bolchk2;
+    let bolchk3;
+
+    passChk.addEventListener('change',function(){
+        if(passChk!==""){
+            if(passChk.value === nowPass.value){
+                bolchk2 = true;
+                chgPassArea.innerHTML =`<p style="color:#00a6db; margin:4px; font-size:0.8vw;">확인이 완료되었습니다.</p>`;
+            }else{
+                bolchk2 = false;
+                chgPassArea.innerHTML =`<p style="color:red; margin:4px; font-size:0.8vw;">비밀번호를 다시 확인해주세요.</p>`;
+            }
+        }
+        if(bolchk1 === true && bolchk2 === true){
+              rein.disabled=false;
+              rein.style.backgroundColor ="#000000";
+        }else{
+            rein.disabled=true;
+            rein.style.backgroundColor = "#8e8e8e"
+        }
+    })
+
+
+
+    currentPass.addEventListener('change',function(){
+        $.ajax({
+               url : '/main/myPage/profile/passUpdate',
+               type : 'POST',
+               data : {pass : currentPass.value},
+               dataType : 'text',
+               success : function(data){
+                        if(data === "true"){
+                            console.log(`${typeof(data)}`);
+                            bolchk1 = Boolean(data);
+                            curChkArea.innerHTML =`<p style="color:#00a6db; margin:4px; font-size:0.8vw;">맞음</p>`;
+                        }else{
+                        bolchk1 = Boolean(data);
+                         console.log(`${typeof(data)}`);
+                        curChkArea.innerHTML =`<p style="color:red;margin:4px; font-size:0.8vw;">틀렸음</p>`;
+                        }
+                },
+                error: function(){
+                    alert('status 500(Server Error)');
+                }
+            });
+             if(bolchk1 === true && bolchk2 === true){
+                     rein.disabled=false;
+                     rein.style.backgroundColor ="#000000";
+                 }else{
+                    rein.disabled=true;
+                    rein.style.backgroundColor = "#8e8e8e"
+                 }
+    })
+
+
+    function preview(e){
+        let reader = new FileReader();
+        reader.onload = function(e){
+            let img = document.querySelector('.View_area');
+            img.setAttribute("src",e.target.result);
+         };
+        reader.readAsDataURL(e.target.files[0]);
+    }
+
+
+</script>
+</body>
+</html>
