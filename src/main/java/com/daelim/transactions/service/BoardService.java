@@ -46,10 +46,21 @@ public interface BoardService {
      * 마이페이지 위시리스트(찜 한 팔아요 게시글)
      */
     public List<BoardDTO> getLikeBoardList(String loginId);
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     /**
      * 마이페이지 게시글 삭제
      */
     public void removeBoardList(List<Integer> params);
+<<<<<<< Updated upstream
 
     public int getCommentCount();
+=======
+
+
+    public int getCommentCount();
+
+>>>>>>> Stashed changes
 }

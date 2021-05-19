@@ -360,3 +360,10 @@ footer{
         border-radius: 7px;
         cursor: pointer;
 }
+.sawrite{
+    padding: 10px;
+        background: #6495ED;
+        color: white;
+        cursor: pointer;
+        border: none;
+}
