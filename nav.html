@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav th:fragment ="main-nav">
+    <div class ="center-align">
+        <div class="flex-menu">
+            <div class="menu-bar">
+                <i class="fas fa-bars fa-lg"></i>
+                <ul class="category">
+                    <li>카테고리</li>
+                    <a href="/categories?categoriesProduct=여성의류">여성의류</a>
+                    <a href="/categories?categoriesProduct=남성의류">남성의류</a>
+                    <a href="/categories?categoriesProduct=패션잡화">패션잡화</a>
+                    <a href="/categories?categoriesProduct=디지털/가전">디지털/가전</a>
+                    <a href="/categories?categoriesProduct=도서/티켓/취미">도서/티켓/취미</a>
+                    <a href="/categories?categoriesProduct=애완">애완</a>
+                    <a href="/categories?categoriesProduct=스타굿즈">스타굿즈</a>
+                    <a href="/categories?categoriesProduct=생활/식품">생활/식품</a>
+                    <a href="/categories?categoriesProduct=문구/가구">문구/가구</a>
+                    <a href="/categories?categoriesProduct=스포츠/레저">스포츠/레저</a>
+                    <a href="/categories?categoriesProduct=뷰티/미용">뷰티/미용</a>
+                    <a href="/categories?categoriesProduct=차량/오토바이">차량/오토바이</a>
+                    <a href="/categories?categoriesProduct=재능">재능</a>
+                    <a href="/categories?categoriesProduct=나눔터">나눔터</a>
+                    <a href="/categories?categoriesProduct=기타">기타</a>
+                </ul>
+            </div>
+            <div class="fieldset-block">
+                <fieldset>
+                    <input class="search_input" placeholder="검색할 상품을 입력해주세요"/>
+                    <button class="search_button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </fieldset>
+            </div>
+            <div class="nav-util">
+                <a href="/main/product.do" class="flex-a">
+                    <img src="/images/main/sale.png" alt="팔아요"/>
+                    <span class="sale-text">팔아요</span>
+                </a>
+                <a href="/main/buyList" class="flex-a">
+                    <img src="/images/main/find.png" alt="구해요"/>
+                    <span class>구해요</span>
+                </a>
+                <div class="flex-a btnBell">
+                    <i class="far fa-bell fa-lg bell"></i>
+                    <span class="sale-text">알림</span>
+                </div>
+            </div>
+        </div>
+        <div class="div-fixed">
+            <div class="div-fixed-one">
+                <a th:if=${session.member!=null} href="/main/myPage/favorites.do" style="text-decoration: none">
+                    <div class="fixed-text">찜한상품</div>
+                    <div class ="like-product">
+                        <img th:text="${likeCount}" src="/images/buyList/forsale/heart2.png" alt="#" class="heart-nav">
+                    </div>
+                </a>
+                <a th:unless=${session.member!=null} href="javascript:void(0)" style="text-decoration: none">
+                    <div class="fixed-text">찜한상품</div>
+                    <div class ="like-product">
+                        <i class="fas fa-heart">0</i>
+                    </div>
+                </a>
+            </div>
+            <div class="div-fixed-two">
+                <div class="fixed-text">최근본상품</div>
+                <div class="watch-count" th:if="${not #lists.isEmpty(cookieList)}" th:each="row: ${cookieList}">
+                    <div th:text="${row}"></div>
+                </div>
+            </div>
+            <div class="div-fixed-three">
+                <div style="cursor:pointer;" onclick="window.scrollTo(0,0);">TOP</div>
+            </div>
+        </div>
+        <div class="alert">
+            <h3>알림</h3>
+            <div class="response">
+                <p class="bellCon">어떤 사람이 내 글의 글을 달았는데? 망했따;;</p>
+                <em class="dataTime">17시간 전</em>
+            </div>
+            <div class="response">
+                <p class="bellCon">어떤 사람이 내 글의 글을 달았는데? 망했따;;</p>
+                <em class="dataTime">17시간 전</em>
+            </div><div class="response">
+            <p class="bellCon">어떤 사람이 내 글의 글을 달았는데? 망했따;;</p>
+            <em class="dataTime">17시간 전</em>
+        </div><div class="response">
+            <p class="bellCon">어떤 사람이 내 글의 글을 달았는데? 망했따;;</p>
+            <em class="dataTime">17시간 전</em>
+        </div><div class="response">
+            <p class="bellCon">어떤 사람이 내 글의 글을 달았는데? 망했따;;</p>
+            <em class="dataTime">17시간 전</em>
+        </div>
+
+        </div>
+    </div>
+    <script src="/scripts/nav/nav.js"></script>
+</nav>
+</body>
+</html>
