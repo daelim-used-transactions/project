@@ -58,4 +58,21 @@ public class MemberUpdateController {
         return "redirect:/main";
     }
 
+    /**
+     * 회원탈퇴 기능
+     *
+     */
+    @PostMapping(value = "/main/withdraw.do")
+    public String withDraw(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        MemberDTO member  = (MemberDTO) session.getAttribute("member");
+        Boolean removeCheck = profileService.removeMember(member.getLoginId());
+        if(removeCheck){
+            session.invalidate(); // 세션 제거
+        }else{
+            System.out.println("아이디 삭제 안된듯");
+        }
+        return "redirect:/main";
+    }
+
 }

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마이페이지</title>
-    <link rel="stylesheet" href="/css/mypage/profile.css">
+    <link rel="stylesheet" href="/css/myPage/memDel.css">
     <link rel="stylesheet" href="/css/main.css">
     <script src="/scripts/jquery-3.6.0.min.js"></script>
 </head>
@@ -61,22 +61,10 @@
             <div id="fileBox">
                 <div id="myContent">
                     <div id="goodsBox">
-                        <div class="profile_area">
-                            <label for="img_upload">
-                                <img class="View_area" th:src="@{${memProfile}}" alt="백그라운드">
-                            </label>
-                            <form th:action="@{/profile/upload.do}" method="post" enctype="multipart/form-data">
-                                <input type="file" name="file" accept="image/*" id="img_upload" onchange="preview(event);">
-                                <button class= "fileUpload" type="submit">  업로드 </button>
-                            </form>
-                            <form th:action="@{/profile/upload.do}" method="post" enctype="multipart/form-data">
-                                <button type="submit">기본배경</button>
-                            </form>
 
-                        </div>
 
                         <div class="revice">
-                            <form th:action="@{/main/myPage/profile/passUpdate.do}" method="post" th:object="${member}">
+                            <form th:action="@{/main/withdraw.do}" method="post" th:object="${member}">
                                 <div class="meminfo">
                                     <label class="con" for="name">이름</label>
                                     <div class="int_area">
@@ -87,29 +75,22 @@
                                 <div class="meminfo">
                                     <label  class="con"  for="name">현재 비밀번호</label>
                                     <div class="int_area">
-                                        <input class="int"  id="pass" type="password">
+                                        <input class="int"  id="nowPass" type="password">
                                     </div>
                                     <div id="cur_chk_area"></div>
                                 </div>
 
 
                                 <div class="meminfo">
-                                    <label class="con"  for="name">새 비밀번호</label>
+                                    <label class="con"  for="name">비밀번호 확인</label>
                                     <div class="int_area">
-                                        <input class="int" id="updatePass" type="password">
+                                        <input class="int" id="passChk" type="password">
                                     </div>
                                     <div id="chg_pass_area"></div>
 
                                 </div>
-                                <div class="meminfo">
-                                    <label class="con"  for="name">새 비밀번호 확인</label>
-                                    <div class="int_area">
-                                        <input class="int" id="upPassChk"type="password" th:field="*{loginPw}">
-                                    </div>
-                                    <div id="up_chk_area"></div>
-                                </div>
 
-                                <button class="rein" type="submit">정보 수정 </button>
+                                <button class="rein" type="submit">회원 탈퇴 </button>
                             </form>
                         </div>
 
@@ -121,11 +102,11 @@
 </div>
 <script>
     let chgPassArea = document.querySelector('#chg_pass_area');
-    let updatePass = document.querySelector('#updatePass');
-    let upPassChk = document.querySelector('#upPassChk');
+    let passChk = document.querySelector('#passChk');
+
     let curChkArea = document.querySelector('#cur_chk_area');
-    let upChkArea = document.querySelector('#up_chk_area');
-    let currentPass = document.querySelector('#pass');
+    let currentPass = document.querySelector('#nowPass');
+
     let rein = document.querySelector('.rein');
     rein.disabled=true;
     rein.style.backgroundColor = "#8e8e8e"
@@ -134,34 +115,26 @@
     let bolchk2;
     let bolchk3;
 
-    upPassChk.addEventListener('change',function(){
-        if(updatePass!=="" && upPassChk !==""){
-            if(updatePass.value === upPassChk.value){
-            bolchk2 = true;
-            upChkArea.innerHTML =`<p style="color:#00a6db; margin:4px; font-size:0.8vw;">확인이 완료되었습니다.</p>`;
+    passChk.addEventListener('change',function(){
+        if(passChk!==""){
+            if(passChk.value === nowPass.value){
+                bolchk2 = true;
+                chgPassArea.innerHTML =`<p style="color:#00a6db; margin:4px; font-size:0.8vw;">확인이 완료되었습니다.</p>`;
             }else{
-            bolchk2 = false;
-                upChkArea.innerHTML =`<p style="color:red; margin:4px; font-size:0.8vw;">비밀번호를 다시 확인해주세요.</p>`;
+                bolchk2 = false;
+                chgPassArea.innerHTML =`<p style="color:red; margin:4px; font-size:0.8vw;">비밀번호를 다시 확인해주세요.</p>`;
             }
         }
-        if(bolchk1 === true && bolchk2 === true && bolchk3 === true){
+        if(bolchk1 === true && bolchk2 === true){
               rein.disabled=false;
-              rein.style.backgroundColor ="#00a6db";
+              rein.style.backgroundColor ="#000000";
         }else{
             rein.disabled=true;
             rein.style.backgroundColor = "#8e8e8e"
         }
     })
 
-    updatePass.addEventListener('change',function(){
-        if(!/^.*(?=^.{8,20}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=*()]).*$/.test(updatePass.value)){
-            chgPassArea.innerHTML =`<p style="color:red; margin:4px; font-size:0.8vw;">비밀번호는 숫자,영문,특수문자 조합으로 8~20자를 사용해야 합니다.</p>`
-            bolchk3 = false;
-        }else{
-            chgPassArea.innerHTML =`<p style="color:#00a6db; margin:4px; font-size:0.8vw;">사용가능한 비밀번호 입니다.</p>`
-            bolchk3 = true;
-        }
-     });
+
 
     currentPass.addEventListener('change',function(){
         $.ajax({
@@ -170,28 +143,28 @@
                data : {pass : currentPass.value},
                dataType : 'text',
                success : function(data){
-                        console.log("현재비번 : ", data);
                         if(data === "true"){
                             console.log(`${typeof(data)}`);
                             bolchk1 = Boolean(data);
                             curChkArea.innerHTML =`<p style="color:#00a6db; margin:4px; font-size:0.8vw;">맞음</p>`;
                         }else{
-                        bolchk1 = Boolean(data);
+                        bolchk1 = false;
                          console.log(`${typeof(data)}`);
                         curChkArea.innerHTML =`<p style="color:red;margin:4px; font-size:0.8vw;">틀렸음</p>`;
                         }
+                        if(bolchk1 === true && bolchk2 === true){
+                             rein.disabled=false;
+                             rein.style.backgroundColor ="#000000";
+                         }else{
+                            rein.disabled=true;
+                            rein.style.backgroundColor = "#8e8e8e"
+                         }
                 },
                 error: function(){
                     alert('status 500(Server Error)');
                 }
             });
-             if(bolchk1 === true && bolchk2 === true && bolchk3===true){
-                     rein.disabled=false;
-                     rein.style.backgroundColor ="#00a6db";
-                 }else{
-                    rein.disabled=true;
-                    rein.style.backgroundColor = "#8e8e8e"
-                 }
+
     })
 
 

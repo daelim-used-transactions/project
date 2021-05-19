@@ -6,4 +6,5 @@ import java.security.NoSuchAlgorithmException;
 
 public interface ProfileService {
     public int updateByPass(MemberDTO memberDTO) throws NoSuchAlgorithmException;
+    public boolean removeMember(String params);
 }

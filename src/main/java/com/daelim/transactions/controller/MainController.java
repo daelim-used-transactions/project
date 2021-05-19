@@ -147,6 +147,25 @@ public class MainController {
         return "/myPage/profile";
     }
 
+    @GetMapping(value="/main/myPage/memDel.do")
+    public String toMemDelel(HttpServletRequest request, Model model){
+        MemberDTO member = commonSession(request);
+        MemberDTO newMemberPw = new MemberDTO();
+        List<BuyBoardDTO> buyBoardList = buyBoardService.getBoardList(member.getLoginId());
+        List<BoardDTO> saleBoardList = boardService.getBoardList(member.getLoginId());
+        String date = (String)member.getCreateTime().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        String createDate ="가입일 : " + date.substring(0, 4) + "년 " + date.substring(4, 6) + "월 " +date.substring(6) +"일 ";
+        model.addAttribute("createTime",createDate);
+        model.addAttribute("memNick",member.getNickName());
+        model.addAttribute("memProfile",member.getProfile());
+        model.addAttribute("memName",member.getName());
+        model.addAttribute("member",newMemberPw);
+        model.addAttribute("buyListCount", buyBoardList.size());
+        model.addAttribute("saleListCount", saleBoardList.size());
+        System.out.println(member.getNickName());
+        return "/myPage/memDel";
+    }
+
 
     @PostMapping(value="/profile/upload.do")
     public String uploadProfile(@RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request){

@@ -62,5 +62,8 @@ public interface DaoTest {
      * */
     public MemberDTO allInfoById(String memId);
 
-
+    /**
+     *  회원탈퇴
+     */
+    public int deleteMember(String params);
 }

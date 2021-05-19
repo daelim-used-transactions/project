@@ -78,4 +78,12 @@
              loginId = #{loginId}
     </select>
 
+    <delete id="deleteMember" parameterType="String">
+        DELETE
+        FROM
+            test
+        WHERE
+            loginId = #{loginId}
+    </delete>
+
 </mapper>

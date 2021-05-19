@@ -124,7 +124,7 @@
             let boardIdx = /*[[ ${board.boardIdx} ]]*/;
             if(session){
                 if(document.querySelector('.heart').src === "http://localhost:8080/images/buyList/forsale/heart1.png"){
-                    alert('찜을 하셨습니다.');
+                    alert("찜을 하셨습니다.");
                     document.querySelector('.heart').src ="/images/buyList/forsale/heart2.png";
                     let jsontest = {
                         loginId : session.loginId,
@@ -145,7 +145,7 @@
                         }
                  });//ajax end
                 }else{
-                    alert('찜을 취소 하셨습니다.');
+                    alert("찜을 취소 하셨습니다.");
                     let jsontest = {
                         loginId : session.loginId,
                         boardIdx : boardIdx,
@@ -167,7 +167,7 @@
                     document.querySelector('.heart').src ="/images/buyList/forsale/heart1.png";
                 }
             }else{
-                alert('찜을 하기 위해서는 로그인을 해야 합니다!!');
+                alert("찜을 하기 위해서는 로그인을 해야 합니다!!");
             }
         });
 

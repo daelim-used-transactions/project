@@ -27,4 +27,14 @@ public class ProfileServiceImpl implements ProfileService{
         }
 
     }
+
+    @Override
+    public boolean removeMember(String params) {
+        if(daoTest.deleteMember(params) > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }
