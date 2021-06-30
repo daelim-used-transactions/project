@@ -22,7 +22,7 @@
                         <input type="password" name="pass" id="pass" th:field="*{loginPw}"  required>
                         <label for="pass">PASSWORD</label>
                     </div>
-                    <div class="falseCheck" th:if="${flag==false}"></div>
+                    <div class="falseCheck" th:if="${flag==false}">존재하지 않는 아이디입니다.</div>
 
                     <div class="btn-area">
                         <button id="btn"type="submit">LOGIN</button>

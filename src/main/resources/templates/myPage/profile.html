@@ -69,9 +69,7 @@
                                 <input type="file" name="file" accept="image/*" id="img_upload" onchange="preview(event);">
                                 <button class= "fileUpload" type="submit">  업로드 </button>
                             </form>
-                            <form th:action="@{/profile/upload.do}" method="post" enctype="multipart/form-data">
-                                <button type="submit">기본배경</button>
-                            </form>
+
 
                         </div>
 
@@ -184,11 +182,8 @@
                data : {pass : currentPass.value},
                dataType : 'text',
                success : function(data){
-<<<<<<< Updated upstream
                         console.log("현재비번 : ", data);
-=======
                         console.log(data, typeof(data));
->>>>>>> Stashed changes
                         if(data === "true"){
                             bolchk1 = true
                             curChkArea.innerHTML =`<p style="color:#00a6db; margin:4px; font-size:0.8vw;">맞음</p>`;

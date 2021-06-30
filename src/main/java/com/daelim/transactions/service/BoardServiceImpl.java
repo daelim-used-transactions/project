@@ -208,17 +208,10 @@ public class BoardServiceImpl implements BoardService {
         System.out.println(params);
         daoBoard.deleteBoardList(params);
     }
-<<<<<<< Updated upstream
     public int getCommentCount() {
         return 0;
-=======
-
-    @Override
-    public int getCommentCount() {
-        return 0;
-
->>>>>>> Stashed changes
     }
+
 
 }//end class
 
